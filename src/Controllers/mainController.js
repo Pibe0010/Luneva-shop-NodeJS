@@ -23,6 +23,12 @@ import { deleteProductController } from "../Controllers/product/deleteProductCon
 import { toggleActivationController } from "../Controllers/product/toggleActivationController.js";
 import { getProductSearchController } from "../Models/product/getProductSearchController.js";
 
+// customer
+import { getCustomerListController } from "./customer/getCustomerListController.js";
+import { getCustomerSearchController } from "./customer/getCustomerSearchController.js";
+import { updateCustomerController } from "./customer/updateCustomerController.js";
+import { deleteCustomerController } from "./customer/deleteCustomerController.js";
+
 export {
   notFoundError,
   handlerErorr,
@@ -44,4 +50,8 @@ export {
   deleteProductController,
   toggleActivationController,
   getProductSearchController,
+  getCustomerListController,
+  getCustomerSearchController,
+  updateCustomerController,
+  deleteCustomerController,
 };
