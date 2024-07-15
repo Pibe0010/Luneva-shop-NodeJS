@@ -7,6 +7,5 @@ export const selectProductSearchModel = async (searchTerm) => {
     `SELECT * FROM Products WHERE name LIKE? OR ref_PR LIKE?`,
     [`%${searchTerm}%`, `%${searchTerm}%`]
   );
-  console.log(rows, "Model");
   return rows;
 };
