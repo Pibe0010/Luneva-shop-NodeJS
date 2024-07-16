@@ -9,13 +9,17 @@ export const deleteUploadsPathUtil = async () => {
     // Comprobamos si el directorio existe y borramos el directorio
     await fs.access(uploadsDir);
 
-    await fs.delete(uploadsDir, { recursive: true });
+    await fs.rm(uploadsDir, { recursive: true });
     console.log(
       "Uploads directory and its contents have been deleted successfully."
     );
   } catch (error) {
-    error.code = "DELETE_UPLOADS_PATH_ERROR";
-    error.message = "Error deleting uploads failed";
-    throw error;
+    if (error.code === "ENOENT") {
+      console.log("El directorio de uploads no existe. Directorio Creado");
+    } else {
+      error.code = "DELETE_UPLOADS_PATH_ERROR";
+      error.message = "No se ha podido eliminar el directorio de uploads";
+      throw error;
+    }
   }
 };
