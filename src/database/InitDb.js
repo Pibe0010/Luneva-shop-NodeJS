@@ -6,6 +6,8 @@ import {
   MYSQL_PORT,
   MYSQL_USER,
 } from "../../env.js";
+import { deleteUploadsPathUtil } from "../Utils/deleteUploadsPathUtil.js";
+import { createUploadsPathUtil } from "../Utils/createUploadsPathUtil.js";
 
 const db = await createConnection({
   host: MYSQL_HOST,
@@ -17,6 +19,14 @@ const db = await createConnection({
 // Crear la base de datos
 await createSchema(db);
 console.log("Base de datos creada");
+
+// Borramos el directorio uploads y su contenido
+await deleteUploadsPathUtil();
+console.log("Directorios de uploads borrado");
+
+// Creamos el directorio uploads
+await createUploadsPathUtil();
+console.log("Directorios uploads creado con exito");
 
 await db.end();
 process.exit(0);
