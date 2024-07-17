@@ -19,14 +19,10 @@ export const insertProductTrolleyModel = async (
     `SELECT Stock FROM Products WHERE ID_product = ?`,
     [ID_product]
   );
-  console.log(productStock, "esto es productStock");
 
   // Obtenemos el stock como un número
   const stock = Number(productStock[0].Stock);
   const quantity = Number(products_amount);
-
-  console.log(stock, "esto es stock");
-  console.log(quantity, "esto es quantity");
 
   const namberModify = (storage, number) => {
     return storage - number;
@@ -34,7 +30,6 @@ export const insertProductTrolleyModel = async (
 
   // Restamos la cantidad de productos
   const update = namberModify(stock, quantity);
-  console.log(update, "esto es update");
 
   await pool.query(`UPDATE Products SET stock = ? WHERE ID_product = ?`, [
     update,
