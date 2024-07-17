@@ -1,6 +1,9 @@
 import express from "express";
 import { auththenticatedUser } from "../../Middlewares/auththenticatedUser.js";
-import { newTrolleyController } from "../../Controllers/actionController.js";
+import {
+  newTrolleyController,
+  updateTrolleyController,
+} from "../../Controllers/actionController.js";
 
 // Creamos el router
 export const trolleysRouter = express.Router();
@@ -8,14 +11,14 @@ export const trolleysRouter = express.Router();
 // Crear carrito
 trolleysRouter.post("/trolley", auththenticatedUser, newTrolleyController);
 
-/* // Actualizar carrito
+// Actualizar carrito
 trolleysRouter.put(
-  "/trolley/:id_user/:id_trolley",
+  "/trolley/update",
   auththenticatedUser,
   updateTrolleyController
 );
 
-// Borrar carrito
+/*// Borrar carrito
 trolleysRouter.delete(
   "/trolley/:id_user/:id_trolley",
   auththenticatedUser,
