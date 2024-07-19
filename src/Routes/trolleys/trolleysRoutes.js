@@ -1,6 +1,8 @@
 import express from "express";
 import { auththenticatedUser } from "../../Middlewares/auththenticatedUser.js";
 import {
+  deleteTrolleyController,
+  getTrolleyProductListController,
   newTrolleyController,
   updateTrolleyController,
 } from "../../Controllers/actionController.js";
@@ -18,17 +20,16 @@ trolleysRouter.put(
   updateTrolleyController
 );
 
-/*// Borrar carrito
+// Borrar carrito
 trolleysRouter.delete(
-  "/trolley/:id_user/:id_trolley",
+  "/trolley/delete",
   auththenticatedUser,
   deleteTrolleyController
 );
 
-// Lista del carrito
+// Lista del carrito del cliente
 trolleysRouter.get(
-  "/trolley/:id_user",
+  "/trolley/products/list",
   auththenticatedUser,
-  getTrolleyController
+  getTrolleyProductListController
 );
- */
