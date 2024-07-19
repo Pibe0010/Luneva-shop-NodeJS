@@ -141,8 +141,10 @@ export const createSchema = async (db) => {
     CREATE TABLE IF NOT EXISTS Shipping_Addresses (
         ID_address CHAR(36) PRIMARY KEY NOT NULL,
         ID_customer CHAR(36) NOT NULL,
-        address VARCHAR(255) NOT NULL,
-        FOREIGN KEY (ID_customer) REFERENCES Customers(ID_customer)
+        ID_shipment CHAR(36)  NOT NULL,
+        FOREIGN KEY (ID_customer) REFERENCES Customers(ID_customer),
+        FOREIGN KEY (ID_shipment) REFERENCES Shipments(ID_shipment)
+
     );
     `);
 
