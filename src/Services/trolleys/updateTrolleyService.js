@@ -1,6 +1,7 @@
 import { selectCustomerByIdModel } from "../../Models/customer/selectCustomerByIdModel.js";
 import { selectProductByIdModel } from "../../Models/product/selectProductByIdModel.js";
 import { selectTrolleyByIdModel } from "../../Models/trolleys/selectTrolleyByIdModel.js";
+import { updateProductStockModel } from "../../Models/trolleys/updateProductStockModel.js";
 import { updateTrolleyModel } from "../../Models/trolleys/updateTrolleyModel.js";
 import { notFoundError } from "../error/errorService.js";
 
@@ -19,6 +20,9 @@ export const updateTrolleyService = async (ID_user, body) => {
 
   // Buscamos el carrito del cliente
   const trolley = await selectTrolleyByIdModel(customer_id.ID_customer);
+
+  // Actualizamos el stock del producto
+  await updateProductStockModel(trolley.ID_trolley, ID_product);
 
   // Actualizamos el producto en el carrito
   await updateTrolleyModel(trolley.ID_trolley, ID_product, products_amount);
