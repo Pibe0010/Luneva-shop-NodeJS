@@ -90,6 +90,8 @@ export const createSchema = async (db) => {
         amount INT NOT NULL,
         date_order DATETIME DEFAULT CURRENT_TIMESTAMP,
         status ENUM("earring", "sent", "delivered", "cancelled") DEFAULT "earring",
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updatedAt DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
         FOREIGN KEY (ID_customer) REFERENCES Customers(ID_customer),
         FOREIGN KEY (ID_product) REFERENCES Products(ID_product)
     );
@@ -101,6 +103,8 @@ export const createSchema = async (db) => {
         ID_order CHAR(36) NOT NULL,
         ID_product CHAR(36) NOT NULL,
         amount INT NOT NULL,
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updatedAt DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
         FOREIGN KEY (ID_order) REFERENCES Orders(ID_order)
         
     );
@@ -114,6 +118,8 @@ export const createSchema = async (db) => {
         payment_date DATETIME DEFAULT CURRENT_TIMESTAMP,
         total_amount DECIMAL(10, 2) NOT NULL,
         iva_payments DECIMAL(10, 2) NOT NULL,
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updatedAt DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
         FOREIGN KEY (ID_order) REFERENCES Orders(ID_order)
     );
     `);
@@ -132,6 +138,8 @@ export const createSchema = async (db) => {
         email VARCHAR(100) UNIQUE NOT NULL,
         phone VARCHAR(20) NOT NULL,
         shipping_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updatedAt DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
         FOREIGN KEY (ID_order) REFERENCES Orders(ID_order)
     );
     `);
@@ -142,6 +150,8 @@ export const createSchema = async (db) => {
         ID_address CHAR(36) PRIMARY KEY NOT NULL,
         ID_customer CHAR(36) NOT NULL,
         ID_shipment CHAR(36)  NOT NULL,
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updatedAt DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
         FOREIGN KEY (ID_customer) REFERENCES Customers(ID_customer),
         FOREIGN KEY (ID_shipment) REFERENCES Shipments(ID_shipment)
 
@@ -154,6 +164,8 @@ export const createSchema = async (db) => {
         ID_ticket CHAR(36) PRIMARY KEY NOT NULL,
         ID_order CHAR(36) NOT NULL,
         ticket_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updatedAt DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
         FOREIGN KEY (ID_order) REFERENCES Orders(ID_order)
     );
     `);
@@ -166,6 +178,9 @@ export const createSchema = async (db) => {
         discount_rate DECIMAL(5, 2),
         start_date DATE,
         ending_date DATE,
+        active ENUM("true", "false") DEFAULT "true",
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updatedAt DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
         FOREIGN KEY (ID_product) REFERENCES Products(ID_product)
     );
     `);

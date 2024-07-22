@@ -11,6 +11,7 @@ import { userRouter } from "./src/Routes/user/userRoutes.js";
 import { productRouter } from "./src/Routes/product/productRoutes.js";
 import { customerRouter } from "./src/Routes/customer/customerRoutes.js";
 import { trolleysRouter } from "./src/Routes/trolleys/trolleysRoutes.js";
+import { offersRouter } from "./src/Routes/offers/offersRoutes.js";
 
 // crear la app con express
 const app = express();
@@ -26,6 +27,7 @@ app.use(userRouter);
 app.use(productRouter);
 app.use(customerRouter);
 app.use(trolleysRouter);
+app.use(offersRouter);
 
 // Midleware 404 not found
 app.use(notFoundError);
