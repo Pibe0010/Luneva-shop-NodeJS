@@ -11,6 +11,9 @@ import { deleteOfferController } from "./offers/deleteOfferController.js";
 import { getOffersListController } from "./offers/getOffersListController.js";
 import { toggleOfferActivationController } from "./offers/toggleOfferActivationController.js";
 
+// ordenes
+import { newOrderController } from "./order/newOrderController.js";
+
 export {
   newTrolleyController,
   updateTrolleyController,
@@ -21,4 +24,5 @@ export {
   deleteOfferController,
   getOffersListController,
   toggleOfferActivationController,
+  newOrderController,
 };

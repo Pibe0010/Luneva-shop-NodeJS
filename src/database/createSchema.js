@@ -85,10 +85,11 @@ export const createSchema = async (db) => {
   await db.query(`
     CREATE TABLE IF NOT EXISTS Orders (
         ID_order CHAR(36) PRIMARY KEY NOT NULL,
+        ref_OR CHAR(10) UNIQUE NOT NULL,
         ID_customer CHAR(36) NOT NULL,
         ID_product CHAR(36) NOT NULL,
-        amount INT NOT NULL,
-        date_order DATETIME DEFAULT CURRENT_TIMESTAMP,
+        product_amount INT NOT NULL,
+        price DECIMAL(10, 2) NOT NULL,
         status ENUM("earring", "sent", "delivered", "cancelled") DEFAULT "earring",
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
         updatedAt DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
@@ -98,11 +99,11 @@ export const createSchema = async (db) => {
     `);
   // Detalles de la compra
   await db.query(`
-    CREATE TABLE  IF NOT EXISTS Order_Details (
+    CREATE TABLE IF NOT EXISTS Order_Details (
         ID_Detail CHAR(36) PRIMARY KEY NOT NULL,
         ID_order CHAR(36) NOT NULL,
         ID_product CHAR(36) NOT NULL,
-        amount INT NOT NULL,
+        price_amount INT NOT NULL,
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
         updatedAt DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
         FOREIGN KEY (ID_order) REFERENCES Orders(ID_order)
