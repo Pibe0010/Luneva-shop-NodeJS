@@ -1,4 +1,4 @@
-# Luneva Shop node y react
+# Luneva Shop node and react
 
 ## Tienda de jabones artesanales
 
@@ -8,9 +8,12 @@
 
 2. Instalamos las dependencias que usaremos en el proyecto.
 
-- bcrypt, cors, dotenv, express, express-fileupload, joi, jsonwebtoken, mysql2, nodemailer, sharp, morgan
+   - bcrypt, cors, dotenv, express, express-fileupload, joi, jsonwebtoken, mysql2, nodemailer, sharp, morgan
 
-3. Creamos los archivos .env,.env.example, .gitignore, .prettierrc, .eslintrc, README.md
+3. Creamos los archivos
+
+   - .env,.env.example, .gitignore, .prettierrc, .eslintrc, README.md
+
 4. Armamos la extructura del proyecto, carpetas, archivos
 5. Creamos la base de datos
 
@@ -28,3 +31,50 @@
    - Ruta de stock de productos.
    - Ruta de tickets.
    - Ruta de ofertas.
+
+7. Lanzamos el servidor
+
+   - npm run dev
+
+8. Utilizaremos thunderClient para probar las rutas.
+
+   - User
+
+     - Registro de usuario.
+     - Activación de usuario.
+     - Login de usuario.
+     - actualizar usuario.
+     - borrar usuario.
+     - Listar de usuarios.
+
+   - Product
+
+     - Crear producto.
+     - Listar de Productos.
+     - Borrar Producto.
+     - Actualizar Producto.
+     - Activar / Desactivar Producto.
+     - Busqueda de productos.
+     - Producto a la venta.
+
+   - Customer
+
+     - Lista de clientes.
+     - Busqueda de clientes.
+     - Actualizar cliente.
+     - Borrar cliente.
+
+   - Trolley
+
+     - Crear carrito de compras.
+     - Actualizar carrito de compras.
+     - Borrar carrito de compras.
+     - Listar de carritos de compras.
+
+   - Offers
+
+     - Crear oferta.
+     - Actualizar oferta.
+     - Listar de ofertas.
+     - Borrar oferta.
+     - Activar / Desactivar oferta.
