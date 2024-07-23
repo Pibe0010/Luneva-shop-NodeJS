@@ -6,7 +6,6 @@ import {
   getProductSearchController,
   newProductController,
   productListController,
-  selectSaleProductController,
   toggleActivationController,
   updateProductController,
 } from "../../Controllers/mainController.js";
@@ -31,14 +30,6 @@ productRouter.post(
 
 // Lista de productos
 productRouter.get("/product/list", auththenticatedUser, productListController);
-
-// Obtener producto para la venta
-productRouter.get(
-  "/product/:product_id",
-  auththenticatedUser,
-  productExist,
-  selectSaleProductController
-);
 
 // Acttualiar producto
 productRouter.put(

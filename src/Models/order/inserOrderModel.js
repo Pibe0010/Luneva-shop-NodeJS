@@ -2,23 +2,17 @@ import { getPool } from "../../database/getPool.js";
 
 export const inserOrderModel = async (
   orderId,
-  ID_user,
+  ref,
   customer,
   productId,
-  amount
+  products_amount
 ) => {
   const pool = await getPool();
 
-  // Insertamos el cliente
-  await pool.query(
-    `INSERT INTO Customers  (ID_customer, ID_user) VALUES (?,?)`,
-    [customer, ID_user]
-  );
-
   // Insertamos la orden
   const result = await pool.query(
-    `INSERT INTO Orders  (ID_order, ID_customer, ID_product, amount) VALUES (?,?,?,?)`,
-    [orderId, customer, productId, amount]
+    `INSERT INTO Orders  (ID_order, ref_OR, ID_customer, ID_product, product_amount) VALUES (?,?,?,?,?)`,
+    [orderId, ref, customer, productId, products_amount]
   );
 
   if (result.affectedRows === 0) {
