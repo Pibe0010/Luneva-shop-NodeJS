@@ -81,5 +81,5 @@
 
    - Orders
 
-     - Listar de ofertas.
+     - Listar de ordenes.
      - Buscar orden
