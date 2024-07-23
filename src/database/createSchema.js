@@ -89,7 +89,6 @@ export const createSchema = async (db) => {
         ID_customer CHAR(36) NOT NULL,
         ID_product CHAR(36) NOT NULL,
         product_amount INT NOT NULL,
-        price DECIMAL(10, 2) NOT NULL,
         status ENUM("earring", "sent", "delivered", "cancelled") DEFAULT "earring",
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
         updatedAt DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,

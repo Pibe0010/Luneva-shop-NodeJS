@@ -4,6 +4,7 @@ import { selectTrolleyByIdModel } from "../../Models/trolleys/selectTrolleyByIdM
 import { updateProductStockModel } from "../../Models/trolleys/updateProductStockModel.js";
 import { updateTrolleyModel } from "../../Models/trolleys/updateTrolleyModel.js";
 import { notFoundError } from "../error/errorService.js";
+import { updateOrderProductService } from "../order/updateOrderProductService.js";
 
 export const updateTrolleyService = async (ID_user, body) => {
   const { ID_product, products_amount } = body;
@@ -23,6 +24,9 @@ export const updateTrolleyService = async (ID_user, body) => {
 
   // Actualizamos el stock del producto
   await updateProductStockModel(trolley.ID_trolley, ID_product);
+
+  // Actualizamos la cantidad de la orden
+  updateOrderProductService(products_amount, ID_product);
 
   // Actualizamos el producto en el carrito
   await updateTrolleyModel(trolley.ID_trolley, ID_product, products_amount);

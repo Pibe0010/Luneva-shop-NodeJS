@@ -17,7 +17,6 @@ import { getProfileUserController } from "./user/getProfileUserController.js";
 // Product
 import { newProductController } from "../Controllers/product/newProductController.js";
 import { productListController } from "../Controllers/product/productListController.js";
-import { selectSaleProductController } from "../Controllers/product/selectSaleProductController.js";
 import { updateProductController } from "../Controllers/product/updateProductController.js";
 import { deleteProductController } from "../Controllers/product/deleteProductController.js";
 import { toggleActivationController } from "../Controllers/product/toggleActivationController.js";
@@ -45,7 +44,6 @@ export {
   getProfileUserController,
   newProductController,
   productListController,
-  selectSaleProductController,
   updateProductController,
   deleteProductController,
   toggleActivationController,
