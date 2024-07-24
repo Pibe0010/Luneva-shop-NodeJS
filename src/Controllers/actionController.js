@@ -15,6 +15,10 @@ import { toggleOfferActivationController } from "./offers/toggleOfferActivationC
 import { getOrderListController } from "./order/getOrderListController.js";
 import { getOrderSearchController } from "./order/getOrderSearchController.js";
 
+// Dirección de envio
+import { newShippingAddressController } from "./shippingAddresses/newShippingAddressController.js";
+import { updateShippingAddressController } from "./shippingAddresses/updateShippingAddressController.js";
+
 export {
   newTrolleyController,
   updateTrolleyController,
@@ -27,4 +31,6 @@ export {
   toggleOfferActivationController,
   getOrderListController,
   getOrderSearchController,
+  newShippingAddressController,
+  updateShippingAddressController,
 };

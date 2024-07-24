@@ -1,13 +1,26 @@
 import express from "express";
 import { auththenticatedUser } from "../../Middlewares/auththenticatedUser.js";
-import { adminAuthenticatedUser } from "../../Middlewares/adminAuthenticatedUser.js";
+import {
+  newShippingAddressController,
+  updateShippingAddressController,
+} from "../../Controllers/actionController.js";
 
 // Creamos el router
-export const shippingaddressRouter = express.Router();
+export const shippingAddressRouter = express.Router();
 
 // Crear direccion de envio
+shippingAddressRouter.post(
+  "/address",
+  auththenticatedUser,
+  newShippingAddressController
+);
 
 // Actualizar direcion de envio
+shippingAddressRouter.put(
+  "/address/update",
+  auththenticatedUser,
+  updateShippingAddressController
+);
 
 // Eliminar direccion de envio
 

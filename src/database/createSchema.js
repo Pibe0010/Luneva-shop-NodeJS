@@ -81,7 +81,7 @@ export const createSchema = async (db) => {
     );
     `);
 
-  // Compra
+  // Orden de compra
   await db.query(`
     CREATE TABLE IF NOT EXISTS Orders (
         ID_order CHAR(36) PRIMARY KEY NOT NULL,
@@ -96,19 +96,58 @@ export const createSchema = async (db) => {
         FOREIGN KEY (ID_product) REFERENCES Products(ID_product)
     );
     `);
-  // Detalles de la compra
+
+  // direccion de envio
+  await db.query(`
+    CREATE TABLE IF NOT EXISTS Shipping_Addresses (
+        ID_address CHAR(36) PRIMARY KEY NOT NULL,
+        ID_customer CHAR(36) NOT NULL,
+        address VARCHAR(100) NOT NULL,
+        street_number VARCHAR(40) NOT NULL,
+        floor VARCHAR(40) NULL,
+        ladder_door VARCHAR(40) NULL,
+        city VARCHAR(50) NOT NULL,
+        postal_code VARCHAR(40) NOT NULL,
+        country VARCHAR(50) NOT NULL,
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updatedAt DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+        FOREIGN KEY (ID_customer) REFERENCES Customers(ID_customer)
+    );
+    `);
+
+  // Envios
+  await db.query(`
+    CREATE TABLE IF NOT EXISTS Shipments (
+        ID_shipment CHAR(36) PRIMARY KEY NOT NULL,
+        ID_order CHAR(36) NOT NULL,
+        ref_SH CHAR(10) UNIQUE NOT NULL,
+        ID_shipping_address CHAR(36) NOT NULL,
+        status ENUM("pending", "sent", "delivered", "cancelled") DEFAULT "pending",
+        shipping_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updatedAt DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+        FOREIGN KEY (ID_order) REFERENCES Orders(ID_order),
+        FOREIGN KEY (ID_shipping_address) REFERENCES Shipping_Addresses(ID_address)
+    );
+    `);
+
+  // Detalles de la orden de compra
   await db.query(`
     CREATE TABLE IF NOT EXISTS Order_Details (
         ID_Detail CHAR(36) PRIMARY KEY NOT NULL,
         ID_order CHAR(36) NOT NULL,
         ID_product CHAR(36) NOT NULL,
+        ID_shipment CHAR(36) NOT NULL,
         price_amount INT NOT NULL,
+        Cuantity INT NOT NULL,
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
         updatedAt DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-        FOREIGN KEY (ID_order) REFERENCES Orders(ID_order)
-        
+        FOREIGN KEY (ID_order) REFERENCES Orders(ID_order),
+        FOREIGN KEY (ID_product) REFERENCES Products(ID_product),
+        FOREIGN KEY (ID_shipment) REFERENCES Shipments(ID_shipment)
     );
     `);
+
   // Pagos
   await db.query(`
     CREATE TABLE  IF NOT EXISTS Payments (
@@ -121,40 +160,6 @@ export const createSchema = async (db) => {
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
         updatedAt DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
         FOREIGN KEY (ID_order) REFERENCES Orders(ID_order)
-    );
-    `);
-
-  // Envios
-  await db.query(`
-    CREATE TABLE IF NOT EXISTS shipments (
-        ID_shipment CHAR(36) PRIMARY KEY NOT NULL,
-        ID_order CHAR(36) NOT NULL,
-        address VARCHAR(255) NOT NULL,
-        street_number VARCHAR(40) NOT NULL,
-        floor VARCHAR(40) NOT NULL,
-        ladder VARCHAR(40) NOT NULL,
-        city VARCHAR(100) NOT NULL,
-        postal_code VARCHAR(40) NOT NULL,
-        email VARCHAR(100) UNIQUE NOT NULL,
-        phone VARCHAR(20) NOT NULL,
-        shipping_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-        updatedAt DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-        FOREIGN KEY (ID_order) REFERENCES Orders(ID_order)
-    );
-    `);
-
-  // direccion de envio
-  await db.query(`
-    CREATE TABLE IF NOT EXISTS Shipping_Addresses (
-        ID_address CHAR(36) PRIMARY KEY NOT NULL,
-        ID_customer CHAR(36) NOT NULL,
-        ID_shipment CHAR(36)  NOT NULL,
-        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-        updatedAt DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-        FOREIGN KEY (ID_customer) REFERENCES Customers(ID_customer),
-        FOREIGN KEY (ID_shipment) REFERENCES Shipments(ID_shipment)
-
     );
     `);
 
