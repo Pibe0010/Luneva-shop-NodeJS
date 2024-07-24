@@ -83,3 +83,11 @@
 
      - Listar de ordenes.
      - Buscar orden
+
+   - ShippingAddress
+
+     - Crear nueva dirección de envío.
+     - Listar direcciones de envío.
+     - Borrar direcciones de envío.
+     - Actualizar direcciones de envío.
+     - Buscar direcciones de envío.
