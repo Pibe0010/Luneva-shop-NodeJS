@@ -9,7 +9,6 @@ export const newTrolleyController = async (req, res, next) => {
 
     // Obtengo el id del usuario
     const ID_user = req.user.ID_user;
-    console.log(ID_user);
 
     // Valido el body
     await validateSchemaUtil(newTrolleySchema, req.body);
