@@ -90,4 +90,10 @@
      - Listar direcciones de envío.
      - Borrar direcciones de envío.
      - Actualizar direcciones de envío.
-     - Buscar direcciones de envío.
+     - Seleccionar direcciones de envío.
+
+   - Shipments
+
+     - Actualizar de envío.
+     - Lista de envío.
+     - Buscar envío.
