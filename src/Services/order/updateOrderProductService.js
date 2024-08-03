@@ -2,7 +2,8 @@ import { updateOrderProductModel } from "../../Models/order/updateOrderProductMo
 
 export const updateOrderProductService = async (
   products_amount,
-  ID_product
+  ID_product,
+  price
 ) => {
-  await updateOrderProductModel(products_amount, ID_product);
+  await updateOrderProductModel(products_amount, ID_product, price);
 };

@@ -5,14 +5,15 @@ export const inserOrderModel = async (
   ref,
   customer,
   productId,
-  products_amount
+  products_amount,
+  price
 ) => {
   const pool = await getPool();
 
   // Insertamos la orden
   const result = await pool.query(
-    `INSERT INTO Orders  (ID_order, ref_OR, ID_customer, ID_product, product_amount) VALUES (?,?,?,?,?)`,
-    [orderId, ref, customer, productId, products_amount]
+    `INSERT INTO Orders  (ID_order, ref_OR, ID_customer, ID_product, product_amount, price) VALUES (?,?,?,?,?,?)`,
+    [orderId, ref, customer, productId, products_amount, price]
   );
 
   if (result.affectedRows === 0) {

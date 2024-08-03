@@ -4,7 +4,7 @@ export const controlStockProductService = async (productId) => {
   const pool = await getPool();
 
   const [result] = await pool.query(
-    `SELECT name, stock  FROM Products WHERE ID_product = ?`,
+    `SELECT name, stock, price  FROM Products WHERE ID_product = ?`,
     [productId]
   );
 

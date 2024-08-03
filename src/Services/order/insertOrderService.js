@@ -30,6 +30,16 @@ export const insertOrderService = async (
   // Genero la referencia
   const ref = generateReference5DigitsFromRef("OR", maxRef);
 
+  // Multiplicamos la cantidad por el precio del producto
+  const price = checkQuantity.price * products_amount;
+
   // Inserto el producto en la BD
-  await inserOrderModel(orderId, ref, customer, productId, products_amount);
+  await inserOrderModel(
+    orderId,
+    ref,
+    customer,
+    productId,
+    products_amount,
+    price
+  );
 };

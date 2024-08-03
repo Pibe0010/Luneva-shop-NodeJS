@@ -11,8 +11,8 @@ export const updateProductStockModel = async (trolley, ID_product) => {
 
   // Obtener la cantidad actual en el carrito
   const [productAmountResult] = await pool.query(
-    `SELECT products_amount FROM Trolleys WHERE ID_product = ? AND ID_trolley = ?`,
-    [ID_product, trolley]
+    `SELECT products_amount FROM Trolleys WHERE ID_trolley = ?`,
+    [trolley]
   );
 
   // Obtenemos el cantidad del carrito como un número
