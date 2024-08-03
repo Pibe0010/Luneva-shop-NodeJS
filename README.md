@@ -81,6 +81,7 @@
 
    - Orders
 
+     - La orden se crea al poner el producto en el carrito.
      - Listar de ordenes.
      - Buscar orden
 
@@ -94,6 +95,7 @@
 
    - Shipments
 
-     - Actualizar de envío.
+     - Los envios se crearan al crear el carrito por producto.
+     - Eliminamos el envio al borrar el producto del carrito.
      - Lista de envío.
      - Buscar envío.

@@ -1,10 +1,6 @@
 import { getPool } from "../../database/getPool.js";
 
-export const updateOrderProductModel = async (
-  products_amount,
-  ID_product,
-  price
-) => {
+export const updateOrderStatusModel = async (ID_product, cancelled) => {
   const pool = getPool();
 
   const fieldsToUpdate = [];
@@ -17,8 +13,7 @@ export const updateOrderProductModel = async (
     }
   };
 
-  addToUpdate("product_amount", products_amount);
-  addToUpdate("price", price);
+  addToUpdate("status", cancelled);
 
   if (fieldsToUpdate.length === 0) return {};
 

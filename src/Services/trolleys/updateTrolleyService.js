@@ -25,8 +25,12 @@ export const updateTrolleyService = async (ID_user, body) => {
   // Actualizamos el stock del producto
   await updateProductStockModel(trolley.ID_trolley, ID_product);
 
+  // Actualizamos el pricio del producto
+  // Multiplicamos la cantidad por el precio del producto
+  const price = existProduct.price * products_amount;
+
   // Actualizamos la cantidad de la orden
-  updateOrderProductService(products_amount, ID_product);
+  updateOrderProductService(products_amount, ID_product, price);
 
   // Actualizamos el producto en el carrito
   await updateTrolleyModel(trolley.ID_trolley, ID_product, products_amount);
