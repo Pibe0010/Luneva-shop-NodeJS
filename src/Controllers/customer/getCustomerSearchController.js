@@ -1,15 +1,19 @@
 import { getCustomerSearchService } from "../../Services/customer/getCustomerSearchService.js";
+import { handleErrorController } from "../../Utils/handleError.js";
 
 export const getCustomerSearchController = async (req, res, next) => {
   try {
     const searchTerm = req.query.searchTerm;
-    console.log(searchTerm);
 
     const response = await getCustomerSearchService(searchTerm);
 
-    res.status(201).send({ status: "ok", data: response });
+    res.status(200).send({ status: "ok", data: response });
   } catch (error) {
-    console.error(error);
-    next(error);
+    handleErrorController(
+      error,
+      next,
+      "GET_SEARCH_CONTROLLER_ERROR",
+      "Error en el controlador al obtener la lista de clientes con la busqueda"
+    );
   }
 };

@@ -1,4 +1,5 @@
 import { toggleOfferActivationService } from "../../Services/offers/toggleOfferActivationService.js";
+import { handleErrorController } from "../../Utils/handleError.js";
 
 export const toggleOfferActivationController = async (req, res, next) => {
   try {
@@ -24,7 +25,11 @@ export const toggleOfferActivationController = async (req, res, next) => {
       .status(201)
       .send({ status: "ok", isActive: isActive, message: message });
   } catch (error) {
-    console.error(error);
-    next(error);
+    handleErrorController(
+      error,
+      next,
+      "TOGGLE_ESTATUS_CONTROLLER_ERROR",
+      "Error en el controlador al cambiar el estado de una oferta"
+    );
   }
 };
