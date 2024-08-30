@@ -1,5 +1,6 @@
 import { updateCustomerSchema } from "../../Services/customer/updateCustomerSchema.js";
 import { updateCustomerService } from "../../Services/customer/updateCustomerService.js";
+import { handleErrorService } from "../../Utils/handleError.js";
 import { validateSchemaUtil } from "../../Utils/validateSchemaUtil.js";
 
 export const updateCustomerController = async (req, res, next) => {
@@ -14,10 +15,14 @@ export const updateCustomerController = async (req, res, next) => {
     const customer = await updateCustomerService(ID_user, req.body);
 
     res
-      .status(201)
+      .status(200)
       .send({ status: "ok", message: "Cliente actualizado", data: customer });
   } catch (error) {
-    console.error(error);
-    next(error);
+    handleErrorService(
+      error,
+      next,
+      "UPDATE_CUSTOMER_CONTROLLER_ERROR",
+      "Error en el controlador al modificar un cliente"
+    );
   }
 };

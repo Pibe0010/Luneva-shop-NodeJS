@@ -1,5 +1,6 @@
 import { updateOfferSchema } from "../../Schemas/offers/updateOfferSchema.js";
 import { updateOfferService } from "../../Services/offers/updateOfferService.js";
+import { handleErrorService } from "../../Utils/handleError.js";
 import { validateSchemaUtil } from "../../Utils/validateSchemaUtil.js";
 
 export const updateOfferController = async (req, res, next) => {
@@ -17,7 +18,11 @@ export const updateOfferController = async (req, res, next) => {
       .status(201)
       .send({ status: "ok", message: "Oferta actualizada", data: offer });
   } catch (error) {
-    console.error(error);
-    next(error);
+    handleErrorService(
+      error,
+      next,
+      "UPDATE_CUSTOMER_CONTROLLER_ERROR",
+      "Error en el controlador al modificar una oferta"
+    );
   }
 };

@@ -1,5 +1,6 @@
 import { newOfferSchema } from "../../Schemas/offers/newOfferSchema.js";
 import { insertOfferService } from "../../Services/offers/insertOfferService.js";
+import { handleErrorController } from "../../Utils/handleError.js";
 import { validateSchemaUtil } from "../../Utils/validateSchemaUtil.js";
 
 export const newOfferController = async (req, res, next) => {
@@ -16,7 +17,11 @@ export const newOfferController = async (req, res, next) => {
       data: { offer },
     });
   } catch (error) {
-    console.error(error);
-    next(error);
+    handleErrorController(
+      error,
+      next,
+      "NEW_CUSTOMER_CONTROLLER_ERROR",
+      "Error en el controlador de registro de oferta"
+    );
   }
 };

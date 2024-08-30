@@ -1,8 +1,17 @@
 import { getOffersListModel } from "../../Models/offers/getOffersListModel.js";
+import { handleErrorService } from "../../Utils/handleError.js";
 
 export const getOffersListService = async () => {
-  // Obtenemos todas la ofertas
-  const offersList = await getOffersListModel();
+  try {
+    // Obtenemos todas la ofertas
+    const offersList = await getOffersListModel();
 
-  return offersList;
+    return offersList;
+  } catch (error) {
+    handleErrorService(
+      error,
+      "GET_CUSTOMER_LIST_SERVICE_ERROR",
+      "Error al obtener la lista de ofertas desde el servicio"
+    );
+  }
 };

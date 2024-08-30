@@ -1,4 +1,5 @@
 import { deleteOfferService } from "../../Services/offers/deleteOfferService.js";
+import { handleErrorController } from "../../Utils/handleError.js";
 
 export const deleteOfferController = async (req, res, next) => {
   try {
@@ -13,7 +14,11 @@ export const deleteOfferController = async (req, res, next) => {
       data: offer,
     });
   } catch (error) {
-    console.error(error);
-    next(error);
+    handleErrorController(
+      error,
+      next,
+      "DELETE_CUSTOMER_CONTROLLER_ERROR",
+      "Error en el controlador al eliminar una oferta"
+    );
   }
 };
