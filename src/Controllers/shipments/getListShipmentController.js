@@ -1,4 +1,5 @@
 import { getShipmentListService } from "../../Services/shipments/getShipmentListService.js";
+import { handleErrorController } from "../../Utils/handleError.js";
 
 export const getListShipmentController = async (req, res, next) => {
   try {
@@ -9,7 +10,11 @@ export const getListShipmentController = async (req, res, next) => {
       data: shipmentList,
     });
   } catch (error) {
-    console.error(error);
-    next(error);
+    handleErrorController(
+      error,
+      next,
+      "GET_SHIPMENT_LIST_CONTROLLER_ERROR",
+      "Error en el controlador al obtener la lista de envios"
+    );
   }
 };
