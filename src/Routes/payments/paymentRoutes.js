@@ -10,3 +10,5 @@ export const paymentRouter = express.Router();
 // Lista de pagos
 
 // Buscar pago
+// Actualizar pago
+// Borrar pago
