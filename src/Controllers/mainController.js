@@ -20,7 +20,7 @@ import { productListController } from "../Controllers/product/productListControl
 import { updateProductController } from "../Controllers/product/updateProductController.js";
 import { deleteProductController } from "../Controllers/product/deleteProductController.js";
 import { toggleActivationController } from "../Controllers/product/toggleActivationController.js";
-import { getProductSearchController } from "../Models/product/getProductSearchController.js";
+import { getProductSearchController } from "./product/getProductSearchController.js";
 
 // customer
 import { getCustomerListController } from "./customer/getCustomerListController.js";

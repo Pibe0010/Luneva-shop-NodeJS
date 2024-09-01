@@ -1,5 +1,6 @@
 import { newProductSchema } from "../../Schemas/product/newProductSchema.js";
 import { insertProductService } from "../../Services/product/insertProductService.js";
+import { handleErrorController } from "../../Utils/handleError.js";
 import { validateSchemaUtil } from "../../Utils/validateSchemaUtil.js";
 
 export const newProductController = async (req, res, next) => {
@@ -24,7 +25,11 @@ export const newProductController = async (req, res, next) => {
       message: "Producto creado con exito",
     });
   } catch (error) {
-    console.error(error.message);
-    next(error);
+    handleErrorController(
+      error,
+      next,
+      "NEW_PRODUCT_CONTROLLER_ERROR",
+      "Error en el controlador de registro de producto"
+    );
   }
 };

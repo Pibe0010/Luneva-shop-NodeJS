@@ -1,6 +1,7 @@
 import { getMaxReference5Digits } from "../../Models/getMaxRef.js";
 import { insertProductModel } from "../../Models/product/insertProductModel.js";
 import { generateReference5DigitsFromRef } from "../../Utils/generateReferenceDigits.js";
+import { handleErrorService } from "../../Utils/handleError.js";
 
 export const insertProductService = async (
   name,
@@ -31,8 +32,10 @@ export const insertProductService = async (
       active
     );
   } catch (error) {
-    error.statusCode = 500;
-    error.code = "Error al insertar el producto";
-    throw error;
+    handleErrorService(
+      error,
+      "NEW_PRODUCT_SERVICE_ERROR",
+      "Error al insertar el producto desde el servicio"
+    );
   }
 };

@@ -1,4 +1,5 @@
 import { getOrderSearchService } from "../../Services/order/getOrderSearchService.js";
+import { handleErrorController } from "../../Utils/handleError.js";
 
 export const getOrderSearchController = async (req, res, next) => {
   try {
@@ -9,7 +10,11 @@ export const getOrderSearchController = async (req, res, next) => {
 
     res.status(201).send({ status: "ok", data: response });
   } catch (error) {
-    console.error(error);
-    next(error);
+    handleErrorController(
+      error,
+      next,
+      "GET_SEARCH_CONTROLLER_ERROR",
+      "Error en el controlador al obtener la lista de ordenes con la busqueda"
+    );
   }
 };

@@ -1,4 +1,5 @@
 import { deleteProductService } from "../../Services/product/deleteProductService.js";
+import { handleErrorController } from "../../Utils/handleError.js";
 
 export const deleteProductController = async (req, res, next) => {
   try {
@@ -9,7 +10,11 @@ export const deleteProductController = async (req, res, next) => {
 
     res.status(201).send({ status: "ok", message: response });
   } catch (error) {
-    console.error(error);
-    next(error);
+    handleErrorController(
+      error,
+      next,
+      "DELETE_PRODUCT_CONTROLLER_ERROR",
+      "Error en el controlador al eliminar un producto"
+    );
   }
 };

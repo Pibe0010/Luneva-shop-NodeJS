@@ -4,6 +4,7 @@ import sharp from "sharp";
 import { createPathIfNotExistsUtil } from "../../Utils/createPathIfNotExistsUtil.js";
 import { saveFileError } from "../error/errorService.js";
 import { updateImgProductModel } from "../../Models/product/updateimgProductModel.js";
+import { handleErrorService } from "../../Utils/handleError.js";
 
 export const updateImgProductService = async (
   ID_product,
@@ -59,7 +60,7 @@ export const updateImgProductService = async (
     const imgPathOne = path.join(uploadsDir, imgNameOne);
 
     // Actualizamos la fotos del producto.
-    await updateImgProductModel(
+    const response = await updateImgProductModel(
       ID_product,
       imgNameOne,
       imgNameTwo,
@@ -67,11 +68,11 @@ export const updateImgProductService = async (
     );
 
     // Guardar la imagen.
-    try {
-      await imgSharpTree.toFile(imgPathOne);
+    if (response) {
+      await imgSharpOne.toFile(imgPathOne);
       await imgSharpTwo.toFile(imgPathTwo);
-      await imgSharpOne.toFile(imgPathThree);
-    } catch (error) {
+      await imgSharpTree.toFile(imgPathThree);
+    } else {
       saveFileError();
     }
 
@@ -82,7 +83,10 @@ export const updateImgProductService = async (
       image_three: imgNameThree,
     };
   } catch (error) {
-    console.error(error);
-    throw error;
+    handleErrorService(
+      error,
+      "UPDATE_PRODUCT_SERVICE_ERROR",
+      "Error al actulizar la foto del producto desde el servicio"
+    );
   }
 };

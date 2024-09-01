@@ -1,4 +1,5 @@
 import { getProductSearchService } from "../../Services/product/getProductSearchService.js";
+import { handleErrorService } from "../../Utils/handleError.js";
 
 export const getProductSearchController = async (req, res, next) => {
   try {
@@ -11,7 +12,10 @@ export const getProductSearchController = async (req, res, next) => {
       .status(200)
       .send({ status: "ok", message: "lista Productos", data: response });
   } catch (error) {
-    console.error(error);
-    next(error);
+    handleErrorService(
+      error,
+      "GET_SEARCH_SERVICE_ERROR",
+      "Error al obtener la lista de busquedas de productos desde el servicio"
+    );
   }
 };

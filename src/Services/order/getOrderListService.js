@@ -1,7 +1,16 @@
 import { getOrderListModel } from "../../Models/order/getOrderListModel.js";
+import { handleErrorService } from "../../Utils/handleError.js";
 
 export const getOrderListService = async () => {
-  const orderList = await getOrderListModel();
+  try {
+    const orderList = await getOrderListModel();
 
-  return orderList;
+    return orderList;
+  } catch (error) {
+    handleErrorService(
+      error,
+      "GET_CUSTOMER_LIST_SERVICE_ERROR",
+      "Error al obtener la lista de ordenes desde el servicio"
+    );
+  }
 };

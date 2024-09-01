@@ -1,12 +1,17 @@
-import { selectProductListModel } from "../../Models/product/selectProductListModel.js";
+import { selectProductListService } from "../../Services/product/selectProductListService.js";
+import { handleErrorController } from "../../Utils/handleError.js";
 
 export const productListController = async (req, res, next) => {
   try {
-    const productList = await selectProductListModel();
+    const response = await selectProductListService();
 
-    res.status(201).send({ status: "ok", data: productList });
+    res.status(201).send({ status: "ok", data: response });
   } catch (error) {
-    console.error(error);
-    next(error);
+    handleErrorController(
+      error,
+      next,
+      "GET_PRODUCT_LIST_CONTROLLER_ERROR",
+      "Error en el controlador al obtener la lista de productos"
+    );
   }
 };

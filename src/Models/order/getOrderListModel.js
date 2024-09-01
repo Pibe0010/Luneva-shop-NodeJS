@@ -1,16 +1,23 @@
 import { getPool } from "../../database/getPool.js";
+import { databaseQueryError } from "../../Services/error/errorDataBase.js";
 
 export const getOrderListModel = async () => {
-  const pool = getPool();
+  try {
+    const pool = getPool();
 
-  // Obtener todos los productos
-  const result = await pool.query(`
-      SELECT ID_order, ref_OR, Users.user_name, Users.last_name, Users.email, Customers.phone, Products.name AS product_name, Products.ref_PR,Products.price, Products.category, product_amount, status, Orders.createdAt, Orders.updatedAt
-      FROM Orders
-      LEFT JOIN Customers ON Orders.ID_customer = Customers.ID_customer
-      LEFT JOIN Users ON Customers.ID_user = Users.ID_user
-      LEFT JOIN Products ON Orders.ID_product = Products.ID_product
-    `);
+    // Obtener todos los productos
+    const result = await pool.query(`
+        SELECT ID_order, ref_OR, Users.user_name, Users.last_name, Users.email, Customers.phone, Products.name AS product_name, Products.ref_PR,Products.price, Products.category, product_amount, status, Orders.createdAt, Orders.updatedAt
+        FROM Orders
+        LEFT JOIN Customers ON Orders.ID_customer = Customers.ID_customer
+        LEFT JOIN Users ON Customers.ID_user = Users.ID_user
+        LEFT JOIN Products ON Orders.ID_product = Products.ID_product
+      `);
 
-  return result[0];
+    return result[0];
+  } catch (error) {
+    databaseQueryError(
+      error.message || "Error al obtener la lista de ordenes desde el modelo"
+    );
+  }
 };

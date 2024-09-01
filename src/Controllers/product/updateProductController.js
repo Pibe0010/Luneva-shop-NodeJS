@@ -2,6 +2,7 @@ import { updateImgProductService } from "../../Services/product/updateImgProduct
 import { updateProductSchema } from "../../Schemas/product/updateproductSchema.js";
 import { validateSchemaUtil } from "../../Utils/validateSchemaUtil.js";
 import { updateProductService } from "../../Services/product/updateproductService.js";
+import { handleErrorService } from "../../Utils/handleError.js";
 
 export const updateProductController = async (req, res, next) => {
   try {
@@ -39,7 +40,11 @@ export const updateProductController = async (req, res, next) => {
       data: data,
     });
   } catch (error) {
-    console.error(error);
-    next(error);
+    handleErrorService(
+      error,
+      next,
+      "UPDATE_PRODUCT_CONTROLLER_ERROR",
+      "Error en el controlador al modificar un producto"
+    );
   }
 };
