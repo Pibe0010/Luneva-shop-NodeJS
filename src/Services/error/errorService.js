@@ -61,3 +61,11 @@ export const saveFileError = () => {
     message: "Error al guardar el archivo en el disco",
   };
 };
+
+export const invalidStatusError = (message) => {
+  throw {
+    statusCode: 401,
+    code: "INVALID_STATUS",
+    message: message || "Error al cambiar el estado",
+  };
+};

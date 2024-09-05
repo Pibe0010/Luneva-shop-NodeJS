@@ -1,25 +1,29 @@
 import { getPool } from "../../database/getPool.js";
+import { databaseInsertError } from "../../Services/error/errorDataBase.js";
 
 export const inserOrderModel = async (
   orderId,
   ref,
-  customer,
+  ID_customer,
   productId,
   products_amount,
   price
 ) => {
-  const pool = await getPool();
+  try {
+    const pool = await getPool();
 
-  // Insertamos la orden
-  const result = await pool.query(
-    `INSERT INTO Orders  (ID_order, ref_OR, ID_customer, ID_product, product_amount, price) VALUES (?,?,?,?,?,?)`,
-    [orderId, ref, customer, productId, products_amount, price]
-  );
+    // Insertamos la orden
+    const result = await pool.query(
+      `INSERT INTO Orders  (ID_order, ref_OR, ID_customer, ID_product, product_amount, price) VALUES (?,?,?,?,?,?)`,
+      [orderId, ref, ID_customer, productId, products_amount, price]
+    );
 
-  if (result.affectedRows === 0) {
-    const error = new Error("No se ha podido crear la orden de el producto");
-    error.httpStatus = 500;
-    error.code = "INSERT_ORDER_ERROR";
-    throw error;
+    if (result.affectedRows === 0) {
+      databaseInsertError("No se ha podido crear la orden de el producto");
+    }
+  } catch (error) {
+    databaseInsertError(
+      error.message || "Error en el modelo al insertar la orden"
+    );
   }
 };
