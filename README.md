@@ -81,7 +81,9 @@
 
    - Orders
 
-     - La orden se crea al poner el producto en el carrito.
+     - Crear oferta.
+     - Actualizar oferta.
+     - Borrar oferta.
      - Listar de ordenes.
      - Buscar orden
 

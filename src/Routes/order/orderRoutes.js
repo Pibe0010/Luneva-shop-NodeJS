@@ -2,8 +2,11 @@ import express from "express";
 import { auththenticatedUser } from "../../Middlewares/auththenticatedUser.js";
 import { adminAuthMiddleware } from "../../Middlewares/adminAuthMiddleware.js";
 import {
+  deleteOrderController,
   getOrderListController,
   getOrderSearchController,
+  newOrderController,
+  updateOrderController,
 } from "../../Controllers/actionController.js";
 
 // Creamos el router
@@ -18,11 +21,21 @@ orderRouter.get(
 );
 
 // Buscar ordenes
-orderRouter.get(
-  "/order/search",
-  auththenticatedUser,
-  getOrderListController,
-  getOrderSearchController
-);
+orderRouter.get("/order/search", auththenticatedUser, getOrderSearchController);
 // Creaer orden
+orderRouter.post("/order/create", auththenticatedUser, newOrderController);
+
 // Actualizar orden
+orderRouter.put(
+  "/order/update/:ID_order",
+  auththenticatedUser,
+  updateOrderController
+);
+
+// Eliminar orden
+orderRouter.delete(
+  "/order/delete/:ID_order",
+  auththenticatedUser,
+  adminAuthMiddleware,
+  deleteOrderController
+);
