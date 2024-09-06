@@ -1,36 +1,56 @@
 import { getMaxReference5Digits } from "../../Models/getMaxRef.js";
 import { generateReference5DigitsFromRef } from "../../Utils/generateReferenceDigits.js";
-import { selectOrderByIdModel } from "../../Models/order/selectOrderByIdModel.js";
 import { selectShippingAddressByIdModel } from "../../Models/shippingAddresses/selectShippingAddressByIdModel.js";
 import { insertShipmentModel } from "../../Models/shipments/insertShipmentModel.js";
 import { selectShimpmentByIdModel } from "../../Models/shipments/selectShimpmentByIdModel.js";
+import { selectProductByTrolleyModel } from "../../Models/shipments/selectProductByTrolleyModel.js";
+import { handleErrorService } from "../../Utils/handleError.js";
+import { selectCustomerByIdModel } from "../../Models/customer/selectCustomerByIdModel.js";
+import { selectOrderForShipingModel } from "../../Models/shipments/selectOrderForShipingModel.js";
 
-export const insertShipmenService = async (customer, ID_product) => {
-  // Creamos el id del envio
-  const ID_shipment = crypto.randomUUID();
+export const insertShipmenService = async (customer) => {
+  try {
+    // Obtengo el cliente
+    const response = await selectCustomerByIdModel(customer);
 
-  // Creamos la referencia del envio
-  // Obtengo la referencia maxima de los productos
-  const maxRef = await getMaxReference5Digits("Shipments", "ref_SH");
+    // Obtengo el producto del carrito
+    const product = await selectProductByTrolleyModel(response.ID_customer);
 
-  // Genero la referencia
-  const ref = generateReference5DigitsFromRef("SH", maxRef);
+    console.log("desde el servicio el producto en el carrito", product);
 
-  // Busco la orden de envio
-  const order = await selectOrderByIdModel(ID_product);
+    // Busco la orden para el envio
+    const order = await selectOrderForShipingModel(product.ID_product);
+    console.log("desde el servicio el orden", order);
 
-  // Obtengo la direccion de envio
-  const address = await selectShippingAddressByIdModel(customer);
+    // Obtengo la direccion de envio
+    const address = await selectShippingAddressByIdModel(response.ID_customer);
 
-  // Inserto el envio en la BD
-  await insertShipmentModel(
-    ID_shipment,
-    ref,
-    order.ID_order,
-    address.ID_address
-  );
+    // Creamos el id del envio
+    const ID_shipment = crypto.randomUUID();
 
-  const shipment = selectShimpmentByIdModel(ID_shipment);
+    // Creamos la referencia del envio
+    // Obtengo la referencia maxima de los productos
+    const maxRef = await getMaxReference5Digits("Shipments", "ref_SH");
 
-  return shipment;
+    // Genero la referencia
+    const ref = generateReference5DigitsFromRef("SH", maxRef);
+
+    // Inserto el envio en la BD
+    await insertShipmentModel(
+      ID_shipment,
+      ref,
+      order.ID_order,
+      address.ID_address
+    );
+
+    const shipment = selectShimpmentByIdModel(ID_shipment);
+
+    return shipment;
+  } catch (error) {
+    handleErrorService(
+      error,
+      "NEW_SHIPMENT_SERVICE_ERROR",
+      "Error al insertar el envio desde el servicio"
+    );
+  }
 };

@@ -81,9 +81,9 @@
 
    - Orders
 
-     - Crear oferta.
-     - Actualizar oferta.
-     - Borrar oferta.
+     - Crear orden.
+     - Actualizar orden.
+     - Borrar orden.
      - Listar de ordenes.
      - Buscar orden
 
@@ -97,7 +97,8 @@
 
    - Shipments
 
-     - Los envios se crearan al crear el carrito por producto.
-     - Eliminamos el envio al borrar el producto del carrito.
+     - Crear envio.
+     - Actualizar envio.
+     - Borrar envio.
      - Lista de envío.
      - Buscar envío.
