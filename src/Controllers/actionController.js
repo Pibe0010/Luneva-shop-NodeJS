@@ -27,6 +27,9 @@ import { selectShippingAdrressController } from "./shippingAddresses/selectShipp
 
 // Envios
 import { getListShipmentController } from "./shipments/getListShipmentController.js";
+import { getShipmentController } from "./shipments/getShipmentController.js";
+import { newShipmentController } from "./shipments/newShipmentController.js";
+import { updateShipmentController } from "./shipments/updateShipmentController.js";
 
 export {
   newTrolleyController,
@@ -49,4 +52,7 @@ export {
   getListShippingAddressController,
   selectShippingAdrressController,
   getListShipmentController,
+  getShipmentController,
+  newShipmentController,
+  updateShipmentController,
 };
