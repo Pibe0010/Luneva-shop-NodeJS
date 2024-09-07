@@ -1,4 +1,5 @@
 import { getListShippingAddressService } from "../../Services/shippingAddresses/getListShippingAddressService.js";
+import { handleErrorController } from "../../Utils/handleError.js";
 
 export const getListShippingAddressController = async (req, res, next) => {
   try {
@@ -14,7 +15,11 @@ export const getListShippingAddressController = async (req, res, next) => {
       data: addressList,
     });
   } catch (error) {
-    console.error(error);
-    next(error);
+    handleErrorController(
+      error,
+      next,
+      "GET_SHIPMENT_ADDRESS_LIST_CONTROLLER_ERROR",
+      "Error en el controlador al obtener la lista de direcciónes de envio"
+    );
   }
 };

@@ -1,5 +1,6 @@
 import { updateShippingAddressSchema } from "../../Schemas/shippingAddresse/updateShippingAddressSchema.js";
 import { updateShippingAddressService } from "../../Services/shippingAddresses/updateShippingAddressService.js";
+import { handleErrorController } from "../../Utils/handleError.js";
 import { validateSchemaUtil } from "../../Utils/validateSchemaUtil.js";
 
 export const updateShippingAddressController = async (req, res, next) => {
@@ -19,7 +20,11 @@ export const updateShippingAddressController = async (req, res, next) => {
       data: { updateAddress },
     });
   } catch (error) {
-    console.error(error);
-    next(error);
+    handleErrorController(
+      error,
+      next,
+      "UPDATE_SHIPMENT_ADDRESS_CONTROLLER_ERROR",
+      "Error en el controlador al modificar la dirección"
+    );
   }
 };

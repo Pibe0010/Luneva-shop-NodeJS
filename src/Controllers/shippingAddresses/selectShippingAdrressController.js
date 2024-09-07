@@ -1,5 +1,6 @@
 import { selectShippingAdrressSchema } from "../../Schemas/shippingAddresse/selectShippingAdrressSchema.js";
 import { selectShippingAdrressService } from "../../Services/shippingAddresses/selectShippingAdrressService.js";
+import { handleErrorController } from "../../Utils/handleError.js";
 import { validateSchemaUtil } from "../../Utils/validateSchemaUtil.js";
 
 export const selectShippingAdrressController = async (req, res, next) => {
@@ -16,7 +17,11 @@ export const selectShippingAdrressController = async (req, res, next) => {
       data: { selectAddress },
     });
   } catch (error) {
-    console.error(error);
-    next(error);
+    handleErrorController(
+      error,
+      next,
+      "GET_SHIPMENT_ADDRESS_CONTROLLER_ERROR",
+      "Error en el controlador al obtener la dirección"
+    );
   }
 };
