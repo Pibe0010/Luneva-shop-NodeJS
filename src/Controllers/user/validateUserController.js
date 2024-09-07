@@ -1,23 +1,22 @@
-import { activateUserModel } from "../../Models/user/activateUserModel.js";
-import { findByRegistrationCodeModel } from "../../Models/user/findByRegistrationCodeModel.js";
+import { activateUserService } from "../../Services/user/activateUserService.js";
+import { handleErrorController } from "../../Utils/handleError.js";
 
 export const validateUserController = async (req, res, next) => {
   try {
     // Obtengo el rigistration code ( Luego pondremos la url de activación )
     const { registration_code } = req.params;
 
-    const userId = await findByRegistrationCodeModel(registration_code);
-
-    const { ID_user } = userId;
-
-    // Activo el usuario
-    await activateUserModel(ID_user);
+    await activateUserService(registration_code);
 
     res
       .status(201)
       .send({ status: "ok", message: "Cuenta activada correctamente" });
   } catch (error) {
-    console.error(error);
-    next(error);
+    handleErrorController(
+      error,
+      next,
+      "VALIDATE_USER_CONTROLLER_ERROR",
+      "Error en el controlador al validar un usuario"
+    );
   }
 };

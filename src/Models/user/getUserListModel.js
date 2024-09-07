@@ -1,12 +1,23 @@
 import { getPool } from "../../database/getPool.js";
+import { databaseQueryError } from "../../Services/error/errorDataBase.js";
 
 export const getUserListModel = async () => {
-  const pool = getPool();
+  try {
+    const pool = getPool();
 
-  const result = await pool.query(
-    `SELECT Users.id_user, Users.user_name, Users.last_name, Users.email, Users.avatar
-    FROM Users`
-  );
+    const result = await pool.query(
+      `SELECT Users.id_user, Users.user_name, Users.last_name, Users.email, Users.avatar
+      FROM Users`
+    );
 
-  return result[0];
+    if (result.length === 0) {
+      databaseQueryError("No se encontro la lista de usuarios");
+    }
+
+    return result[0];
+  } catch (error) {
+    databaseQueryError(
+      error.message || "Error al obtener la lista de usuarios desde el modelo"
+    );
+  }
 };

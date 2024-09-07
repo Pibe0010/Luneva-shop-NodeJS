@@ -1,20 +1,22 @@
 import { getPool } from "../../database/getPool.js";
+import { databaseUpdateError } from "../../Services/error/errorDataBase.js";
 
 export const updatePasswordModel = async (ID_user, hashedPassword) => {
-  const pool = getPool();
-
-  const query = `
-    UPDATE Users
-    SET password = ?
-    WHERE id_user = ?
-  `;
-
   try {
+    const pool = getPool();
+
+    const query = `UPDATE Users SET password = ? WHERE id_user = ?`;
+
     const [result] = await pool.execute(query, [hashedPassword, ID_user]);
-    console.log(`Actualizando contraseña: ${JSON.stringify(result)}`);
+
+    if (result.affectedRows === 0) {
+      databaseUpdateError("No se ha podido actualizar la contraseña.");
+    }
+
     return { message: "Contraseña actualizada correctamente" };
   } catch (error) {
-    console.error(`Error al actualizar contraseña: ${error.message}`);
-    throw error;
+    databaseUpdateError(
+      error.message || "Error en el modelo al actualizar la contraseña"
+    );
   }
 };

@@ -1,14 +1,20 @@
 import { getPool } from "../../database/getPool.js";
+import { databaseDeleteError } from "../../Services/error/errorDataBase.js";
 
 export const deleteUserModel = async (ID_user) => {
-  const pool = await getPool();
-  const [result] = await pool.query(`DELETE FROM Users WHERE id_user = ?`, [
-    ID_user,
-  ]);
+  try {
+    const pool = await getPool();
+    const [result] = await pool.query(`DELETE FROM Users WHERE id_user = ?`, [
+      ID_user,
+    ]);
 
-  if (result.affectedRows === 0) {
-    const error = new Error("No se ha podido eliminar el usuario");
-    error.code = "DELETE_USER_ERROR";
-    throw error;
+    if (result.length === 1) {
+      databaseDeleteError("No se ha podido eliminar el usuario");
+    }
+  } catch (error) {
+    databaseDeleteError(
+      error.message || "Error en el modelo al eliminiar un usuario",
+      "Error en el modelo al eliminiar un usuario"
+    );
   }
 };

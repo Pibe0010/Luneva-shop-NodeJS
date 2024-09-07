@@ -1,12 +1,17 @@
-import { getUserListModel } from "../../Models/user/getUserListModel.js";
+import { getUserListService } from "../../Services/user/getUserListService.js";
+import { handleErrorController } from "../../Utils/handleError.js";
 
 export const getUserListController = async (req, res, next) => {
   try {
-    const usersList = await getUserListModel();
+    const usersList = await getUserListService();
 
     res.status(200).send({ status: "ok", usersList });
   } catch (error) {
-    console.error(error);
-    next(error);
+    handleErrorController(
+      error,
+      next,
+      "GET_USER_LIST_CONTROLLER_ERROR",
+      "Error en el controlador al obtener la lista de usuarios"
+    );
   }
 };

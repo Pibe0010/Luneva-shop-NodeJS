@@ -1,6 +1,7 @@
 import { updateUserSchema } from "../../Schemas/user/updateUserSchema.js";
 import { updateAvatarUserService } from "../../Services/user/updateAvatarUserService.js";
 import { updateUserService } from "../../Services/user/updateUserService.js";
+import { handleErrorController } from "../../Utils/handleError.js";
 import { validateSchemaUtil } from "../../Utils/validateSchemaUtil.js";
 
 export const updateUserController = async (req, res, next) => {
@@ -32,7 +33,11 @@ export const updateUserController = async (req, res, next) => {
 
     res.status(201).send({ status: "ok", message: message.trim(), data: data });
   } catch (error) {
-    console.error(error);
-    next(error);
+    handleErrorController(
+      error,
+      next,
+      "UPDATE_USER_CONTROLLER_ERROR",
+      "Error en el controlador al modificar un usuario"
+    );
   }
 };
