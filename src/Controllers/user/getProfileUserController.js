@@ -1,16 +1,21 @@
-import { selectUserByIdModel } from "../../Models/user/selectUserByIdModel.js";
+import { selectProfileUserService } from "../../Services/user/selectProfileUserService.js";
+import { handleErrorController } from "../../Utils/handleError.js";
 
 export const getProfileUserController = async (req, res, next) => {
   try {
     const ID_user = req.user.id_user;
-    const user = await selectUserByIdModel(ID_user);
+
+    const user = await selectProfileUserService(ID_user);
 
     res.status(200).send({
       status: "ok",
       data: user,
     });
   } catch (error) {
-    console.error(error);
-    next(error);
+    handleErrorController(
+      error,
+      next,
+      "Error del controlador en la obtencion del perfil del usuario"
+    );
   }
 };

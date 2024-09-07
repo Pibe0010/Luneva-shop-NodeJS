@@ -1,4 +1,5 @@
 import { getPool } from "../../database/getPool.js";
+import { databaseQueryError } from "../../Services/error/errorDataBase.js";
 
 export const selectIdByRegistrationCodeModel = async (registration_code) => {
   try {
@@ -8,9 +9,17 @@ export const selectIdByRegistrationCodeModel = async (registration_code) => {
       [registration_code]
     );
 
+    if (rows.length === 0) {
+      databaseQueryError(
+        "No se encontró ningún usuario con el código de registro proporcionado."
+      );
+    }
+
     return rows[0];
   } catch (error) {
-    console.error(`Error al consultar id_user: ${error.message}`);
-    throw error;
+    databaseQueryError(
+      error.message ||
+        "Error en el modelo al consultar id_user por código de registro"
+    );
   }
 };

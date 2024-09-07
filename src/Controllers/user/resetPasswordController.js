@@ -1,5 +1,6 @@
 import { changeResetPasswordSchema } from "../../Schemas/user/changeResetPasswordSchema.js";
 import { updatePasswordService } from "../../Services/user/updatePasswordService.js";
+import { handleErrorController } from "../../Utils/handleError.js";
 import { validateSchemaUtil } from "../../Utils/validateSchemaUtil.js";
 
 export const resetPasswordController = async (req, res, next) => {
@@ -15,7 +16,11 @@ export const resetPasswordController = async (req, res, next) => {
     // Responder al cliente
     res.send(201).send(response);
   } catch (error) {
-    console.error(error);
-    next(error);
+    handleErrorController(
+      error,
+      next,
+      "PASSWORD_USER_CONTROLLER_ERROR",
+      "Error en el controlador al resetear la contraseña"
+    );
   }
 };

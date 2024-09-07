@@ -1,43 +1,15 @@
-import { selectUserByEmailModel } from "../../Models/user/selectUserByEmailModel.js";
 import { loginUserSchema } from "../../Schemas/user/loginUserSchema.js";
-import {
-  invalidCredentials,
-  invalidPasswordError,
-  userAlreadyActivatedError,
-} from "../../Services/error/errorService.js";
-import { generateAccessToken } from "../../Utils/generateAccessToken.js";
+import { loginUserService } from "../../Services/user/loginUserService.js";
+import { handleErrorController } from "../../Utils/handleError.js";
 import { validateSchemaUtil } from "../../Utils/validateSchemaUtil.js";
-import bcrypt from "bcrypt";
 
 export const loginUserController = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
-
     // Validamos el body
     await validateSchemaUtil(loginUserSchema, req.body);
 
-    // Buscamos el usuario en la base de datos
-    const user = await selectUserByEmailModel(email);
-
-    if (!user) {
-      invalidCredentials("El usuario / email no existe");
-    }
-
-    // Comprobamos si el usuario esta activo
-    if (user.active != 1) {
-      userAlreadyActivatedError();
-    }
-
-    // Comprobamos si el password es correcto
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-
-    // Verificamos la password
-    if (!isPasswordValid) {
-      invalidPasswordError();
-    }
-
-    // Generamos el token
-    const token = generateAccessToken(user);
+    // Obtengo los datos de login
+    const { token, user } = await loginUserService(req.body);
 
     res.send({
       status: "ok",
@@ -46,7 +18,11 @@ export const loginUserController = async (req, res, next) => {
       user: user.user_name,
     });
   } catch (error) {
-    console.error(error);
-    next(error);
+    handleErrorController(
+      error,
+      next,
+      "LOGIN_USER_CONTROLLER_ERROR",
+      "Error en el controlador al hacer login"
+    );
   }
 };

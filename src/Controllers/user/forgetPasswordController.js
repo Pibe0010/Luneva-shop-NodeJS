@@ -1,6 +1,7 @@
 import { recoveryPasswordSchema } from "../../Schemas/user/recoveryPasswordSchema.js";
 import { sendRecoveryPaswordEmail } from "../../Services/email/sendWelcomeEmail.js";
 import { forgetPasswordService } from "../../Services/user/forgetPasswordService.js";
+import { handleErrorController } from "../../Utils/handleError.js";
 import { validateSchemaUtil } from "../../Utils/validateSchemaUtil.js";
 
 export const forgetPasswordController = async (req, res, next) => {
@@ -20,7 +21,11 @@ export const forgetPasswordController = async (req, res, next) => {
     // Devolvemos el usuario actualizado.
     res.status(202).send({ message: "Correo enviado" });
   } catch (error) {
-    console.error(error);
-    next(error);
+    handleErrorController(
+      error,
+      next,
+      "PASSWORD_USER_CONTROLLER_ERROR",
+      "Error en el controlador de la peticion de restaurar contraseña"
+    );
   }
 };

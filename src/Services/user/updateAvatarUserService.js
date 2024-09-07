@@ -4,6 +4,7 @@ import sharp from "sharp";
 import { createPathIfNotExistsUtil } from "../../Utils/createPathIfNotExistsUtil.js";
 import { updateUserAvatarModel } from "../../Models/user/updateUserAvatarModel.js";
 import { saveFileError } from "../error/errorService.js";
+import { handleErrorService } from "../../Utils/handleError.js";
 
 export const updateAvatarUserService = async (ID_user, img, width) => {
   try {
@@ -35,16 +36,19 @@ export const updateAvatarUserService = async (ID_user, img, width) => {
     const imgPath = path.join(uploadsDir, imgName);
 
     // Guardar la imagen.
-    try {
+    if (imgPath) {
       await imgSharp.toFile(imgPath);
-    } catch (error) {
+    } else {
       saveFileError();
     }
 
     // Devolver el nombre de la imagen.
     return imgName;
   } catch (error) {
-    console.error(error);
-    throw error;
+    handleErrorService(
+      error,
+      "UPDATE_AVATAR_USER_SERVICE_ERROR",
+      "Error en el servicio al cambiar el avatar de un usuario"
+    );
   }
 };
