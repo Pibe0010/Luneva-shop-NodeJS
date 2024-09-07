@@ -66,6 +66,6 @@ export const invalidStatusError = (message) => {
   throw {
     statusCode: 401,
     code: "INVALID_STATUS",
-    message: message || "Error al cambiar el estado",
+    message: message || "Error el estado no es cancelado",
   };
 };

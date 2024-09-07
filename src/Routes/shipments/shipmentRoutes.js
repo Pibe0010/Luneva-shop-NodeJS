@@ -2,6 +2,7 @@ import express from "express";
 import { auththenticatedUser } from "../../Middlewares/auththenticatedUser.js";
 import { adminAuthMiddleware } from "../../Middlewares/adminAuthMiddleware.js";
 import {
+  deleteShipmentController,
   getListShipmentController,
   getShipmentController,
   newShipmentController,
@@ -41,10 +42,9 @@ shipmentRouter.put(
   updateShipmentController
 );
 
-/*// Eliminar envio
+// Eliminar envio
 shipmentRouter.delete(
-  "/shipment/delete/:shipment",
+  "/shipment/delete/:ID_shipment",
   auththenticatedUser,
   deleteShipmentController
 );
-*/

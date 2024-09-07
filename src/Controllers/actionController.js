@@ -30,6 +30,7 @@ import { getListShipmentController } from "./shipments/getListShipmentController
 import { getShipmentController } from "./shipments/getShipmentController.js";
 import { newShipmentController } from "./shipments/newShipmentController.js";
 import { updateShipmentController } from "./shipments/updateShipmentController.js";
+import { deleteShipmentController } from "./shipments/deleteShipmentController.js";
 
 export {
   newTrolleyController,
@@ -55,4 +56,5 @@ export {
   getShipmentController,
   newShipmentController,
   updateShipmentController,
+  deleteShipmentController,
 };
