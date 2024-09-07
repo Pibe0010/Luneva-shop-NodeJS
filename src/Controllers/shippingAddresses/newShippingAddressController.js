@@ -1,5 +1,6 @@
 import { newShippingAddressSchema } from "../../Schemas/shippingAddresse/newShippingAddressSchema.js";
 import { insertShippingAddressService } from "../../Services/shippingAddresses/insertShippingAddressService.js";
+import { handleErrorController } from "../../Utils/handleError.js";
 import { validateSchemaUtil } from "../../Utils/validateSchemaUtil.js";
 
 export const newShippingAddressController = async (req, res, next) => {
@@ -18,7 +19,11 @@ export const newShippingAddressController = async (req, res, next) => {
       message: "Direccion de envio creada con exito",
     });
   } catch (error) {
-    console.error(error);
-    next(error);
+    handleErrorController(
+      error,
+      next,
+      "NEW_SHIPMENT_ADDRESS_CONTROLLER_ERROR",
+      "Error en el controlador de registro de un dirección de envio"
+    );
   }
 };

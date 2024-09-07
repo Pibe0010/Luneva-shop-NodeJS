@@ -1,16 +1,22 @@
 import { getPool } from "../../database/getPool.js";
+import { databaseDeleteError } from "../../Services/error/errorDataBase.js";
 
 export const deleteShippingAddressModel = async (address) => {
-  const pool = getPool();
+  try {
+    const pool = getPool();
 
-  const [result] = await pool.query(
-    `DELETE FROM Shipping_addresses WHERE ID_customer = ?`,
-    [address]
-  );
+    const [result] = await pool.query(
+      `DELETE FROM Shipping_addresses WHERE ID_customer = ?`,
+      [address]
+    );
 
-  if (result.affectedRows === 0) {
-    const error = new Error("No se ha podido eliminar la dirección.");
-    error.code = "DELETE_ADDRESS_ERROR";
-    throw error;
+    if (result.length === 1) {
+      databaseDeleteError("No se ha podido eliminar la dirección.");
+    }
+  } catch (error) {
+    databaseDeleteError(
+      error.message || "Error en el modelo al eliminiar la dirección de envio",
+      "Error en el modelo al eliminiar la dirección de envio"
+    );
   }
 };
