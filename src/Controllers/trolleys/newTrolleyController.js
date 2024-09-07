@@ -1,5 +1,6 @@
 import { newTrolleySchema } from "../../Schemas/trolleys/newTrolleySchema.js";
 import { insertProductTrolleyService } from "../../Services/trolleys/insertProductTrolleyService.js";
+import { handleErrorController } from "../../Utils/handleError.js";
 import { validateSchemaUtil } from "../../Utils/validateSchemaUtil.js";
 
 export const newTrolleyController = async (req, res, next) => {
@@ -21,7 +22,11 @@ export const newTrolleyController = async (req, res, next) => {
       message: "Producto añadido al carrito",
     });
   } catch (error) {
-    console.error(error);
-    next(error);
+    handleErrorController(
+      error,
+      next,
+      "NEW_TROLLEY_CONTROLLER_ERROR",
+      "Error en el controlador de registro de producto en el carrito"
+    );
   }
 };
