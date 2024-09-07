@@ -1,4 +1,5 @@
 import { deleteTrolleyService } from "../../Services/trolleys/deleteTrolleyService.js";
+import { handleErrorController } from "../../Utils/handleError.js";
 
 export const deleteTrolleyController = async (req, res, next) => {
   try {
@@ -12,7 +13,11 @@ export const deleteTrolleyController = async (req, res, next) => {
 
     res.status(201).send({ status: "ok", data: response });
   } catch (error) {
-    console.error(error);
-    next(error);
+    handleErrorController(
+      error,
+      next,
+      "DELETE_CUSTOMER_CONTROLLER_ERROR",
+      "Error en el controlador al eliminar el carrito"
+    );
   }
 };

@@ -1,5 +1,6 @@
 import { updateTrolleySchema } from "../../Schemas/trolleys/updateTrolleySchema.js";
 import { updateTrolleyService } from "../../Services/trolleys/updateTrolleyService.js";
+import { handleErrorController } from "../../Utils/handleError.js";
 import { validateSchemaUtil } from "../../Utils/validateSchemaUtil.js";
 
 export const updateTrolleyController = async (req, res, next) => {
@@ -17,7 +18,11 @@ export const updateTrolleyController = async (req, res, next) => {
       .status(201)
       .send({ status: "ok", message: "Carrito actualizado", data: trolley });
   } catch (error) {
-    console.error(error);
-    next(error);
+    handleErrorController(
+      error,
+      next,
+      "UPDATE_TROLLEY_CONTROLLER_ERROR",
+      "Error en el controlador al modificar el carrito"
+    );
   }
 };

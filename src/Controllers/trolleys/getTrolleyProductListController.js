@@ -1,4 +1,5 @@
 import { getTrolleyProductListService } from "../../Services/trolleys/getTrolleyProductListService.js";
+import { handleErrorController } from "../../Utils/handleError.js";
 
 export const getTrolleyProductListController = async (req, res, next) => {
   try {
@@ -10,7 +11,11 @@ export const getTrolleyProductListController = async (req, res, next) => {
       .status(200)
       .send({ status: "ok", message: "Lista del carrito", data: trolleyList });
   } catch (error) {
-    console.error(error);
-    next(error);
+    handleErrorController(
+      error,
+      next,
+      "GET_TROLLEY_PRODUCT_LIST_CONTROLLER_ERROR",
+      "Error en el controlador al obtener la lista de productos del carrito"
+    );
   }
 };

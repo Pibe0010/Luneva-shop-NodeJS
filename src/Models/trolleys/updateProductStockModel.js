@@ -1,39 +1,45 @@
 import { getPool } from "../../database/getPool.js";
+import { databaseQueryError } from "../../Services/error/errorDataBase.js";
 
 export const updateProductStockModel = async (trolley, ID_product) => {
-  const pool = getPool();
+  try {
+    const pool = getPool();
 
-  // Obtener el stock del producto
-  const [productStockResult] = await pool.query(
-    `SELECT Stock FROM Products WHERE ID_product = ?`,
-    [ID_product]
-  );
+    // Obtener el stock del producto
+    const [productStockResult] = await pool.query(
+      `SELECT Stock FROM Products WHERE ID_product = ?`,
+      [ID_product]
+    );
 
-  // Obtener la cantidad actual en el carrito
-  const [productAmountResult] = await pool.query(
-    `SELECT products_amount FROM Trolleys WHERE ID_trolley = ?`,
-    [trolley]
-  );
+    // Obtener la cantidad actual en el carrito
+    const [productAmountResult] = await pool.query(
+      `SELECT products_amount FROM Trolleys WHERE ID_trolley = ?`,
+      [trolley]
+    );
 
-  // Obtenemos el cantidad del carrito como un número
-  const productStock = Number(productStockResult[0].Stock);
-  const trolleyQuantity = Number(productAmountResult[0].products_amount);
+    // Obtenemos el cantidad del carrito como un número
+    const productStock = Number(productStockResult[0].Stock);
+    const trolleyQuantity = Number(productAmountResult[0].products_amount);
 
-  const namberModify = (storage, number) => {
-    return storage + number;
-  };
+    const namberModify = (storage, number) => {
+      return storage + number;
+    };
 
-  // Sumamos la cantidad de producto
-  const stockProduct = namberModify(productStock, trolleyQuantity);
+    // Sumamos la cantidad de producto
+    const stockProduct = namberModify(productStock, trolleyQuantity);
 
-  const result = await pool.query(
-    `UPDATE Products SET Stock = ? WHERE ID_product = ?`,
-    [stockProduct, ID_product]
-  );
+    const result = await pool.query(
+      `UPDATE Products SET Stock = ? WHERE ID_product = ?`,
+      [stockProduct, ID_product]
+    );
 
-  if (result.affectedRows === 0) {
-    const error = new Error("No se ha podido insertar el producto.");
-    error.code = "INSERT_PRODUCTS_ERROR";
-    throw error;
+    if (result.affectedRows === 0) {
+      databaseQueryError("No se ha podido actualizar el stock.");
+    }
+  } catch (error) {
+    databaseQueryError(
+      error.message ||
+        "Error en el modelo al actualizar el stock del producto en el carrito"
+    );
   }
 };
