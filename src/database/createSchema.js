@@ -174,17 +174,6 @@ export const createSchema = async (db) => {
     );
     `);
 
-  // stock de productos
-  await db.query(`
-    CREATE TABLE IF NOT EXISTS Stock_Products (
-        ID_stock CHAR(36) PRIMARY KEY NOT NULL,
-        ID_product CHAR(36) NOT NULL,
-        quantity_available INT NOT NULL,
-        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-        updatedAt DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-        FOREIGN KEY (ID_product) REFERENCES Products(ID_product)
-    );
-    `);
   console.log("Base de datos creada con exito");
 
   // Creamos el admin
