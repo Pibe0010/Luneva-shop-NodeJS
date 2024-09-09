@@ -15,6 +15,7 @@
    - .env,.env.example, .gitignore, .prettierrc, .eslintrc, README.md
 
 4. Armamos la extructura del proyecto, carpetas, archivos
+
 5. Creamos la base de datos
 
 6. creamos las rutas que usaremos
@@ -24,11 +25,9 @@
    - Ruta de clientes.
    - Ruta de carrito de compras.
    - Ruta de ordenes.
-   - Ruta de detalles de la orden.
    - Ruta de pagos.
    - Ruta de envios.
    - Ruta de direcciónes.
-   - Ruta de stock de productos.
    - Ruta de tickets.
    - Ruta de ofertas.
 
@@ -38,67 +37,74 @@
 
 8. Utilizaremos thunderClient para probar las rutas.
 
-   - User
+- User
 
-     - Registro de usuario.
-     - Activación de usuario.
-     - Login de usuario.
-     - actualizar usuario.
-     - borrar usuario.
-     - Listar de usuarios.
+  - Registro de usuario.
+  - Activación de usuario.
+  - Login de usuario.
+  - actualizar usuario.
+  - borrar usuario.
+  - Listar de usuarios.
 
-   - Product
+- Product
 
-     - Crear producto.
-     - Listar de Productos.
-     - Borrar Producto.
-     - Actualizar Producto.
-     - Activar / Desactivar Producto.
-     - Busqueda de productos.
-     - Producto a la venta.
+  - Crear producto.
+  - Listar de Productos.
+  - Borrar Producto.
+  - Actualizar Producto.
+  - Activar / Desactivar Producto.
+  - Busqueda de productos.
+  - Producto a la venta.
 
-   - Customer
+- Customer
 
-     - Lista de clientes.
-     - Busqueda de clientes.
-     - Actualizar cliente.
-     - Borrar cliente.
+  - Lista de clientes.
+  - Busqueda de clientes.
+  - Actualizar cliente.
+  - Borrar cliente.
 
-   - Trolley
+- Trolley
 
-     - Crear carrito de compras.
-     - Actualizar carrito de compras.
-     - Borrar carrito de compras.
-     - Listar de carritos de compras.
+  - Crear carrito de compras.
+  - Actualizar carrito de compras.
+  - Borrar carrito de compras.
+  - Listar de carritos de compras.
 
-   - Offers
+- Offers
 
-     - Crear oferta.
-     - Actualizar oferta.
-     - Listar de ofertas.
-     - Borrar oferta.
-     - Activar / Desactivar oferta.
+  - Crear oferta.
+  - Actualizar oferta.
+  - Listar de ofertas.
+  - Borrar oferta.
+  - Activar / Desactivar oferta.
 
-   - Orders
+- Orders
 
-     - Crear orden.
-     - Actualizar orden.
-     - Borrar orden.
-     - Listar de ordenes.
-     - Buscar orden
+  - Crear orden.
+  - Actualizar orden.
+  - Borrar orden.
+  - Listar de ordenes.
+  - Buscar orden
 
-   - ShippingAddress
+- ShippingAddress
 
-     - Crear nueva dirección de envío.
-     - Listar direcciones de envío.
-     - Borrar direcciones de envío.
-     - Actualizar direcciones de envío.
-     - Seleccionar direcciones de envío.
+  - Crear nueva dirección de envío.
+  - Listar direcciones de envío.
+  - Borrar direcciones de envío.
+  - Actualizar direcciones de envío.
+  - Seleccionar direcciones de envío.
 
-   - Shipments
+- Shipments
 
-     - Crear envio.
-     - Actualizar envio.
-     - Borrar envio.
-     - Lista de envío.
-     - Buscar envío.
+  - Crear envio.
+  - Actualizar envio.
+  - Borrar envio.
+  - Lista de envío.
+  - Buscar envío.
+
+- Ticket_purchases
+
+  - Crear ticket.
+  - Borrar ticket.
+  - Lista de ticket.
+  - Buscar ticket.

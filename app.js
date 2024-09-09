@@ -15,6 +15,7 @@ import { offersRouter } from "./src/Routes/offers/offersRoutes.js";
 import { orderRouter } from "./src/Routes/order/orderRoutes.js";
 import { shippingAddressRouter } from "./src/Routes/shippingAddresses/shippingAddressRountes.js";
 import { shipmentRouter } from "./src/Routes/shipments/shipmentRoutes.js";
+import { ticketPurchaseRouter } from "./src/Routes/ticketPurchases/ticketPurchaseRoutes.js";
 
 // crear la app con express
 const app = express();
@@ -34,6 +35,7 @@ app.use(offersRouter);
 app.use(orderRouter);
 app.use(shippingAddressRouter);
 app.use(shipmentRouter);
+app.use(ticketPurchaseRouter);
 
 // Midleware 404 not found
 app.use(notFoundError);
