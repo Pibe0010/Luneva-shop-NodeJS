@@ -32,6 +32,12 @@ import { newShipmentController } from "./shipments/newShipmentController.js";
 import { updateShipmentController } from "./shipments/updateShipmentController.js";
 import { deleteShipmentController } from "./shipments/deleteShipmentController.js";
 
+// Tikets de compra
+import { newTicketPurchaseController } from "./ticketPurchases/newTicketPurchaseController.js";
+import { deleteTicketPurchaseController } from "./ticketPurchases/deleteTicketPurchaseController.js";
+import { getTicketPurshaseListController } from "./ticketPurchases/getTicketPurshaseListController.js";
+import { getticketPurchaseSearchController } from "./ticketPurchases/getticketPurchaseSearchController.js";
+
 export {
   newTrolleyController,
   updateTrolleyController,
@@ -57,4 +63,8 @@ export {
   newShipmentController,
   updateShipmentController,
   deleteShipmentController,
+  newTicketPurchaseController,
+  deleteTicketPurchaseController,
+  getTicketPurshaseListController,
+  getticketPurchaseSearchController,
 };
