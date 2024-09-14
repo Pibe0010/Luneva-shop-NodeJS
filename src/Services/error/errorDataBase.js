@@ -32,6 +32,7 @@ export const databaseDeleteError = (
     statusCode: 400,
     code: "DATABASE_DELETE_ERROR",
     message: customMessage,
+    error: new Error().message,
   };
 };
 
@@ -43,6 +44,7 @@ export const databaseInsertError = (
     statusCode: 400,
     code: "DATABASE_INSERT_ERROR",
     message: message,
+    error: new Error().message,
   };
 };
 
@@ -53,6 +55,7 @@ export const databaseUpdateError = (
     statusCode: 400,
     code: "DATABASE_UPDATE_ERROR",
     message: message,
+    error: new Error().message,
   };
 };
 
@@ -63,6 +66,7 @@ export const databaseQueryError = (
     statusCode: 400,
     code: "DATABASE_QUERY_ERROR",
     message: message,
+    error: new Error().message,
   };
 };
 
