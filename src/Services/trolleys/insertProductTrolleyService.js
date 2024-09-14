@@ -7,7 +7,7 @@ export const insertProductTrolleyService = async (ID_user, body) => {
     // Obtengo l producto
     const { ID_product, products_amount } = body;
 
-    // creao el id del carrito
+    // creo el id del carrito
     const ID_trolley = crypto.randomUUID();
 
     // Buscamos el cliente con el ID

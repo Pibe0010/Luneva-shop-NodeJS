@@ -69,6 +69,7 @@
   - Actualizar carrito de compras.
   - Borrar carrito de compras.
   - Listar de carritos de compras.
+  - Cambiar estado del carrito de compras.
 
 - Offers
 

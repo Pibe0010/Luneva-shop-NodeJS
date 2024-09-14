@@ -3,6 +3,7 @@ import { newTrolleyController } from "./trolleys/newTrolleyController.js";
 import { updateTrolleyController } from "./trolleys/updateTrolleyController.js";
 import { deleteTrolleyController } from "./trolleys/deleteTrolleyController.js";
 import { getTrolleyProductListController } from "./trolleys/getTrolleyProductListController.js";
+import { updateTrolleyStatusController } from "./trolleys/updateTrolleyStatusController.js";
 
 // Ofertas
 import { newOfferController } from "./offers/newOfferController.js";
@@ -51,6 +52,7 @@ export {
   updateTrolleyController,
   deleteTrolleyController,
   getTrolleyProductListController,
+  updateTrolleyStatusController,
   newOfferController,
   updateOfferController,
   deleteOfferController,

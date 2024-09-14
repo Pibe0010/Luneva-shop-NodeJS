@@ -5,6 +5,7 @@ import {
   getTrolleyProductListController,
   newTrolleyController,
   updateTrolleyController,
+  updateTrolleyStatusController,
 } from "../../Controllers/actionController.js";
 
 // Creamos el router
@@ -32,4 +33,11 @@ trolleysRouter.get(
   "/trolley/products/list",
   auththenticatedUser,
   getTrolleyProductListController
+);
+
+// Cambiar estado del carrito
+trolleysRouter.put(
+  "/trolley/update/status",
+  auththenticatedUser,
+  updateTrolleyStatusController
 );
