@@ -16,7 +16,7 @@ export const changePasswordController = async (req, res, next) => {
     handleErrorController(
       error,
       next,
-      "PASSWORD_USER_CONTROLLER_ERROR",
+      "CHANGE_PASSWORD_USER_CONTROLLER_ERROR",
       "Error en el controlador de cambio de contraseña"
     );
   }

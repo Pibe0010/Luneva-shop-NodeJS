@@ -4,7 +4,7 @@ import { handleErrorController } from "../../Utils/handleError.js";
 export const deleteProductController = async (req, res, next) => {
   try {
     // Obtengo el id del producto
-    const ID_product = req.params.product_id;
+    const ID_product = req.params.ID_product;
 
     const response = await deleteProductService(ID_product);
 

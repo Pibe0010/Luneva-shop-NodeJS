@@ -10,6 +10,10 @@ export const selectTrolleyByIdModel = async (customer_id) => {
       [customer_id]
     );
 
+    if (result.length === 0) {
+      return null;
+    }
+
     return result[0];
   } catch (error) {
     databaseQueryError(

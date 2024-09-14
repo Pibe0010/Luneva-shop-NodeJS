@@ -10,6 +10,10 @@ export const selectCustomerByIdModel = async (ID_user) => {
       [ID_user]
     );
 
+    if (result.length === 0) {
+      return null;
+    }
+
     return result[0];
   } catch (error) {
     databaseQueryError(

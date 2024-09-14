@@ -8,7 +8,7 @@ export const insertProductTrolleyModel = async (
   products_amount
 ) => {
   try {
-    const pool = getPool();
+    const pool = await getPool();
 
     // insertamos el producto en el carrito
     const [result] = await pool.query(

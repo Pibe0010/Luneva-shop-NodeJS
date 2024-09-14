@@ -31,16 +31,13 @@ export const updateOfferModel = async (
 
     const [result] = await pool.query(query, values);
 
-    // Si no se ha actualizado ningún producto, lanzar un error.
     if (result.affectedRows === 0) {
-      databaseInsertError("No se ha podido actualizar el producto");
+      databaseInsertError("No se ha podido actualizar la ofeta");
     }
 
     // Devolver el resultado.
     return result;
   } catch (error) {
-    databaseInsertError(
-      error.message || "Error en el modelo al actualizar la oferta"
-    );
+    databaseInsertError("Error en el modelo al actualizar la oferta");
   }
 };

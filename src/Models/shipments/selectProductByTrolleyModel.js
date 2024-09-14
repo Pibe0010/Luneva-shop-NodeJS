@@ -5,12 +5,16 @@ export const selectProductByTrolleyModel = async (customer) => {
   try {
     const pool = await getPool();
 
-    const [rows] = await pool.query(
+    const [result] = await pool.query(
       "SELECT * FROM Trolleys WHERE ID_customer = ?",
       [customer]
     );
 
-    return rows[0];
+    if (result.length === 0) {
+      return null;
+    }
+
+    return result[0];
   } catch (error) {
     databaseQueryError(
       error.message || "Error en el modelo al obtener el carrito de un cliente"

@@ -3,7 +3,7 @@ import { databaseQueryError } from "../../Services/error/errorDataBase.js";
 
 export const updateProductStockModel = async (trolley, ID_product) => {
   try {
-    const pool = getPool();
+    const pool = await getPool();
 
     // Obtener el stock del producto
     const [productStockResult] = await pool.query(

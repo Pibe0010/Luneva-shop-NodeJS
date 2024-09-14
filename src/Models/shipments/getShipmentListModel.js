@@ -3,7 +3,7 @@ import { databaseQueryError } from "../../Services/error/errorDataBase.js";
 
 export const getShipmentListModel = async () => {
   try {
-    const pool = getPool();
+    const pool = await getPool();
 
     const result = await pool.query(
       `SELECT 
@@ -40,6 +40,10 @@ export const getShipmentListModel = async () => {
   LEFT JOIN 
     Users ON Shipping_addresses.ID_customer = Users.ID_user`
     );
+
+    if (result.length === 0) {
+      return null;
+    }
 
     return result[0];
   } catch (error) {

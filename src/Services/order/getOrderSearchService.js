@@ -10,7 +10,7 @@ export const getOrderSearchService = async (searchTerm) => {
   } catch (error) {
     handleErrorService(
       error,
-      "GET_SEARCH_SERVICE_ERROR",
+      "GET_SEARCH_ORDER_SERVICE_ERROR",
       "Error al obtener la lista de busquedas de ordenes desde el servicio"
     );
   }

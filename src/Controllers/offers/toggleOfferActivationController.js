@@ -3,16 +3,15 @@ import { handleErrorController } from "../../Utils/handleError.js";
 
 export const toggleOfferActivationController = async (req, res, next) => {
   try {
-    // Obtenemos el id de la oferta
-    const ID_offer = req.params.id_offer;
-
-    const { active } = req.body;
+    // Obtenemos la oferta
+    const ID_offer = req.params.ID_offer;
 
     // Desactivamos la oferta
-    const offer = await toggleOfferActivationService(ID_offer, active);
+    const offer = await toggleOfferActivationService(ID_offer, req.body);
 
     let isActive;
     let message;
+
     if (offer.active === "true") {
       isActive = true;
       message = "La oferta está activada.";
@@ -28,7 +27,7 @@ export const toggleOfferActivationController = async (req, res, next) => {
     handleErrorController(
       error,
       next,
-      "TOGGLE_ESTATUS_CONTROLLER_ERROR",
+      "TOGGLE_ESTATUS_OFFER_CONTROLLER_ERROR",
       "Error en el controlador al cambiar el estado de una oferta"
     );
   }

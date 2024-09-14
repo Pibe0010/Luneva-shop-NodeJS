@@ -3,9 +3,9 @@ import { databaseQueryError } from "../../Services/error/errorDataBase.js";
 
 export const selectOrderSearchModel = async (searchTerm) => {
   try {
-    const pool = getPool();
+    const pool = await getPool();
 
-    const [rows] = await pool.query(
+    const [result] = await pool.query(
       `SELECT SELECT ID_order, ref_OR, Users.user_name, Users.last_name, Users.email, Customers.phone, Products.name AS product_name, Products.ref_PR,Products.price, Products.category, product_amount, status, Orders.createdAt, Orders.updatedAt
         FROM Orders
         LEFT JOIN Customers ON Orders.ID_customer = Customers.ID_customer
@@ -21,7 +21,11 @@ export const selectOrderSearchModel = async (searchTerm) => {
       ]
     );
 
-    return rows;
+    if (result.length === 0) {
+      return null;
+    }
+
+    return result;
   } catch (error) {
     databaseQueryError(
       error.message ||

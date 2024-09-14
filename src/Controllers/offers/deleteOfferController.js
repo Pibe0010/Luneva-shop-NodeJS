@@ -4,7 +4,7 @@ import { handleErrorController } from "../../Utils/handleError.js";
 export const deleteOfferController = async (req, res, next) => {
   try {
     // Obtenemos el id de la oferta
-    const ID_offer = req.params.id_offer;
+    const ID_offer = req.params.ID_offer;
 
     // Eliminamos la oferta
     const offer = await deleteOfferService(ID_offer);
@@ -17,7 +17,7 @@ export const deleteOfferController = async (req, res, next) => {
     handleErrorController(
       error,
       next,
-      "DELETE_CUSTOMER_CONTROLLER_ERROR",
+      "DELETE_OFFER_CONTROLLER_ERROR",
       "Error en el controlador al eliminar una oferta"
     );
   }

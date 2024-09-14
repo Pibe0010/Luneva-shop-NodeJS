@@ -11,7 +11,7 @@ export const updateProductModel = async (
   active
 ) => {
   try {
-    const pool = getPool();
+    const pool = await getPool();
 
     const fieldsToUpdate = [];
     const values = [];

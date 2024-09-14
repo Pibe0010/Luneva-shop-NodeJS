@@ -3,7 +3,7 @@ import { databaseInsertError } from "../../Services/error/errorDataBase.js";
 
 export const updateOrderModel = async (products_amount, order, price) => {
   try {
-    const pool = getPool();
+    const pool = await getPool();
 
     const fieldsToUpdate = [];
     const values = [];
@@ -25,9 +25,8 @@ export const updateOrderModel = async (products_amount, order, price) => {
 
     const [result] = await pool.query(query, values);
 
-    // Si no se actualizo el producto lanzamos un error
     if (result.affectedRows === 0) {
-      databaseInsertError("No se ha podido actualizar el producto");
+      databaseInsertError("No se ha podido actualizar la orden");
     }
   } catch (error) {
     databaseInsertError(

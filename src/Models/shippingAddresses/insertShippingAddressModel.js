@@ -13,7 +13,7 @@ export const insertShippingAddressModel = async (
   country
 ) => {
   try {
-    const pool = getPool();
+    const pool = await getPool();
 
     const [result] = await pool.query(
       `INSERT INTO Shipping_Addresses (

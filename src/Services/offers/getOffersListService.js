@@ -10,7 +10,7 @@ export const getOffersListService = async () => {
   } catch (error) {
     handleErrorService(
       error,
-      "GET_CUSTOMER_LIST_SERVICE_ERROR",
+      "GET_OFFERS_LIST_SERVICE_ERROR",
       "Error al obtener la lista de ofertas desde el servicio"
     );
   }

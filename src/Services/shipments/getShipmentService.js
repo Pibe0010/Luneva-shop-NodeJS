@@ -1,6 +1,6 @@
 import { selectShimpmentByIdModel } from "../../Models/shipments/selectShimpmentByIdModel.js";
 import { handleErrorService } from "../../Utils/handleError.js";
-import { invalidCredentials } from "../error/errorService.js";
+import { notFoundError } from "../error/errorService.js";
 
 export const getShipmentService = async (ID_shipment) => {
   try {
@@ -8,7 +8,7 @@ export const getShipmentService = async (ID_shipment) => {
     const shipment = await selectShimpmentByIdModel(ID_shipment);
 
     if (!shipment) {
-      invalidCredentials("El envio no existe");
+      notFoundError("payment");
     }
 
     return shipment;

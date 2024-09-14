@@ -1,12 +1,17 @@
 import { deleteOrderModel } from "../../Models/order/deleteOrderModel.js";
 import { selectOrderByIdModel } from "../../Models/order/selectOrderByIdModel.js";
 import { handleErrorService } from "../../Utils/handleError.js";
-import { invalidStatusError } from "../error/errorService.js";
+import { invalidStatusError, notFoundError } from "../error/errorService.js";
 
 export const deleteOrderService = async (order) => {
   try {
     // Verificamos que la orden este cancellada
     const selectOrder = await selectOrderByIdModel(order);
+
+    // Comprobamos que existe la orden
+    if (!selectOrder) {
+      notFoundError("order");
+    }
 
     if (selectOrder.status !== "cancelled") {
       invalidStatusError(" La order no ha sido cancelado");

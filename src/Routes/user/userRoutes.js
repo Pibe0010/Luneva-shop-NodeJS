@@ -37,7 +37,7 @@ userRouter.put("/user/update", auththenticatedUser, updateUserController);
 
 // Borrar ususario
 userRouter.delete(
-  "/user/delete/:id_user",
+  "/user/delete/:ID_user",
   auththenticatedUser,
   adminAuthMiddleware,
   deleteUserController

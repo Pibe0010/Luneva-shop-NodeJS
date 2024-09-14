@@ -3,7 +3,7 @@ import { databaseDeleteError } from "../../Services/error/errorDataBase.js";
 
 export const deleteTrolleyModel = async (trolley) => {
   try {
-    const pool = getPool();
+    const pool = await getPool();
 
     // Borramos el carrito
     const [result] = await pool.query(

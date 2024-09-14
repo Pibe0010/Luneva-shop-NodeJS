@@ -8,7 +8,7 @@ export const updateCustomerController = async (req, res, next) => {
     // Valido el body
     await validateSchemaUtil(updateCustomerSchema, req.body);
 
-    // Obtengo el id
+    // Obtengo el usuario
     const ID_user = req.user.ID_user;
 
     // Actualizo el cliente

@@ -14,7 +14,7 @@ export const newOrderController = async (req, res, next) => {
     // Insertamos la orden
     const response = await insertOrderService(ID_user, req.body);
 
-    res.status(200).send({
+    res.status(201).send({
       status: "ok",
       message: "Orden creada con exito",
       data: response,
@@ -23,8 +23,8 @@ export const newOrderController = async (req, res, next) => {
     handleErrorController(
       error,
       next,
-      "NEW_CUSTOMER_CONTROLLER_ERROR",
-      "Error en el controlador de registro de ordenes"
+      "NEW_ORDER_CONTROLLER_ERROR",
+      "Error en el controlador de registro de una orden"
     );
   }
 };

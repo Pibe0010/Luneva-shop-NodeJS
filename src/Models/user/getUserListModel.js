@@ -3,7 +3,7 @@ import { databaseQueryError } from "../../Services/error/errorDataBase.js";
 
 export const getUserListModel = async () => {
   try {
-    const pool = getPool();
+    const pool = await getPool();
 
     const result = await pool.query(
       `SELECT Users.id_user, Users.user_name, Users.last_name, Users.email, Users.avatar
@@ -11,7 +11,7 @@ export const getUserListModel = async () => {
     );
 
     if (result.length === 0) {
-      databaseQueryError("No se encontro la lista de usuarios");
+      return null;
     }
 
     return result[0];

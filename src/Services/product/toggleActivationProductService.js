@@ -3,8 +3,10 @@ import { toggleActiveModel } from "../../Models/product/toggleActiveModel.js";
 import { handleErrorService } from "../../Utils/handleError.js";
 import { notFoundError } from "../error/errorService.js";
 
-export const toggleActivationProductService = async (ID_product, active) => {
+export const toggleActivationProductService = async (ID_product, body) => {
   try {
+    const { active } = body;
+
     // Compruebo si existe el producto
     const product = await selectProductByIdModel(ID_product);
 
@@ -22,7 +24,7 @@ export const toggleActivationProductService = async (ID_product, active) => {
   } catch (error) {
     handleErrorService(
       error,
-      "TGGLE_ACTIVE_PRODUCT_SERVICE_ERROR",
+      "TOGGLE_ACTIVE_PRODUCT_SERVICE_ERROR",
       "Error en el servicio al cambiar el estado de un producto"
     );
   }

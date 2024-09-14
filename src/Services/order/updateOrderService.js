@@ -26,7 +26,7 @@ export const updateOrderService = async (order, body) => {
   } catch (error) {
     handleErrorService(
       error,
-      "NEW_CUSTOMER_SERVICE_ERROR",
+      "NEW_ORDER_SERVICE_ERROR",
       "Error al actulizar la orden desde el servicio"
     );
   }

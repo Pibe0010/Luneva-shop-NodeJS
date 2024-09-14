@@ -11,7 +11,7 @@ export const selectShippingAdrressController = async (req, res, next) => {
     // Selecciono la direccion de envio
     const selectAddress = await selectShippingAdrressService(req.body);
 
-    res.status(201).send({
+    res.status(200).send({
       status: "ok",
       message: "Direccion de envio seleccionada con exito",
       data: { selectAddress },

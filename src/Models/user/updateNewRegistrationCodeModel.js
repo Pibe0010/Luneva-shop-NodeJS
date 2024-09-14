@@ -6,7 +6,7 @@ export const updateNewRegistrationCodeModel = async (
   new_registration_code
 ) => {
   try {
-    const dbPool = getPool();
+    const dbPool = await getPool();
 
     const query = `UPDATE Users SET registration_code = ? WHERE id_user = ?`;
 

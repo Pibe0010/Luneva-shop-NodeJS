@@ -9,19 +9,19 @@ export const updateOfferController = async (req, res, next) => {
     await validateSchemaUtil(updateOfferSchema, req.body);
 
     // Obtenemos el id del producto
-    const ID_product = req.params.id_product;
+    const ID_product = req.params.ID_product;
 
     // Actualizamos la oferta
     const offer = await updateOfferService(ID_product, req.body);
 
     res
-      .status(201)
+      .status(200)
       .send({ status: "ok", message: "Oferta actualizada", data: offer });
   } catch (error) {
     handleErrorService(
       error,
       next,
-      "UPDATE_CUSTOMER_CONTROLLER_ERROR",
+      "UPDATE_OFFER_CONTROLLER_ERROR",
       "Error en el controlador al modificar una oferta"
     );
   }

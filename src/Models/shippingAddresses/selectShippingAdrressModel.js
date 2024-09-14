@@ -3,12 +3,16 @@ import { databaseQueryError } from "../../Services/error/errorDataBase.js";
 
 export const selectShippingAdrressModel = async (address) => {
   try {
-    const pool = getPool();
+    const pool = await getPool();
 
     const [result] = await pool.query(
       `SELECT ID_address, address, street_number, floor, ladder_door, postal_code, city, country FROM Shipping_addresses WHERE ID_address = ?`,
       [address]
     );
+
+    if (result.length === 0) {
+      return null;
+    }
 
     return result[0];
   } catch (error) {

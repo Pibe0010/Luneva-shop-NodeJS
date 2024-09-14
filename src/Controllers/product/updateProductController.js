@@ -2,7 +2,7 @@ import { updateImgProductService } from "../../Services/product/updateImgProduct
 import { updateProductSchema } from "../../Schemas/product/updateproductSchema.js";
 import { validateSchemaUtil } from "../../Utils/validateSchemaUtil.js";
 import { updateProductService } from "../../Services/product/updateproductService.js";
-import { handleErrorService } from "../../Utils/handleError.js";
+import { handleErrorController } from "../../Utils/handleError.js";
 
 export const updateProductController = async (req, res, next) => {
   try {
@@ -10,8 +10,8 @@ export const updateProductController = async (req, res, next) => {
     await validateSchemaUtil(updateProductSchema, req.body);
     await validateSchemaUtil(updateProductSchema, req.files || {});
 
-    // Obtenemos el id del producto
-    const ID_product = req.params.product_id;
+    // Obtenemos el producto
+    const ID_product = req.params.ID_product;
 
     let message = "";
     let data = {};
@@ -40,7 +40,7 @@ export const updateProductController = async (req, res, next) => {
       data: data,
     });
   } catch (error) {
-    handleErrorService(
+    handleErrorController(
       error,
       next,
       "UPDATE_PRODUCT_CONTROLLER_ERROR",

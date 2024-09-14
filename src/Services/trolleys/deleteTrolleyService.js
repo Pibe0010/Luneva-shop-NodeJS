@@ -27,7 +27,7 @@ export const deleteTrolleyService = async (ID_user) => {
   } catch (error) {
     handleErrorService(
       error,
-      "DELETE_CUSTOMER_SERVICE_ERROR",
+      "DELETE_TROLLEY_SERVICE_ERROR",
       "Error al elimniar el carrito del servicio"
     );
   }

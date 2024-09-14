@@ -9,7 +9,7 @@ export const insertOfferModel = async (
   ending_date
 ) => {
   try {
-    const pool = getPool();
+    const pool = await getPool();
 
     const [result] = await pool.query(
       `INSERT INTO Offers (ID_offer, ID_product, discount_rate, start_date, ending_date) VALUES (?, ?, ?, ?, ?)`,

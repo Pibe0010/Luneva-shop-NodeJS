@@ -3,6 +3,7 @@ import { handleErrorController } from "../../Utils/handleError.js";
 
 export const getListShipmentController = async (req, res, next) => {
   try {
+    // Obtengo la lista de envios
     const shipmentList = await getShipmentListService();
 
     res.status(200).send({

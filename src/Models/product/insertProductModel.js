@@ -12,7 +12,7 @@ export const insertProductModel = async (
   active
 ) => {
   try {
-    const pool = getPool();
+    const pool = await getPool();
 
     const [result] = await pool.query(
       `INSERT INTO Products (ID_product, ref_PR, name, description, price, stock, category, active) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)`,
@@ -20,9 +20,7 @@ export const insertProductModel = async (
     );
 
     if (result.affectedRows === 0) {
-      const error = new Error("No se ha podido insertar el producto");
-      error.code = "INSERT_PRODUCT_ERROR";
-      throw error;
+      databaseInsertError("No se ha podido insertar el producto");
     }
   } catch (error) {
     databaseInsertError(

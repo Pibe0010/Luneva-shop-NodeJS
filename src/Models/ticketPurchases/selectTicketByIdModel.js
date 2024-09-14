@@ -1,12 +1,11 @@
 import { getPool } from "../../database/getPool.js";
 import { databaseQueryError } from "../../Services/error/errorDataBase.js";
-import { notFoundError } from "../../Services/error/errorService.js";
 
 export const selectTicketByIdModel = async (ID_ticket) => {
   try {
     const pool = await getPool();
 
-    const [rows] = await pool.query(
+    const [result] = await pool.query(
       `SELECT Ticket_purchases.ID_ticket, Ticket_purchases.ID_order, Orders.product_amount, Orders.price, Products.name, Users.user_name 
       FROM Ticket_purchases 
           INNER JOIN Orders  ON Ticket_purchases.ID_order = Orders.ID_order 
@@ -17,11 +16,11 @@ export const selectTicketByIdModel = async (ID_ticket) => {
       [ID_ticket]
     );
 
-    if (!rows || rows.length === 0) {
-      notFoundError("SalesProduct");
+    if (result.length === 0) {
+      return null;
     }
 
-    return rows[0];
+    return result[0];
   } catch (error) {
     databaseQueryError(
       error.message ||

@@ -3,7 +3,7 @@ import { databaseInsertError } from "../../Services/error/errorDataBase.js";
 
 export const updateCustomerPhoneModel = async (ID_user, phone) => {
   try {
-    const pool = getPool();
+    const pool = await getPool();
 
     const fieldsToUpdate = [];
     const values = [];

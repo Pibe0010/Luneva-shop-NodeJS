@@ -8,7 +8,7 @@ export const updateCustomerModel = async (
   email
 ) => {
   try {
-    const pool = getPool();
+    const pool = await getPool();
 
     const fieldsToUpdate = [];
     const values = [];
