@@ -3,7 +3,7 @@ import { databaseDeleteError } from "../../Services/error/errorDataBase.js";
 
 export const deleteShipmentModel = async (ID_shipment) => {
   try {
-    const pool = getPool();
+    const pool = await getPool();
 
     const [result] = await pool.query(
       `DELETE FROM Shipments WHERE ID_shipment = ?`,

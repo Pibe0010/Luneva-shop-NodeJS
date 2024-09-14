@@ -3,7 +3,7 @@ import { databaseQueryError } from "../../Services/error/errorDataBase.js";
 
 export const updateProductStockDeleteModel = async (trolley) => {
   try {
-    const pool = getPool();
+    const pool = await getPool();
 
     // Obtener la cantidad actual en el carrito
     const [productAmountResult] = await pool.query(

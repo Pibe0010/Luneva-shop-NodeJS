@@ -14,7 +14,7 @@ export const updateShippingAddressController = async (req, res, next) => {
     // Actualizamos la direccion de envio en la BD
     const updateAddress = await updateShippingAddressService(ID_user, req.body);
 
-    res.status(201).send({
+    res.status(200).send({
       status: "ok",
       message: "Direccion de envio actualizada con exito",
       data: { updateAddress },

@@ -3,7 +3,7 @@ import { handleErrorController } from "../../Utils/handleError.js";
 
 export const deleteUserController = async (req, res, next) => {
   try {
-    const ID_user = req.params.id_user;
+    const ID_user = req.params.ID_user;
 
     // Eliminamos el usuario
     await deleteUserService(ID_user);

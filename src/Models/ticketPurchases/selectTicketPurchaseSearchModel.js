@@ -21,6 +21,10 @@ export const selectTicketPurchaseSearchModel = async (searchTerm) => {
       ]
     );
 
+    if (result.length === 0) {
+      return null;
+    }
+
     return result;
   } catch (error) {
     databaseQueryError(

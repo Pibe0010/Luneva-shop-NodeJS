@@ -16,11 +16,8 @@ export const insertShipmenService = async (customer) => {
     // Obtengo el producto del carrito
     const product = await selectProductByTrolleyModel(response.ID_customer);
 
-    console.log("desde el servicio el producto en el carrito", product);
-
     // Busco la orden para el envio
     const order = await selectOrderForShipingModel(product.ID_product);
-    console.log("desde el servicio el orden", order);
 
     // Obtengo la direccion de envio
     const address = await selectShippingAddressByIdModel(response.ID_customer);

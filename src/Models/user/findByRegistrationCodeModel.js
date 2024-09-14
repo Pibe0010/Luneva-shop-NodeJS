@@ -5,7 +5,7 @@ import { getPool } from "../../database/getPool.js";
 
 export const findByRegistrationCodeModel = async (registration_code) => {
   try {
-    const pool = getPool();
+    const pool = await getPool();
 
     const [user] = await pool.query(
       `SELECT ID_user From Users WHERE registrationCode = ?`,

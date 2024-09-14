@@ -23,7 +23,7 @@ export const updateOrderController = async (req, res, next) => {
     handleErrorController(
       error,
       next,
-      "UPDATE_CUSTOMER_CONTROLLER_ERROR",
+      "UPDATE_ORDER_CONTROLLER_ERROR",
       "Error en el controlador al modificar una orden"
     );
   }

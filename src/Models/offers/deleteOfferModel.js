@@ -10,7 +10,7 @@ export const deleteOfferModel = async (ID_offer) => {
     ]);
 
     if (result.affectedRows === 0) {
-      databaseDeleteError("No se ha podido eliminar el producto.");
+      databaseDeleteError("No se ha podido eliminar la oferta.");
     }
 
     return { message: "Oferta eliminado correctamente" };

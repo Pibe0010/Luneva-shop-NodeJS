@@ -3,16 +3,15 @@ import { handleErrorController } from "../../Utils/handleError.js";
 
 export const toggleActivationController = async (req, res, next) => {
   try {
-    // Obtengo el id del producto
-    const ID_product = req.params.id_product;
-
-    const { active } = req.body;
+    // Obtengo el producto
+    const ID_product = req.params.ID_product;
 
     // Desactivo el producto o lo activo
-    const product = await toggleActivationProductService(ID_product, active);
+    const product = await toggleActivationProductService(ID_product, req.body);
 
     let isActive;
     let message;
+
     if (product.active === "true") {
       isActive = true;
       message = "El producto está activado.";

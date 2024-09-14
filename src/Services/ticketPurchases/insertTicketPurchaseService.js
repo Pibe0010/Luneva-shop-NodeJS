@@ -8,11 +8,9 @@ export const insertTicketPurchaseService = async (ID_user) => {
   try {
     // Obtengo el cliente
     const customer = await selectCustomerByIdModel(ID_user);
-    console.log(customer);
 
     // Obtengo la orden
     const order = await selectOrdersFromCustomerModel(customer.ID_customer);
-    console.log(order);
 
     // Creao el id del ticket
     const ID_ticket = crypto.randomUUID();

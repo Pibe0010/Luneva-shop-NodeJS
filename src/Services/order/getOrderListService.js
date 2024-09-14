@@ -9,7 +9,7 @@ export const getOrderListService = async () => {
   } catch (error) {
     handleErrorService(
       error,
-      "GET_CUSTOMER_LIST_SERVICE_ERROR",
+      "GET_ORDER_LIST_SERVICE_ERROR",
       "Error al obtener la lista de ordenes desde el servicio"
     );
   }

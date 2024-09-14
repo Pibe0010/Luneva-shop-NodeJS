@@ -11,7 +11,7 @@ export const insertUserModel = async (
   customer
 ) => {
   try {
-    const pool = getPool();
+    const pool = await getPool();
 
     const [result] = await pool.query(
       `INSERT INTO Users (ID_user, user_name, last_name, email, password, registrationCode) VALUES (?, ?, ?, ?, ?, ?)`,

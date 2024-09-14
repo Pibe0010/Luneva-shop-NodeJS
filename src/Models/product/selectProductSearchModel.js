@@ -3,12 +3,17 @@ import { databaseQueryError } from "../../Services/error/errorDataBase.js";
 
 export const selectProductSearchModel = async (searchTerm) => {
   try {
-    const pool = getPool();
+    const pool = await getPool();
 
     const [rows] = await pool.query(
       `SELECT * FROM Products WHERE name LIKE? OR ref_PR LIKE?`,
       [`%${searchTerm}%`, `%${searchTerm}%`]
     );
+
+    if (rows.length === 0) {
+      return null;
+    }
+
     return rows;
   } catch (error) {
     databaseQueryError(

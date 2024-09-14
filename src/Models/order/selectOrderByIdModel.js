@@ -10,6 +10,10 @@ export const selectOrderByIdModel = async (orderId) => {
       [orderId]
     );
 
+    if (result.length === 0) {
+      return null;
+    }
+
     return result[0];
   } catch (error) {
     databaseQueryError(

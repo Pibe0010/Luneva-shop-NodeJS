@@ -25,8 +25,8 @@ export const insertOfferService = async (body) => {
   } catch (error) {
     handleErrorService(
       error,
-      "NEW_CUSTOMER_SERVICE_ERROR",
-      "Error al insertar la oferta desde el servicio"
+      "NEW_OFFER_SERVICE_ERROR",
+      "Error al insertar una oferta desde el servicio"
     );
   }
 };

@@ -3,6 +3,7 @@ import { handleErrorController } from "../../Utils/handleError.js";
 
 export const productListController = async (req, res, next) => {
   try {
+    // Obtengo la lista de productos
     const response = await selectProductListService();
 
     res.status(201).send({ status: "ok", data: response });

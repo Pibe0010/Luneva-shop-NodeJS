@@ -3,11 +3,15 @@ import { databaseQueryError } from "../../Services/error/errorDataBase.js";
 
 export const selectUserByIdModel = async (ID_user) => {
   try {
-    const pool = getPool();
+    const pool = await getPool();
 
     const [user] = await pool.query("SELECT * FROM Users WHERE ID_user = ?", [
       ID_user,
     ]);
+
+    if (user.length === 0) {
+      return null;
+    }
 
     return user[0];
   } catch (error) {

@@ -4,6 +4,7 @@ import { handleErrorService } from "../../Utils/handleError.js";
 export const selectProductListService = async () => {
   try {
     const productList = await selectProductListModel();
+
     return productList;
   } catch (error) {
     handleErrorService(

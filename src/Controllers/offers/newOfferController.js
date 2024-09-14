@@ -20,8 +20,8 @@ export const newOfferController = async (req, res, next) => {
     handleErrorController(
       error,
       next,
-      "NEW_CUSTOMER_CONTROLLER_ERROR",
-      "Error en el controlador de registro de oferta"
+      "NEW_OFFER_CONTROLLER_ERROR",
+      "Error en el controlador de registro de una oferta"
     );
   }
 };

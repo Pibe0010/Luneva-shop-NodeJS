@@ -1,7 +1,7 @@
 import { selectIdByRegistrationCodeModel } from "../../Models/user/selectIdByRegistrationCodeModel.js";
 import { updatePasswordModel } from "../../Models/user/updatePasswordModel.js";
 import { handleErrorService } from "../../Utils/handleError.js";
-import { invalidCredentials } from "../error/errorService.js";
+import { invalidCredentials, notFoundError } from "../error/errorService.js";
 import bcrypt from "bcrypt";
 
 export const updatePasswordService = async (registration_code, body) => {
@@ -12,7 +12,7 @@ export const updatePasswordService = async (registration_code, body) => {
 
     // Verificar que el usuario exista
     if (!user) {
-      invalidCredentials("El usuario no existe");
+      notFoundError("usuario");
     }
 
     // Verificar que el código de registro coincida

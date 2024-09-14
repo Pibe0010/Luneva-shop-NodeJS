@@ -1,7 +1,7 @@
 import { selectUserByEmailModel } from "../../Models/user/selectUserByEmailModel.js";
 import { updateNewRegistrationCodeModel } from "../../Models/user/updateNewRegistrationCodeModel.js";
 import { handleErrorService } from "../../Utils/handleError.js";
-import { invalidCredentials } from "../error/errorService.js";
+import { notFoundError } from "../error/errorService.js";
 
 export const forgetPasswordService = async (email) => {
   try {
@@ -10,7 +10,7 @@ export const forgetPasswordService = async (email) => {
 
     // Validar que el usuario exista
     if (!user) {
-      invalidCredentials("El usuario/email no existe");
+      notFoundError("usuario/email");
     }
 
     // Generar un código de recuperación único

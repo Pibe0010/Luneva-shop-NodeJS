@@ -3,6 +3,7 @@ import { handleErrorController } from "../../Utils/handleError.js";
 
 export const getProfileUserController = async (req, res, next) => {
   try {
+    // Obtenemos el usuario
     const ID_user = req.user.id_user;
 
     const user = await selectProfileUserService(ID_user);

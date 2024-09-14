@@ -34,7 +34,7 @@ export const updateOfferService = async (ID_product, body) => {
   } catch (error) {
     handleErrorService(
       error,
-      "UPDATE_CUSTOMER_SERVICE_ERROR",
+      "UPDATE_OFFER_SERVICE_ERROR",
       "Error al actulizar la oferta desde el servicio"
     );
   }

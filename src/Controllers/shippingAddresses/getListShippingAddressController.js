@@ -3,7 +3,7 @@ import { handleErrorController } from "../../Utils/handleError.js";
 
 export const getListShippingAddressController = async (req, res, next) => {
   try {
-    // Obtengo el id del usuario
+    // Obtengo el usuario
     const ID_user = req.user.ID_user;
 
     // Obtenemos la lista de direcciones de envios

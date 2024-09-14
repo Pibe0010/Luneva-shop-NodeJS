@@ -15,6 +15,10 @@ export const getTicketPurshaseListModel = async () => {
           `
     );
 
+    if (result.length === 0) {
+      return null;
+    }
+
     return result;
   } catch (error) {
     databaseQueryError(

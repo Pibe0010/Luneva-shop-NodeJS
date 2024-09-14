@@ -7,7 +7,7 @@ export const updateTrolleyModel = async (
   products_amount
 ) => {
   try {
-    const pool = getPool();
+    const pool = await getPool();
 
     // Obtener el stock del producto
     const [productStockResult] = await pool.query(

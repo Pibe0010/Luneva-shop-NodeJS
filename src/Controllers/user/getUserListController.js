@@ -3,6 +3,7 @@ import { handleErrorController } from "../../Utils/handleError.js";
 
 export const getUserListController = async (req, res, next) => {
   try {
+    // Obtengo la lista de usuarios
     const usersList = await getUserListService();
 
     res.status(200).send({ status: "ok", usersList });

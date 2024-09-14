@@ -3,10 +3,14 @@ import { databaseQueryError } from "../../Services/error/errorDataBase.js";
 
 export const selectProductListModel = async () => {
   try {
-    const pool = getPool();
+    const pool = await getPool();
 
     // Obrengo la lista
     const result = await pool.query(`SELECT * FROM Products`);
+
+    if (result.length === 0) {
+      return null;
+    }
 
     return result[0];
   } catch (error) {

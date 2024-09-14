@@ -3,8 +3,10 @@ import { handleErrorController } from "../../Utils/handleError.js";
 
 export const getCustomerSearchController = async (req, res, next) => {
   try {
+    // Obtengo el termino de busqueda
     const searchTerm = req.query.searchTerm;
 
+    // Llamo al servicio
     const response = await getCustomerSearchService(searchTerm);
 
     res.status(200).send({ status: "ok", data: response });
@@ -12,7 +14,7 @@ export const getCustomerSearchController = async (req, res, next) => {
     handleErrorController(
       error,
       next,
-      "GET_SEARCH_CONTROLLER_ERROR",
+      "GET_SEARCH_CUSTOMER_CONTROLLER_ERROR",
       "Error en el controlador al obtener la lista de clientes con la busqueda"
     );
   }

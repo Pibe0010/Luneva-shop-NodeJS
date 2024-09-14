@@ -3,7 +3,7 @@ import { databaseQueryError } from "../../Services/error/errorDataBase.js";
 
 export const getTrolleyProductListModel = async (customer_id) => {
   try {
-    const pool = getPool();
+    const pool = await getPool();
 
     // Obtengo la lista de el producto del carrito del cliente
     const result = await pool.query(
@@ -13,6 +13,10 @@ export const getTrolleyProductListModel = async (customer_id) => {
        WHERE ID_customer LIKE ?`,
       [customer_id]
     );
+
+    if (result.length === 0) {
+      return null;
+    }
 
     return result[0];
   } catch (error) {

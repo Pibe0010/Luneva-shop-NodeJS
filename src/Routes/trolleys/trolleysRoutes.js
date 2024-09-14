@@ -22,7 +22,7 @@ trolleysRouter.put(
 
 // Borrar carrito
 trolleysRouter.delete(
-  "/trolley/delete/:id_product",
+  "/trolley/delete/:ID_product",
   auththenticatedUser,
   deleteTrolleyController
 );

@@ -5,7 +5,6 @@ export const newShipmentController = async (req, res, next) => {
   try {
     // Obtengo el usuario
     const customer = req.user.ID_user;
-    console.log("desde el controlador", customer);
 
     // Insertamos el envio en la BD
     const newShipment = await insertShipmenService(customer);

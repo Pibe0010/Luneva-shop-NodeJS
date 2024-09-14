@@ -2,12 +2,11 @@ import { selectCustomerByIdModel } from "../../Models/customer/selectCustomerByI
 import { insertProductTrolleyModel } from "../../Models/trolleys/insertProductTrolleyModel.js";
 import { handleErrorService } from "../../Utils/handleError.js";
 
-export const insertProductTrolleyService = async (
-  ID_user,
-  ID_product,
-  products_amount
-) => {
+export const insertProductTrolleyService = async (ID_user, body) => {
   try {
+    // Obtengo l producto
+    const { ID_product, products_amount } = body;
+
     // creao el id del carrito
     const ID_trolley = crypto.randomUUID();
 

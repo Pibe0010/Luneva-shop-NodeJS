@@ -53,7 +53,7 @@ export const insertOrderService = async (ID_user, body) => {
   } catch (error) {
     handleErrorService(
       error,
-      "NEW_CUSTOMER_SERVICE_ERROR",
+      "NEW_ORDER_SERVICE_ERROR",
       "Error al insertar la orden desde el servicio"
     );
   }

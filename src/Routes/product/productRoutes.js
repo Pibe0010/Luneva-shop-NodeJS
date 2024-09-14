@@ -33,7 +33,7 @@ productRouter.get("/product/list", auththenticatedUser, productListController);
 
 // Acttualiar producto
 productRouter.put(
-  "/product/update/:product_id",
+  "/product/update/:ID_product",
   auththenticatedUser,
   adminAuthMiddleware,
   productExist,
@@ -42,7 +42,7 @@ productRouter.put(
 
 // Eliminar producto
 productRouter.delete(
-  "/product/delete/:product_id",
+  "/product/delete/:ID_product",
   auththenticatedUser,
   adminAuthMiddleware,
   productExist,
@@ -51,7 +51,7 @@ productRouter.delete(
 
 // Activar o desactivar producto
 productRouter.put(
-  "/product/toggleActivation/:id_product",
+  "/product/toggleActivation/:ID_product",
   auththenticatedUser,
   adminAuthMiddleware,
   productExist,

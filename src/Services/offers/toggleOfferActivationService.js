@@ -3,8 +3,10 @@ import { toggleActiveOfferModel } from "../../Models/offers/toggleActiveModel.js
 import { handleErrorService } from "../../Utils/handleError.js";
 import { notFoundError } from "../error/errorService.js";
 
-export const toggleOfferActivationService = async (ID_offer, active) => {
+export const toggleOfferActivationService = async (ID_offer, body) => {
   try {
+    const { active } = body;
+
     // Compruebo si existe el producto
     const product = await selectOfferByIdModel(ID_offer);
 
@@ -22,7 +24,7 @@ export const toggleOfferActivationService = async (ID_offer, active) => {
   } catch (error) {
     handleErrorService(
       error,
-      "TOGGLE_ESTATUS_SERVICE_ERROR",
+      "TOGGLE_ESTATUS_OFFER_SERVICE_ERROR",
       "Error en el servicio al cambiar el estado de una oferta"
     );
   }

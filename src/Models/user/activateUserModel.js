@@ -3,7 +3,7 @@ import { databaseUpdateError } from "../../Services/error/errorDataBase.js";
 
 export const activateUserModel = async (ID_user) => {
   try {
-    const pool = getPool();
+    const pool = await getPool();
 
     const query = `UPDATE Users SET active = 1 WHERE ID_user = ?`;
 

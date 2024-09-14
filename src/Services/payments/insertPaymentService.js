@@ -1,6 +1,5 @@
 import { selectCustomerByIdModel } from "../../Models/customer/selectCustomerByIdModel.js";
 import { getMaxReference5Digits } from "../../Models/getMaxRef.js";
-import { updateOrderStatusModel } from "../../Models/order/updateOrderStatusModel.js";
 import { insertPaymentModel } from "../../Models/payments/insertPaymentModel.js";
 import { selectPaymentByIdModel } from "../../Models/payments/selectPaymentByIdModel.js";
 import { selectPaymentOrdersFromCustomerModel } from "../../Models/payments/selectPaymentOrdersFromCustomerModel.js";

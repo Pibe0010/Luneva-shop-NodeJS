@@ -22,7 +22,7 @@ offersRouter.post(
 
 // Actualizar oferta
 offersRouter.put(
-  "/offers/update/:id_product",
+  "/offers/update/:ID_product",
   auththenticatedUser,
   adminAuthMiddleware,
   updateOfferController
@@ -30,7 +30,7 @@ offersRouter.put(
 
 // Eliminar oferta
 offersRouter.delete(
-  "/offers/delete/:id_offer",
+  "/offers/delete/:ID_offer",
   auththenticatedUser,
   adminAuthMiddleware,
   deleteOfferController
@@ -46,7 +46,7 @@ offersRouter.get(
 
 // Activar o desactivar oferta
 offersRouter.put(
-  "/offers/toggleActivation/:id_offer",
+  "/offers/toggleActivation/:ID_offer",
   auththenticatedUser,
   adminAuthMiddleware,
   toggleOfferActivationController

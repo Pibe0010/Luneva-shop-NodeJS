@@ -3,15 +3,10 @@ import { insertProductModel } from "../../Models/product/insertProductModel.js";
 import { generateReference5DigitsFromRef } from "../../Utils/generateReferenceDigits.js";
 import { handleErrorService } from "../../Utils/handleError.js";
 
-export const insertProductService = async (
-  name,
-  description,
-  price,
-  stock,
-  category,
-  active
-) => {
+export const insertProductService = async (body) => {
   try {
+    const { name, description, price, stock, category, active } = body;
+
     const ID_product = crypto.randomUUID();
 
     // Obtengo la referencia maxima de los productos

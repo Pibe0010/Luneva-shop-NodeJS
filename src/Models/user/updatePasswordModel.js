@@ -3,7 +3,7 @@ import { databaseUpdateError } from "../../Services/error/errorDataBase.js";
 
 export const updatePasswordModel = async (ID_user, hashedPassword) => {
   try {
-    const pool = getPool();
+    const pool = await getPool();
 
     const query = `UPDATE Users SET password = ? WHERE id_user = ?`;
 

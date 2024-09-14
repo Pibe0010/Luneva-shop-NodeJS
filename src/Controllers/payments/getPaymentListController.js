@@ -3,6 +3,7 @@ import { handleErrorController } from "../../Utils/handleError.js";
 
 export const getPaymentListController = async (req, res, next) => {
   try {
+    // Obtengo la lista de pagos
     const paymentList = await getPaymentListService();
 
     res.status(200).send({ status: "ok", data: paymentList });

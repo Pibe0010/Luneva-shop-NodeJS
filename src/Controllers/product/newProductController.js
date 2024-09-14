@@ -5,20 +5,11 @@ import { validateSchemaUtil } from "../../Utils/validateSchemaUtil.js";
 
 export const newProductController = async (req, res, next) => {
   try {
-    const { name, description, price, stock, category, active } = req.body;
-
     // validamos el body
     await validateSchemaUtil(newProductSchema, req.body);
 
     // Insertamos el producto en la BD
-    await insertProductService(
-      name,
-      description,
-      price,
-      stock,
-      category,
-      active
-    );
+    await insertProductService(req.body);
 
     res.status(201).send({
       status: "ok",

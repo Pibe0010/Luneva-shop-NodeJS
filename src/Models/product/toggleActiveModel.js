@@ -3,7 +3,7 @@ import { databaseUpdateError } from "../../Services/error/errorDataBase.js";
 
 export const toggleActiveModel = async (ID_product, newStatus) => {
   try {
-    const pool = getPool();
+    const pool = await getPool();
 
     const query = `UPDATE Products SET active = ? WHERE ID_product = ?`;
 
