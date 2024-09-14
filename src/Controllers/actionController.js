@@ -38,6 +38,14 @@ import { deleteTicketPurchaseController } from "./ticketPurchases/deleteTicketPu
 import { getTicketPurshaseListController } from "./ticketPurchases/getTicketPurshaseListController.js";
 import { getticketPurchaseSearchController } from "./ticketPurchases/getticketPurchaseSearchController.js";
 
+// Pagos
+import { newPaymentController } from "./payments/newPaymentController.js";
+import { getPaymentListController } from "./payments/getPaymentListController.js";
+import { getPaymentSearchController } from "./payments/getPaymentSearchController.js";
+import { updatePaymentController } from "./payments/updatePaymentController.js";
+import { deletePaymentController } from "./payments/deletePaymentController.js";
+import { cancelPaymentController } from "./payments/cancelPaymentController.js";
+
 export {
   newTrolleyController,
   updateTrolleyController,
@@ -67,4 +75,10 @@ export {
   deleteTicketPurchaseController,
   getTicketPurshaseListController,
   getticketPurchaseSearchController,
+  newPaymentController,
+  getPaymentListController,
+  getPaymentSearchController,
+  updatePaymentController,
+  deletePaymentController,
+  cancelPaymentController,
 };

@@ -35,7 +35,7 @@
 
    - npm run dev
 
-8. Utilizaremos thunderClient para probar las rutas.
+8. Utilizaremos Postman para probar las rutas.
 
 - User
 
@@ -108,3 +108,11 @@
   - Borrar ticket.
   - Lista de ticket.
   - Buscar ticket.
+
+- Payments
+
+  - Crear pago.
+  - Borrar pago.
+  - Lista de pagos.
+  - Buscar pago.
+  - cancelar pago

@@ -136,9 +136,11 @@ export const createSchema = async (db) => {
   await db.query(`
     CREATE TABLE  IF NOT EXISTS Payments (
         ID_payment CHAR(36) PRIMARY KEY NOT NULL,
+        ref_PM CHAR(10) UNIQUE NOT NULL,
         ID_order CHAR(36) NOT NULL,
         payment_method ENUM("card", "transfer", "PayPal"),
         payment_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+        status ENUM("pending", "paid", "cancelled") DEFAULT "pending",
         total_amount DECIMAL(10, 2) NOT NULL,
         iva_payments DECIMAL(10, 2) NOT NULL,
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
