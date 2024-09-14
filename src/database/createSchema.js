@@ -73,7 +73,7 @@ export const createSchema = async (db) => {
         ID_customer CHAR(36) NOT NULL,
         ID_product CHAR(36) NOT NULL,
         products_amount INT NOT NULL,
-        process ENUM("pending", "sent", "cancelled") DEFAULT "pending",
+        process ENUM("active", "abandoned", "empty") DEFAULT "active",
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
         updatedAt DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
         FOREIGN KEY (ID_customer) REFERENCES Customers(ID_customer),
