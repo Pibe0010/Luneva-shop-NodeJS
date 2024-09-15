@@ -1,7 +1,7 @@
 import { getPool } from "../../database/getPool.js";
 import { databaseQueryError } from "../../Services/error/errorDataBase.js";
 
-export const updateProductStockModel = async (trolley, ID_product) => {
+export const updateProductStockModel = async (ID_trolley, ID_product) => {
   try {
     const pool = await getPool();
 
@@ -14,7 +14,7 @@ export const updateProductStockModel = async (trolley, ID_product) => {
     // Obtener la cantidad actual en el carrito
     const [productAmountResult] = await pool.query(
       `SELECT products_amount FROM Trolleys WHERE ID_trolley = ?`,
-      [trolley]
+      [ID_trolley]
     );
 
     // Obtenemos el cantidad del carrito como un número

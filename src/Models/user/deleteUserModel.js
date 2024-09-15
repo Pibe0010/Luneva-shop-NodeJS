@@ -4,7 +4,10 @@ import { databaseDeleteError } from "../../Services/error/errorDataBase.js";
 export const deleteUserModel = async (ID_user) => {
   try {
     const pool = await getPool();
-    const [result] = await pool.query(`DELETE FROM Users WHERE id_user = ?`, [
+
+    await pool.query(`DELETE FROM Customers WHERE ID_user = ?`, [ID_user]);
+
+    const [result] = await pool.query(`DELETE FROM Users WHERE ID_user = ?`, [
       ID_user,
     ]);
 

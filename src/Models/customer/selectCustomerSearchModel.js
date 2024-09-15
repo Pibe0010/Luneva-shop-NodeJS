@@ -6,7 +6,9 @@ export const selectCustomerSearchModel = async (searchTerm) => {
     const pool = await getPool();
 
     const [result] = await pool.query(
-      `SELECT Customers.ID_customer, Users.ID_user, Customers.phone, Customers.createdAt, Users.user_name, Users.last_name, Users.email FROM Customers JOIN Users ON Customers.ID_user = Users.ID_user WHERE Customers.phone LIKE? OR Users.user_name LIKE? OR Users.last_name LIKE? OR Users.email LIKE?`,
+      `SELECT c.ID_customer, u.ID_user, c.phone, c.createdAt, u.user_name, u.last_name, u.email FROM Customers c
+       LEFT JOIN Users u ON c.ID_user = u.ID_user 
+       WHERE c.phone LIKE ? OR u.user_name LIKE ? OR u.last_name LIKE ? OR u.email LIKE ?`,
       [
         `%${searchTerm}%`,
         `%${searchTerm}%`,
@@ -14,6 +16,11 @@ export const selectCustomerSearchModel = async (searchTerm) => {
         `%${searchTerm}%`,
       ]
     );
+
+    if (result.length === 0) {
+      return null;
+    }
+
     return result;
   } catch (error) {
     databaseQueryError(

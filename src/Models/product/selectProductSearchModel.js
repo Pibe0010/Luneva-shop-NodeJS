@@ -5,16 +5,16 @@ export const selectProductSearchModel = async (searchTerm) => {
   try {
     const pool = await getPool();
 
-    const [rows] = await pool.query(
+    const [result] = await pool.query(
       `SELECT * FROM Products WHERE name LIKE? OR ref_PR LIKE?`,
       [`%${searchTerm}%`, `%${searchTerm}%`]
     );
 
-    if (rows.length === 0) {
+    if (result.length === 0) {
       return null;
     }
 
-    return rows;
+    return result;
   } catch (error) {
     databaseQueryError(
       error.message ||

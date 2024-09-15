@@ -3,12 +3,13 @@ import { handleErrorController } from "../../Utils/handleError.js";
 
 export const deleteTrolleyController = async (req, res, next) => {
   try {
-    // Obtengo id del usuario
+    // Obtengo el usuario
     const ID_user = req.user.ID_user;
 
-    const ID_product = req.params.id_product;
+    // Obtengo el producto del carrito
+    const ID_product = req.params.ID_product;
 
-    // Borramos el carrito
+    // Borramos el producto del carrito
     const response = await deleteTrolleyService(ID_user, ID_product);
 
     res.status(201).send({ status: "ok", data: response });

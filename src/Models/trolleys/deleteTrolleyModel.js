@@ -15,7 +15,7 @@ export const deleteTrolleyModel = async (trolley) => {
       databaseDeleteError("No se ha podido eliminar el carrito.");
     }
 
-    return { message: "Carrito eliminado correctamente" };
+    return { message: "Producto eliminado del carrito correctamente" };
   } catch (error) {
     databaseDeleteError(
       error.message || "Error en el modelo al eliminar el carrito",

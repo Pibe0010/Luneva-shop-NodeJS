@@ -1,5 +1,6 @@
 import { selectCustomerByIdModel } from "../../Models/customer/selectCustomerByIdModel.js";
 import { selectProductByIdModel } from "../../Models/product/selectProductByIdModel.js";
+import { selectTrolleyByIdCustomerModel } from "../../Models/trolleys/selectTrolleyByIdCustomerModel.js";
 import { selectTrolleyByIdModel } from "../../Models/trolleys/selectTrolleyByIdModel.js";
 import { updateProductStockModel } from "../../Models/trolleys/updateProductStockModel.js";
 import { updateTrolleyModel } from "../../Models/trolleys/updateTrolleyModel.js";
@@ -21,7 +22,11 @@ export const updateTrolleyService = async (ID_user, body) => {
     const customer_id = await selectCustomerByIdModel(ID_user);
 
     // Buscamos el carrito del cliente
-    const trolley = await selectTrolleyByIdModel(customer_id.ID_customer);
+    const trolley = await selectTrolleyByIdCustomerModel(
+      customer_id.ID_customer,
+      ID_product
+    );
+    console.log(trolley);
 
     // Actualizamos el stock del producto
     await updateProductStockModel(trolley.ID_trolley, ID_product);

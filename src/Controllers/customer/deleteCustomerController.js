@@ -4,7 +4,7 @@ import { handleErrorController } from "../../Utils/handleError.js";
 export const deleteCustomerController = async (req, res, next) => {
   try {
     // Obtengo el id del cliente
-    const ID_user = req.user.ID_user;
+    const ID_user = req.params.ID_customer;
 
     // Elimino el cliente
     const customer = await deleteCustomerService(ID_user);
