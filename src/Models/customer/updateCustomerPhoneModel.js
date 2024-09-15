@@ -1,5 +1,6 @@
 import { getPool } from "../../database/getPool.js";
 import { databaseInsertError } from "../../Services/error/errorDataBase.js";
+import { selectCustomerByIdModel } from "./selectCustomerByIdModel.js";
 
 export const updateCustomerPhoneModel = async (ID_user, phone) => {
   try {
@@ -31,7 +32,9 @@ export const updateCustomerPhoneModel = async (ID_user, phone) => {
       );
     }
 
-    return result;
+    const response = await selectCustomerByIdModel(ID_user);
+
+    return response;
   } catch (error) {
     databaseInsertError(
       error.message ||

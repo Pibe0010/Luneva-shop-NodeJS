@@ -1,9 +1,10 @@
 import { selectCustomerByIdModel } from "../../Models/customer/selectCustomerByIdModel.js";
+import { selectTrolleyByIdCustomerModel } from "../../Models/trolleys/selectTrolleyByIdCustomerModel.js";
 import { selectTrolleyByIdModel } from "../../Models/trolleys/selectTrolleyByIdModel.js";
 import { updateTrolleyStatusModel } from "../../Models/trolleys/updateTrolleyStatusModel.js";
 import { handleErrorService } from "../../Utils/handleError.js";
 
-export const updateTrolleyStatusService = async (ID_user, body) => {
+export const updateTrolleyStatusService = async (ID_user, ID_product, body) => {
   try {
     const { process } = body;
 
@@ -11,7 +12,10 @@ export const updateTrolleyStatusService = async (ID_user, body) => {
     const customer = await selectCustomerByIdModel(ID_user);
 
     // Obtengo el carrito
-    const trolley = await selectTrolleyByIdModel(customer.ID_customer);
+    const trolley = await selectTrolleyByIdCustomerModel(
+      customer.ID_customer,
+      ID_product
+    );
 
     // Actualizo el estado del carrito
     await updateTrolleyStatusModel(trolley.ID_trolley, process);

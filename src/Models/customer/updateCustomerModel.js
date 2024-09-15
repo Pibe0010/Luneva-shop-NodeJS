@@ -1,5 +1,6 @@
 import { getPool } from "../../database/getPool.js";
 import { databaseInsertError } from "../../Services/error/errorDataBase.js";
+import { selectUserByIdModel } from "../user/selectUserByIdModel.js";
 
 export const updateCustomerModel = async (
   ID_user,
@@ -36,7 +37,8 @@ export const updateCustomerModel = async (
       databaseInsertError("No se ha podido actualizar el Cliente.");
     }
 
-    return result;
+    const response = await selectUserByIdModel(ID_user);
+    return response;
   } catch (error) {
     databaseInsertError(
       error.message || "Error en el modelo al actualizar el cliente"

@@ -2,7 +2,7 @@ import { getPool } from "../../database/getPool.js";
 import { databaseQueryError } from "../../Services/error/errorDataBase.js";
 
 export const updateTrolleyModel = async (
-  trolley,
+  ID_trolley,
   ID_product,
   products_amount
 ) => {
@@ -18,7 +18,7 @@ export const updateTrolleyModel = async (
     // Obtener la cantidad actual en el carrito
     const [productAmountResult] = await pool.query(
       `SELECT products_amount FROM Trolleys WHERE ID_trolley = ?`,
-      [trolley]
+      [ID_trolley]
     );
 
     // Obtenemos el cantidad del carrito como un número
@@ -56,7 +56,7 @@ export const updateTrolleyModel = async (
     // Actualizar el carrito
     const [result] = await pool.query(
       `UPDATE Trolleys SET products_amount = ? WHERE ID_trolley = ? `,
-      [products_amount, trolley, ID_product]
+      [products_amount, ID_trolley, ID_product]
     );
 
     if (result.affectedRows === 0) {

@@ -5,6 +5,7 @@ export const getCustomerSearchController = async (req, res, next) => {
   try {
     // Obtengo el termino de busqueda
     const searchTerm = req.query.searchTerm;
+    console.log(searchTerm);
 
     // Llamo al servicio
     const response = await getCustomerSearchService(searchTerm);

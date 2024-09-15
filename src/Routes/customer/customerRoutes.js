@@ -6,6 +6,7 @@ import {
   getCustomerSearchController,
   updateCustomerController,
 } from "../../Controllers/mainController.js";
+import { adminAuthMiddleware } from "../../Middlewares/adminAuthMiddleware.js";
 
 // Creamos el router
 export const customerRouter = express.Router();
@@ -14,6 +15,7 @@ export const customerRouter = express.Router();
 customerRouter.get(
   "/customer/search",
   auththenticatedUser,
+  adminAuthMiddleware,
   getCustomerSearchController
 );
 
@@ -21,19 +23,21 @@ customerRouter.get(
 customerRouter.get(
   "/customer/list",
   auththenticatedUser,
+  adminAuthMiddleware,
   getCustomerListController
 );
 
-// modificar cliente
+// Modificar cliente
 customerRouter.put(
   "/customer/update",
   auththenticatedUser,
   updateCustomerController
 );
 
-// eliminar cliente
+// Eliminar cliente
 customerRouter.delete(
-  "/customer/delete",
+  "/customer/delete/:ID_customer",
   auththenticatedUser,
+  adminAuthMiddleware,
   deleteCustomerController
 );

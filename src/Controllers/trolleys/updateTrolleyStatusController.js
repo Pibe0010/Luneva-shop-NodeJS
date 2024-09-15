@@ -11,12 +11,19 @@ export const updateTrolleyStatusController = async (req, res, next) => {
     // Obtenemos el usuraio
     const ID_user = req.user.ID_user;
 
-    // Actualizamos el estado del carrito
-    const trolley = await updateTrolleyStatusService(ID_user, req.body);
+    // Obtengo el producto
+    const ID_product = req.params.ID_product;
 
-    res.status().send({
+    // Actualizamos el estado del carrito
+    const trolley = await updateTrolleyStatusService(
+      ID_user,
+      ID_product,
+      req.body
+    );
+
+    res.status(200).send({
       status: "ok",
-      message: "Estado del carrito actualizado",
+      message: "Estado del producto en el carrito actualizado",
       data: trolley,
     });
   } catch (error) {

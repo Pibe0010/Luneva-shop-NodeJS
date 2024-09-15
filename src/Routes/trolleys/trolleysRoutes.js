@@ -37,7 +37,7 @@ trolleysRouter.get(
 
 // Cambiar estado del carrito
 trolleysRouter.put(
-  "/trolley/update/status",
+  "/trolley/update/status/:ID_product",
   auththenticatedUser,
   updateTrolleyStatusController
 );

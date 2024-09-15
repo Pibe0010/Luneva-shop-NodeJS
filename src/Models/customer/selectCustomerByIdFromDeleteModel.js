@@ -1,13 +1,13 @@
 import { getPool } from "../../database/getPool.js";
 import { databaseQueryError } from "../../Services/error/errorDataBase.js";
 
-export const selectTrolleyByIdModel = async (ID_trolley) => {
+export const selectCustomerByIdFromDeleteModel = async (ID_user) => {
   try {
     const pool = await getPool();
 
     const [result] = await pool.query(
-      `SELECT * FROM Trolleys WHERE ID_trolley = ?`,
-      [ID_trolley]
+      `SELECT * FROM Customers WHERE ID_customer = ?`,
+      [ID_user]
     );
 
     if (result.length === 0) {
@@ -17,7 +17,7 @@ export const selectTrolleyByIdModel = async (ID_trolley) => {
     return result[0];
   } catch (error) {
     databaseQueryError(
-      error.message || "Error en el modelo al obtener el carrito"
+      error.message || "Error en el modelo al obtener el cliente por id"
     );
   }
 };
