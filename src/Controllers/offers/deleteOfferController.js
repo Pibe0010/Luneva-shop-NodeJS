@@ -9,7 +9,7 @@ export const deleteOfferController = async (req, res, next) => {
     // Eliminamos la oferta
     const offer = await deleteOfferService(ID_offer);
 
-    res.status(201).send({
+    res.status(200).send({
       status: "ok",
       data: offer,
     });

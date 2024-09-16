@@ -21,7 +21,7 @@ export const toggleOfferActivationController = async (req, res, next) => {
     }
 
     res
-      .status(201)
+      .status(200)
       .send({ status: "ok", isActive: isActive, message: message });
   } catch (error) {
     handleErrorController(

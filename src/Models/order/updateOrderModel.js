@@ -1,7 +1,7 @@
 import { getPool } from "../../database/getPool.js";
 import { databaseInsertError } from "../../Services/error/errorDataBase.js";
 
-export const updateOrderModel = async (products_amount, order, price) => {
+export const updateOrderModel = async (products_amount, ID_order, price) => {
   try {
     const pool = await getPool();
 
@@ -21,7 +21,7 @@ export const updateOrderModel = async (products_amount, order, price) => {
     if (fieldsToUpdate.length === 0) return {};
 
     const query = `UPDATE Orders SET ${fieldsToUpdate.join(", ")} WHERE ID_order = ?`;
-    values.push(order);
+    values.push(ID_order);
 
     const [result] = await pool.query(query, values);
 

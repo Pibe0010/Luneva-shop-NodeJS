@@ -6,7 +6,7 @@ export const getOffersListController = async (req, res, next) => {
     // Obtenemos todas la ofertas
     const listOffers = await getOffersListService();
 
-    res.status(201).send({ status: "ok", offersList: listOffers });
+    res.status(200).send({ status: "ok", offersList: listOffers });
   } catch (error) {
     handleErrorController(
       error,
