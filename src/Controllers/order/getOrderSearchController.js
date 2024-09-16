@@ -8,7 +8,7 @@ export const getOrderSearchController = async (req, res, next) => {
 
     const response = await getOrderSearchService(searchTerm);
 
-    res.status(201).send({ status: "ok", data: response });
+    res.status(200).send({ status: "ok", data: response });
   } catch (error) {
     handleErrorController(
       error,

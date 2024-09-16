@@ -21,16 +21,18 @@ orderRouter.get(
 );
 
 // Buscar ordenes
-orderRouter.get("/order/search", auththenticatedUser, getOrderSearchController);
+orderRouter.get(
+  "/order/search",
+  auththenticatedUser,
+  adminAuthMiddleware,
+  getOrderSearchController
+);
+
 // Creaer orden
 orderRouter.post("/order/create", auththenticatedUser, newOrderController);
 
 // Actualizar orden
-orderRouter.put(
-  "/order/update/:ID_order",
-  auththenticatedUser,
-  updateOrderController
-);
+orderRouter.put("/order/update", auththenticatedUser, updateOrderController);
 
 // Eliminar orden
 orderRouter.delete(

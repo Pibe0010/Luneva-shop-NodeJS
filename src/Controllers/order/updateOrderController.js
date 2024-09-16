@@ -1,18 +1,13 @@
-import { updateOrderSchema } from "../../Schemas/orders/updateOrderSchema.js";
 import { updateOrderService } from "../../Services/order/updateOrderService.js";
 import { handleErrorController } from "../../Utils/handleError.js";
-import { validateSchemaUtil } from "../../Utils/validateSchemaUtil.js";
 
 export const updateOrderController = async (req, res, next) => {
   try {
-    // Validamos el body
-    await validateSchemaUtil(updateOrderSchema, req.body);
-
-    // Obtengo el producto
-    const order = req.params.ID_order;
+    // Obtengo el cliente
+    const ID_user = req.user.ID_user;
 
     // Actualizamos la orden
-    const response = await updateOrderService(order, req.body);
+    const response = await updateOrderService(ID_user);
 
     res.status(200).send({
       status: "ok",
