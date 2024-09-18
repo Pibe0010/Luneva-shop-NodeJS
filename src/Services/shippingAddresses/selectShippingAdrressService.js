@@ -6,9 +6,9 @@ export const selectShippingAdrressService = async (body) => {
     const { address } = body;
 
     // Selecciono la direccion de envio
-    const selectionAddress = await selectShippingAdrressModel(address);
+    const selectedAddress = await selectShippingAdrressModel(address);
 
-    return selectionAddress;
+    return selectedAddress;
   } catch (error) {
     handleErrorService(
       error,

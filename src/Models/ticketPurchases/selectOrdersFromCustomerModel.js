@@ -6,7 +6,7 @@ export const selectOrdersFromCustomerModel = async (ID_customer) => {
     const pool = await getPool();
 
     const [result] = await pool.query(
-      `SELECT * FROM Orders WHERE ID_customer = ?`,
+      `SELECT * FROM Orders WHERE ID_customer = ? AND status = "earring"`,
       [ID_customer]
     );
 
@@ -14,7 +14,7 @@ export const selectOrdersFromCustomerModel = async (ID_customer) => {
       return null;
     }
 
-    return result[0];
+    return result;
   } catch (error) {
     databaseQueryError(
       error.message ||

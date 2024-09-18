@@ -46,5 +46,6 @@ shipmentRouter.put(
 shipmentRouter.delete(
   "/shipment/delete/:ID_shipment",
   auththenticatedUser,
+  adminAuthMiddleware,
   deleteShipmentController
 );

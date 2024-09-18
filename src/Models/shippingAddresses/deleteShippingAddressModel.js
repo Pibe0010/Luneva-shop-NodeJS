@@ -1,13 +1,13 @@
 import { getPool } from "../../database/getPool.js";
 import { databaseDeleteError } from "../../Services/error/errorDataBase.js";
 
-export const deleteShippingAddressModel = async (address) => {
+export const deleteShippingAddressModel = async (ID_address) => {
   try {
     const pool = await getPool();
 
     const [result] = await pool.query(
-      `DELETE FROM Shipping_addresses WHERE ID_customer = ?`,
-      [address]
+      `DELETE FROM Shipping_addresses WHERE ID_address = ?`,
+      [ID_address]
     );
 
     if (result.length === 1) {

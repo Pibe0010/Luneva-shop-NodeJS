@@ -8,11 +8,14 @@ export const updateShippingAddressController = async (req, res, next) => {
     // Validamos el body
     await validateSchemaUtil(updateShippingAddressSchema, req.body);
 
-    // Obtengo el id del usuario
-    const ID_user = req.user.ID_user;
+    // Obtengo la direccion de envio
+    const ID_address = req.params.ID_address;
 
     // Actualizamos la direccion de envio en la BD
-    const updateAddress = await updateShippingAddressService(ID_user, req.body);
+    const updateAddress = await updateShippingAddressService(
+      ID_address,
+      req.body
+    );
 
     res.status(200).send({
       status: "ok",

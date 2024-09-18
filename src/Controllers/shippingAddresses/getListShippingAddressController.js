@@ -9,7 +9,7 @@ export const getListShippingAddressController = async (req, res, next) => {
     // Obtenemos la lista de direcciones de envios
     const addressList = await getListShippingAddressService(ID_user);
 
-    res.status(201).send({
+    res.status(200).send({
       status: "ok",
       message: "Lista de direcciones de envios",
       data: addressList,

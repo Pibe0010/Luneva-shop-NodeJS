@@ -1,14 +1,12 @@
 import { getPool } from "../../database/getPool.js";
 import { databaseQueryError } from "../../Services/error/errorDataBase.js";
 
-export const selectPaymentOrdersFromCustomerModel = async (ID_customer) => {
+export const selectAddressFromShipmentModel = async (ID_customer) => {
   try {
     const pool = await getPool();
 
     const [result] = await pool.query(
-      `SELECT ID_order, product_amount, price
-       FROM Orders o
-       WHERE ID_customer = ? AND status = "earring"`,
+      `SELECT * FROM Shipping_addresses WHERE ID_customer = ? `,
       [ID_customer]
     );
 
@@ -16,10 +14,10 @@ export const selectPaymentOrdersFromCustomerModel = async (ID_customer) => {
       return null;
     }
 
-    return result;
+    return result[0];
   } catch (error) {
     databaseQueryError(
-      "Error en el modelo al obtener la orden de pago de un cliente"
+      error.message || "Error en el modelo al obtener la dirección de envio"
     );
   }
 };
