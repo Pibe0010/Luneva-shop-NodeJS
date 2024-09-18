@@ -9,12 +9,12 @@ export const selectShippingAdrressController = async (req, res, next) => {
     await validateSchemaUtil(selectShippingAdrressSchema, req.body);
 
     // Selecciono la direccion de envio
-    const selectAddress = await selectShippingAdrressService(req.body);
+    const address = await selectShippingAdrressService(req.body);
 
     res.status(200).send({
       status: "ok",
       message: "Direccion de envio seleccionada con exito",
-      data: { selectAddress },
+      data: address,
     });
   } catch (error) {
     handleErrorController(

@@ -1,9 +1,8 @@
-import { selectCustomerByIdModel } from "../../Models/customer/selectCustomerByIdModel.js";
 import { selectShippingAddressByIdModel } from "../../Models/shippingAddresses/selectShippingAddressByIdModel.js";
 import { updateShippingAddressModel } from "../../Models/shippingAddresses/updateShippingAddressModel.js";
 import { handleErrorService } from "../../Utils/handleError.js";
 
-export const updateShippingAddressService = async (ID_user, body) => {
+export const updateShippingAddressService = async (ID_address, body) => {
   try {
     const {
       address,
@@ -15,12 +14,9 @@ export const updateShippingAddressService = async (ID_user, body) => {
       street_number,
     } = body;
 
-    // Buscamos el cliente en la BD
-    const customer = await selectCustomerByIdModel(ID_user);
-
     // Actualizamos la direccion en la BD
     await updateShippingAddressModel(
-      customer.ID_customer,
+      ID_address,
       address,
       city,
       postal_code,
@@ -30,9 +26,7 @@ export const updateShippingAddressService = async (ID_user, body) => {
       street_number
     );
 
-    const addressUpdated = await selectShippingAddressByIdModel(
-      customer.ID_customer
-    );
+    const addressUpdated = await selectShippingAddressByIdModel(ID_address);
 
     return addressUpdated;
   } catch (error) {

@@ -3,13 +3,13 @@ import { handleErrorController } from "../../Utils/handleError.js";
 
 export const deleteShippingAddressController = async (req, res, next) => {
   try {
-    // Obtengo el id del usuario
-    const ID_user = req.user.ID_user;
+    // Obtengo la direccion de envio
+    const ID_address = req.params.ID_address;
 
     // Eliminamos la direccion de envio
-    await deleteShippingAddressService(ID_user);
+    await deleteShippingAddressService(ID_address);
 
-    res.status(201).send({
+    res.status(200).send({
       status: "ok",
       message: "Direccion de envio eliminada con exito",
     });

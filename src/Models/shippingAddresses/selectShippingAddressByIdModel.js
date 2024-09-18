@@ -1,13 +1,13 @@
 import { getPool } from "../../database/getPool.js";
 import { databaseQueryError } from "../../Services/error/errorDataBase.js";
 
-export const selectShippingAddressByIdModel = async (customer) => {
+export const selectShippingAddressByIdModel = async (ID_address) => {
   try {
     const pool = await getPool();
 
     const [result] = await pool.query(
-      `SELECT ID_address, address, street_number, floor, ladder_door, postal_code, city, country FROM Shipping_addresses WHERE ID_customer = ?`,
-      [customer]
+      `SELECT ID_address, address, street_number, floor, ladder_door, postal_code, city, country FROM Shipping_addresses WHERE ID_address = ?`,
+      [ID_address]
     );
 
     if (result.length === 0) {

@@ -2,7 +2,7 @@ import { getPool } from "../../database/getPool.js";
 import { databaseInsertError } from "../../Services/error/errorDataBase.js";
 
 export const updateShippingAddressModel = async (
-  customer,
+  ID_address,
   address,
   city,
   postal_code,
@@ -34,8 +34,8 @@ export const updateShippingAddressModel = async (
 
     if (fieldsToUpdate.length === 0) return {}; // No hay campos para actualizar, salir
 
-    const query = `UPDATE Shipping_addresses SET ${fieldsToUpdate.join(", ")} WHERE ID_customer = ?`;
-    values.push(customer);
+    const query = `UPDATE Shipping_addresses SET ${fieldsToUpdate.join(", ")} WHERE ID_address = ?`;
+    values.push(ID_address);
 
     const [result] = await pool.query(query, values);
 

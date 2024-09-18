@@ -6,6 +6,7 @@ import { notFoundError } from "../error/errorService.js";
 export const updateShipmentService = async (ID_shipment, body) => {
   try {
     const { status } = body;
+
     // Verifico que el envio existe
     const shipment = await selectShimpmentByIdModel(ID_shipment);
 

@@ -20,14 +20,14 @@ shippingAddressRouter.post(
 
 // Actualizar direcion de envio
 shippingAddressRouter.put(
-  "/address/update",
+  "/address/update/:ID_address",
   auththenticatedUser,
   updateShippingAddressController
 );
 
 // Eliminar direccion de envio
 shippingAddressRouter.delete(
-  "/address/delete",
+  "/address/delete/:ID_address",
   auththenticatedUser,
   deleteShippingAddressController
 );
@@ -41,7 +41,7 @@ shippingAddressRouter.get(
 
 // Seleccionar dirección de envio
 shippingAddressRouter.get(
-  "/address/select",
+  "/address/selected",
   auththenticatedUser,
   selectShippingAdrressController
 );

@@ -12,16 +12,24 @@ export const insertTicketPurchaseService = async (ID_user) => {
     // Obtengo la orden
     const order = await selectOrdersFromCustomerModel(customer.ID_customer);
 
-    // Creao el id del ticket
-    const ID_ticket = crypto.randomUUID();
+    // ALmaceno los tickets
+    const tickets = [];
 
-    // Inserto el ticket
-    await insertTicketPurchaseModel(ID_ticket, order.ID_order);
+    // Creo los tickets por cada orden
+    for (const orders of order) {
+      // Creao el id del ticket
+      const ID_ticket = crypto.randomUUID();
 
-    // Retorno el ticket Creado
-    const tickect = await selectTicketByIdModel(ID_ticket);
+      // Inserto el ticket
+      await insertTicketPurchaseModel(ID_ticket, orders.ID_order);
 
-    return tickect;
+      // Retorno el ticket Creado
+      const tickect = await selectTicketByIdModel(ID_ticket);
+
+      tickets.push(tickect);
+    }
+
+    return tickets;
   } catch (error) {
     handleErrorService(
       error,
