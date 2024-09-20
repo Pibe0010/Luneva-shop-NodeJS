@@ -1,7 +1,9 @@
 import { selectCustomerByIdModel } from "../../Models/customer/selectCustomerByIdModel.js";
 import { getMaxReference5Digits } from "../../Models/getMaxRef.js";
+import { inserOrderAndDiscountModel } from "../../Models/order/inserOrderAndDiscountModel.js";
 import { inserOrderModel } from "../../Models/order/inserOrderModel.js";
 import { selectOrderByIdModel } from "../../Models/order/selectOrderByIdModel.js";
+import { selectProductOfferByIdModel } from "../../Models/order/selectProductOfferByIdModel.js";
 import { selectTrolleyByOrderModel } from "../../Models/order/selectTrolleyByOrderModel.js";
 import { generateReference5DigitsFromRef } from "../../Utils/generateReferenceDigits.js";
 import { handleErrorService } from "../../Utils/handleError.js";
@@ -40,18 +42,47 @@ export const insertOrderService = async (ID_user) => {
       // Genero la referencia
       const ref = generateReference5DigitsFromRef("OR", maxRef);
 
-      // Multiplicamos la cantidad por el precio del producto
-      const price = checkQuantity.price * product.products_amount;
+      // Compruebo si el producto tiene alguna oferta
+      const checkOffer = await selectProductOfferByIdModel(productId);
 
-      // Inserto la orden en la BD
-      await inserOrderModel(
-        orderId,
-        ref,
-        customer.ID_customer,
-        productId,
-        product.products_amount,
-        price
-      );
+      if (
+        checkOffer &&
+        checkOffer.ID_product === productId &&
+        checkOffer.active
+      ) {
+        // Multiplicamos la cantidad por el precio del producto
+        const price = checkQuantity.price * product.products_amount;
+
+        // Aplico el descuento
+        const discount = checkQuantity.price - checkOffer.discount_rate;
+
+        // Precio total con descuento
+        const totalPrice = discount * product.products_amount;
+
+        // Inserto la orden en la BD
+        await inserOrderAndDiscountModel(
+          orderId,
+          ref,
+          customer.ID_customer,
+          productId,
+          product.products_amount,
+          price,
+          totalPrice
+        );
+      } else if (checkOffer === null || checkOffer.ID_product !== productId) {
+        // Multiplicamos la cantidad por el precio del producto
+        const price = checkQuantity.price * product.products_amount;
+
+        // Inserto la orden en la BD
+        await inserOrderModel(
+          orderId,
+          ref,
+          customer.ID_customer,
+          productId,
+          product.products_amount,
+          price
+        );
+      }
 
       // Obtengo la orden insertada
       const order = await selectOrderByIdModel(orderId);

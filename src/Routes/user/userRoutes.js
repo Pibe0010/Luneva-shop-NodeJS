@@ -5,6 +5,7 @@ import {
   forgetPasswordController,
   getProfileUserController,
   getUserListController,
+  getUserSearchController,
   loginUserController,
   logoutUserController,
   newUserController,
@@ -61,3 +62,11 @@ userRouter.put(
 
 // Obtener perfil de usuario
 userRouter.get("/user/profile", auththenticatedUser, getProfileUserController);
+
+// Buscar usuario
+userRouter.get(
+  "/user/search",
+  auththenticatedUser,
+  adminAuthMiddleware,
+  getUserSearchController
+);

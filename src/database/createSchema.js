@@ -81,6 +81,21 @@ export const createSchema = async (db) => {
     );
     `);
 
+  // Ofertas
+  await db.query(`
+    CREATE TABLE IF NOT EXISTS Offers (
+        ID_offer CHAR(36) PRIMARY KEY NOT NULL,
+        ID_product CHAR(36) NOT NULL,
+        discount_rate DECIMAL(5, 2),
+        start_date DATE,
+        ending_date DATE,
+        active ENUM("true", "false") DEFAULT "true",
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updatedAt DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+        FOREIGN KEY (ID_product) REFERENCES Products(ID_product)
+    );
+    `);
+
   // Orden de compra
   await db.query(`
     CREATE TABLE IF NOT EXISTS Orders (
@@ -88,8 +103,9 @@ export const createSchema = async (db) => {
         ref_OR CHAR(10) UNIQUE NOT NULL,
         ID_customer CHAR(36) NOT NULL,
         ID_product CHAR(36) NOT NULL,
+        product_discount DECIMAL(5, 2) NULL,
         product_amount INT NOT NULL,
-        price INT NOT NULL,
+        price DECIMAL(10, 2)NOT NULL,
         status ENUM("earring", "sent", "delivered", "cancelled") DEFAULT "earring",
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
         updatedAt DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
@@ -158,21 +174,6 @@ export const createSchema = async (db) => {
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
         updatedAt DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
         FOREIGN KEY (ID_order) REFERENCES Orders(ID_order)
-    );
-    `);
-
-  // Ofertas
-  await db.query(`
-    CREATE TABLE IF NOT EXISTS Offers (
-        ID_offer CHAR(36) PRIMARY KEY NOT NULL,
-        ID_product CHAR(36) NOT NULL,
-        discount_rate DECIMAL(5, 2),
-        start_date DATE,
-        ending_date DATE,
-        active ENUM("true", "false") DEFAULT "true",
-        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-        updatedAt DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-        FOREIGN KEY (ID_product) REFERENCES Products(ID_product)
     );
     `);
 

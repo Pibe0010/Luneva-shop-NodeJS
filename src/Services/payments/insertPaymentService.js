@@ -25,15 +25,6 @@ export const insertPaymentService = async (ID_user, body) => {
 
     // CReamos los pagos por cada orden del cliente
     for (const orders of order) {
-      // iva
-      const iva = 0.21;
-
-      // Calculamos el iva
-      const total_price = orders.price * iva;
-
-      // Calculamos el total
-      const total_amount = orders.price + total_price;
-
       // Creo el id del pago
       const ID_payment = crypto.randomUUID();
 
@@ -43,15 +34,56 @@ export const insertPaymentService = async (ID_user, body) => {
       // Genero la referencia
       const ref = generateReference5DigitsFromRef("PM", maxRef);
 
-      // Inserto el pago en la BD
-      await insertPaymentModel(
-        ID_payment,
-        ref,
-        payment_method,
-        orders.ID_order,
-        total_amount,
-        iva
-      );
+      // Aplico el descuento al pago si el producto està en oferta
+      if (orders.product_discount !== null) {
+        // iva
+        const iva = 0.21;
+
+        // Asegúrate de que el descuento es un número
+        const discount = parseFloat(orders.product_discount);
+
+        // Aplica el IVA sobre el descuento
+        const total_price_with_iva = discount * iva;
+
+        // Suma el descuento con el IVA
+        const total_amount = parseFloat(
+          discount + total_price_with_iva
+        ).toFixed(2);
+
+        // Inserta el pago en la BD
+        await insertPaymentModel(
+          ID_payment,
+          ref,
+          orders.ID_order,
+          payment_method,
+          total_amount,
+          iva
+        );
+      } else if (orders.product_discount === null) {
+        // iva
+        const iva = 0.21;
+
+        // Asegúrate de que el precio es un número
+        const price = parseFloat(orders.price);
+
+        // Calcular el IVA sobre el precio original
+        const total_price_with_iva = price * iva;
+
+        // Sumar el precio original con el IVA para obtener el total
+        const total_amount = parseFloat(price + total_price_with_iva).toFixed(
+          2
+        );
+
+        // Inserta el pago en la BD
+        await insertPaymentModel(
+          ID_payment,
+          ref,
+          orders.ID_order,
+          payment_method,
+          total_amount,
+          iva
+        );
+      }
 
       // Actualiza el estado de la orden
       await updateOrderStatusFromPaymentModel(orders.ID_order, "sent");

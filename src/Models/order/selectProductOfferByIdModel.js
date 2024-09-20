@@ -1,25 +1,24 @@
 import { getPool } from "../../database/getPool.js";
 import { databaseQueryError } from "../../Services/error/errorDataBase.js";
 
-export const selectPaymentOrdersFromCustomerModel = async (ID_customer) => {
+export const selectProductOfferByIdModel = async (ID_product) => {
   try {
     const pool = await getPool();
 
     const [result] = await pool.query(
-      `SELECT ID_order, product_discount, product_amount,  price
-       FROM Orders
-       WHERE ID_customer = ? AND status = "earring"`,
-      [ID_customer]
+      `SELECT * FROM Offers WHERE ID_product = ?`,
+      [ID_product]
     );
 
     if (result.length === 0) {
       return null;
     }
 
-    return result;
+    return result[0];
   } catch (error) {
     databaseQueryError(
-      "Error en el modelo al obtener la orden de pago de un cliente"
+      error.message ||
+        "Error en el modelo al obtener la oferta del un producto en la orden"
     );
   }
 };
