@@ -13,6 +13,7 @@ import { changePasswordController } from "../Controllers/user/changePasswordCont
 import { forgetPasswordController } from "../Controllers/user/forgetPasswordController.js";
 import { resetPasswordController } from "./user/resetPasswordController.js";
 import { getProfileUserController } from "./user/getProfileUserController.js";
+import { getUserSearchController } from "./user/getUserSearchController.js";
 
 // Product
 import { newProductController } from "../Controllers/product/newProductController.js";
@@ -38,6 +39,7 @@ export {
   logoutUserController,
   updateUserController,
   deleteUserController,
+  getUserSearchController,
   changePasswordController,
   forgetPasswordController,
   resetPasswordController,

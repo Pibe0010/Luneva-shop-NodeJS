@@ -1,46 +1,28 @@
 import { getPool } from "../../database/getPool.js";
-import { databaseQueryError } from "../../Services/error/errorDataBase.js";
+import { databaseInsertError } from "../../Services/error/errorDataBase.js";
 
 export const insertPaymentModel = async (
   ID_payment,
   ref,
-  payment_method,
   ID_order,
+  payment_method,
   total_amount,
   iva
 ) => {
   try {
     const pool = await getPool();
 
-    const fieldsToUpdate = [];
-    const values = [];
-
-    const addToUpdate = (field, value) => {
-      if (value !== undefined && value !== null) {
-        fieldsToUpdate.push(`${field} = ?`);
-        values.push(value);
-      }
-    };
-
-    addToUpdate("ID_payment", ID_payment);
-    addToUpdate("ref_PM", ref);
-    addToUpdate("ID_order", ID_order);
-    addToUpdate("payment_method", payment_method);
-    addToUpdate("total_amount", total_amount);
-    addToUpdate("iva_payments", iva);
-
-    if (fieldsToUpdate.length === 0) return {}; // No hay campos para actualizar
-
-    // Adaptar e query a los valores dados
-    const fieldsString = fieldsToUpdate.join(", ");
-    const query = `INSERT INTO Payments SET ${fieldsString}`;
-
-    const [result] = await pool.query(query, values);
+    const result = await pool.query(
+      `INSERT INTO Payments  (ID_payment, ref_PM, ID_order, payment_method, total_amount, iva_payments) VALUES (?,?,?,?,?,?)`,
+      [ID_payment, ref, ID_order, payment_method, total_amount, iva]
+    );
 
     if (result.affectedRows === 0) {
-      databaseQueryError("No se ha podido insertar el pago");
+      databaseInsertError("No se ha podido crear el pago");
     }
   } catch (error) {
-    databaseQueryError("Error en el modelo al insertar el pago");
+    databaseInsertError(
+      error.message || "Error en el modelo al insertar el pago del cliente"
+    );
   }
 };

@@ -45,6 +45,7 @@
   - actualizar usuario.
   - borrar usuario.
   - Listar de usuarios.
+  - Buscar usuario.
 
 - Product
 

@@ -6,7 +6,7 @@ export const getUserListModel = async () => {
     const pool = await getPool();
 
     const result = await pool.query(
-      `SELECT Users.id_user, Users.user_name, Users.last_name, Users.email, Users.avatar
+      `SELECT Users.id_user, Users.user_name, Users.last_name, Users.email, Users.avatar, Users.role
       FROM Users`
     );
 
