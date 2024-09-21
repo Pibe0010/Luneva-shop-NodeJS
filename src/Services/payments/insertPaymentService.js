@@ -39,6 +39,9 @@ export const insertPaymentService = async (ID_user, body) => {
         // iva
         const iva = 0.21;
 
+        // pago por envio
+        const shipment_cost = 3.5;
+
         // Asegúrate de que el descuento es un número
         const discount = parseFloat(orders.product_discount);
 
@@ -50,18 +53,26 @@ export const insertPaymentService = async (ID_user, body) => {
           discount + total_price_with_iva
         ).toFixed(2);
 
+        // Precio total
+        const total_price = total_amount + shipment_cost;
+        console.log(total_price);
+
         // Inserta el pago en la BD
         await insertPaymentModel(
           ID_payment,
           ref,
           orders.ID_order,
           payment_method,
-          total_amount,
-          iva
+          total_price,
+          iva,
+          shipment_cost
         );
       } else if (orders.product_discount === null) {
         // iva
         const iva = 0.21;
+
+        // pago por envio
+        const shipment_cost = 3.5;
 
         // Asegúrate de que el precio es un número
         const price = parseFloat(orders.price);
@@ -70,9 +81,10 @@ export const insertPaymentService = async (ID_user, body) => {
         const total_price_with_iva = price * iva;
 
         // Sumar el precio original con el IVA para obtener el total
-        const total_amount = parseFloat(price + total_price_with_iva).toFixed(
-          2
-        );
+        const total_amount = price + total_price_with_iva;
+
+        // Precio total
+        const total_price = total_amount + shipment_cost;
 
         // Inserta el pago en la BD
         await insertPaymentModel(
@@ -80,8 +92,9 @@ export const insertPaymentService = async (ID_user, body) => {
           ref,
           orders.ID_order,
           payment_method,
-          total_amount,
-          iva
+          total_price,
+          iva,
+          shipment_cost
         );
       }
 

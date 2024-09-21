@@ -31,7 +31,7 @@ export const deleteTrolleyService = async (ID_user, ID_product) => {
     handleErrorService(
       error,
       "DELETE_TROLLEY_SERVICE_ERROR",
-      "Error al elimniar el carrito del servicio"
+      "Error al elimniar un producto del carrito en el servicio"
     );
   }
 };

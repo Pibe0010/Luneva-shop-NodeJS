@@ -18,7 +18,7 @@ export const deleteTrolleyController = async (req, res, next) => {
       error,
       next,
       "DELETE_TROLLEY_CONTROLLER_ERROR",
-      "Error en el controlador al eliminar el carrito"
+      "Error en el controlador al eliminar un producto del carrito"
     );
   }
 };

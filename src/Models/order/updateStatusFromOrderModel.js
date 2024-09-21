@@ -1,7 +1,7 @@
 import { getPool } from "../../database/getPool.js";
 import { databaseUpdateError } from "../../Services/error/errorDataBase.js";
 
-export const updateOrderStatusModel = async (ID_product, cancelled) => {
+export const updateStatusFromOrderModel = async (ID_order, status) => {
   try {
     const pool = await getPool();
 
@@ -15,12 +15,12 @@ export const updateOrderStatusModel = async (ID_product, cancelled) => {
       }
     };
 
-    addToUpdate("status", cancelled);
+    addToUpdate("status", status);
 
     if (fieldsToUpdate.length === 0) return {};
 
-    const query = `UPDATE Orders SET ${fieldsToUpdate.join(", ")} WHERE ID_product = ?`;
-    values.push(ID_product);
+    const query = `UPDATE Orders SET ${fieldsToUpdate.join(", ")} WHERE ID_order = ?`;
+    values.push(ID_order);
 
     const [result] = await pool.query(query, values);
 

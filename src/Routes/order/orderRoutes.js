@@ -7,6 +7,7 @@ import {
   getOrderSearchController,
   newOrderController,
   updateOrderController,
+  updateOrderStatusController,
 } from "../../Controllers/actionController.js";
 
 // Creamos el router
@@ -40,4 +41,11 @@ orderRouter.delete(
   auththenticatedUser,
   adminAuthMiddleware,
   deleteOrderController
+);
+
+// Cambiar el estado de la orden
+orderRouter.put(
+  "/order/updateStatus/:ID_order",
+  auththenticatedUser,
+  updateOrderStatusController
 );
