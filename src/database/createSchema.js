@@ -159,6 +159,7 @@ export const createSchema = async (db) => {
         status ENUM("pending", "paid", "cancelled") DEFAULT "pending",
         total_amount DECIMAL(10, 2) NOT NULL,
         iva_payments DECIMAL(10, 2) NOT NULL,
+        shipment_cost DECIMAL(10, 2) NOT NULL,
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
         updatedAt DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
         FOREIGN KEY (ID_order) REFERENCES Orders(ID_order)

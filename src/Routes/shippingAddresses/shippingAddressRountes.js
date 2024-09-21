@@ -3,6 +3,7 @@ import { auththenticatedUser } from "../../Middlewares/auththenticatedUser.js";
 import {
   deleteShippingAddressController,
   getListShippingAddressController,
+  getSearchShippingAddressController,
   newShippingAddressController,
   selectShippingAdrressController,
   updateShippingAddressController,
@@ -44,4 +45,11 @@ shippingAddressRouter.get(
   "/address/selected",
   auththenticatedUser,
   selectShippingAdrressController
+);
+
+// Buscar direcciones de envio
+shippingAddressRouter.get(
+  "/address/search",
+  auththenticatedUser,
+  getSearchShippingAddressController
 );

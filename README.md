@@ -68,9 +68,10 @@
 
   - Crear carrito de compras.
   - Actualizar carrito de compras.
-  - Borrar carrito de compras.
+  - Borrar producto del carrito de compras.
   - Listar de carritos de compras.
   - Cambiar estado del carrito de compras.
+  - Borrar carrito de compras.
 
 - Offers
 
@@ -87,6 +88,7 @@
   - Borrar orden.
   - Listar de ordenes.
   - Buscar orden
+  - Cambiar estado de la orden.
 
 - ShippingAddress
 
@@ -95,6 +97,7 @@
   - Borrar direcciones de envío.
   - Actualizar direcciones de envío.
   - Seleccionar direcciones de envío.
+  - Buscar direcciones de envío.
 
 - Shipments
 

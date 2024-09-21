@@ -1,6 +1,7 @@
 import express from "express";
 import { auththenticatedUser } from "../../Middlewares/auththenticatedUser.js";
 import {
+  deleteAllTrolleyController,
   deleteTrolleyController,
   getTrolleyProductListController,
   newTrolleyController,
@@ -40,4 +41,11 @@ trolleysRouter.put(
   "/trolley/update/status/:ID_product",
   auththenticatedUser,
   updateTrolleyStatusController
+);
+
+// Borrar el carrito completo
+trolleysRouter.delete(
+  "/delete/trolley",
+  auththenticatedUser,
+  deleteAllTrolleyController
 );

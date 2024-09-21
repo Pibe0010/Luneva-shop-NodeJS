@@ -4,6 +4,7 @@ import { updateTrolleyController } from "./trolleys/updateTrolleyController.js";
 import { deleteTrolleyController } from "./trolleys/deleteTrolleyController.js";
 import { getTrolleyProductListController } from "./trolleys/getTrolleyProductListController.js";
 import { updateTrolleyStatusController } from "./trolleys/updateTrolleyStatusController.js";
+import { deleteAllTrolleyController } from "./trolleys/deleteAllTrolleyController.js";
 
 // Ofertas
 import { newOfferController } from "./offers/newOfferController.js";
@@ -18,6 +19,7 @@ import { getOrderSearchController } from "./order/getOrderSearchController.js";
 import { newOrderController } from "./order/newOrderController.js";
 import { updateOrderController } from "./order/updateOrderController.js";
 import { deleteOrderController } from "./order/deleteOrderController.js";
+import { updateOrderStatusController } from "./order/updateOrderStatusController.js";
 
 // Dirección de envio
 import { newShippingAddressController } from "./shippingAddresses/newShippingAddressController.js";
@@ -25,6 +27,7 @@ import { updateShippingAddressController } from "./shippingAddresses/updateShipp
 import { deleteShippingAddressController } from "./shippingAddresses/deleteShippingAddressController.js";
 import { getListShippingAddressController } from "./shippingAddresses/getListShippingAddressController.js";
 import { selectShippingAdrressController } from "./shippingAddresses/selectShippingAdrressController.js";
+import { getSearchShippingAddressController } from "./shippingAddresses/getSearchShippingAddressController.js";
 
 // Envios
 import { getListShipmentController } from "./shipments/getListShipmentController.js";
@@ -53,6 +56,7 @@ export {
   deleteTrolleyController,
   getTrolleyProductListController,
   updateTrolleyStatusController,
+  deleteAllTrolleyController,
   newOfferController,
   updateOfferController,
   deleteOfferController,
@@ -63,6 +67,7 @@ export {
   newOrderController,
   updateOrderController,
   deleteOrderController,
+  updateOrderStatusController,
   newShippingAddressController,
   updateShippingAddressController,
   deleteShippingAddressController,
@@ -73,6 +78,7 @@ export {
   newShipmentController,
   updateShipmentController,
   deleteShipmentController,
+  getSearchShippingAddressController,
   newTicketPurchaseController,
   deleteTicketPurchaseController,
   getTicketPurshaseListController,
