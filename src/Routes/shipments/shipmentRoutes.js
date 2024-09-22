@@ -5,12 +5,21 @@ import {
   deleteShipmentController,
   getListShipmentController,
   getShipmentController,
+  getShipmentSearchController,
   newShipmentController,
   updateShipmentController,
 } from "../../Controllers/actionController.js";
 
 // Creamos el router
 export const shipmentRouter = express.Router();
+
+// Buscar envio
+shipmentRouter.get(
+  "/shipment/search",
+  auththenticatedUser,
+  adminAuthMiddleware,
+  getShipmentSearchController
+);
 
 // Lista de envios
 shipmentRouter.get(
@@ -20,7 +29,7 @@ shipmentRouter.get(
   getListShipmentController
 );
 
-// Buscar envio
+// Buscar un envio
 shipmentRouter.get(
   "/shipment/:ID_shipment",
   auththenticatedUser,

@@ -35,6 +35,7 @@ import { getShipmentController } from "./shipments/getShipmentController.js";
 import { newShipmentController } from "./shipments/newShipmentController.js";
 import { updateShipmentController } from "./shipments/updateShipmentController.js";
 import { deleteShipmentController } from "./shipments/deleteShipmentController.js";
+import { getShipmentSearchController } from "./shipments/getShipmentSearchController.js";
 
 // Tikets de compra
 import { newTicketPurchaseController } from "./ticketPurchases/newTicketPurchaseController.js";
@@ -78,6 +79,7 @@ export {
   newShipmentController,
   updateShipmentController,
   deleteShipmentController,
+  getShipmentSearchController,
   getSearchShippingAddressController,
   newTicketPurchaseController,
   deleteTicketPurchaseController,

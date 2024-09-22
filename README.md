@@ -105,7 +105,8 @@
   - Actualizar envio.
   - Borrar envio.
   - Lista de envío.
-  - Buscar envío.
+  - Buscar un envío.
+  - Buscar envios.
 
 - Ticket_purchases
 

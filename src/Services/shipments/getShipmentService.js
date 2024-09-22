@@ -8,7 +8,7 @@ export const getShipmentService = async (ID_shipment) => {
     const shipment = await selectShimpmentByIdModel(ID_shipment);
 
     if (!shipment) {
-      notFoundError("payment");
+      notFoundError("shipment");
     }
 
     return shipment;
