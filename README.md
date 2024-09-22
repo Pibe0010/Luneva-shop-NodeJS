@@ -1,6 +1,6 @@
-# Luneva Shop node and react
+# Luneva Shop nodeJS
 
-## Tienda de jabones artesanales
+## Tienda de jabones artesanales Backend
 
 1. Inizializamos el proyecto de node
 
