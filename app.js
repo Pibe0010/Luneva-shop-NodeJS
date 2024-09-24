@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import fileUpload from "express-fileupload";
-import { PORT } from "./env.js";
+import { FRONTEND_HOST, PORT } from "./env.js";
 import {
   handlerErorr,
   notFoundError,
@@ -27,7 +27,7 @@ app.use(fileUpload());
 app.use(morgan("dev"));
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: FRONTEND_HOST,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
