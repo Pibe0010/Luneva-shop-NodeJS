@@ -11,7 +11,7 @@ export const loginUserController = async (req, res, next) => {
     // Obtengo los datos de login
     const { token, user } = await loginUserService(req.body);
 
-    res.send({
+    res.status(200).send({
       status: "ok",
       message: "Sesion iniciada correctamente",
       data: token,
