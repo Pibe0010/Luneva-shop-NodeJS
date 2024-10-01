@@ -6,18 +6,18 @@ export const updateNewRegistrationCodeModel = async (
   new_registration_code
 ) => {
   try {
-    const dbPool = await getPool();
+    const pool = await getPool();
 
-    const query = `UPDATE Users SET registration_code = ? WHERE id_user = ?`;
+    const query = `UPDATE Users SET registrationCode = ? WHERE ID_user = ?`;
 
     const values = [new_registration_code, id_user];
-    const [rows] = await dbPool.query(query, values);
+    const [result] = await pool.query(query, values);
 
-    if (rows.affectedRows === 0) {
+    if (result.affectedRows === 0) {
       databaseUpdateError("No se ha podido actualizar el código de registro.");
     }
 
-    return rows;
+    return result;
   } catch (error) {
     databaseUpdateError(
       error.message || "Error en el modelo al actualizar el código de registro"

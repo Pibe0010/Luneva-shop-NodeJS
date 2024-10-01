@@ -16,7 +16,7 @@ export const updatePasswordService = async (registration_code, body) => {
     }
 
     // Verificar que el código de registro coincida
-    if (user.registration_code !== registration_code) {
+    if (user.registrationCode !== registration_code) {
       invalidCredentials("Código de registro inválido");
     }
 

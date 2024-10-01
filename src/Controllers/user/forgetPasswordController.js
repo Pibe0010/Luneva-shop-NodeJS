@@ -19,7 +19,7 @@ export const forgetPasswordController = async (req, res, next) => {
     await sendRecoveryPaswordEmail(email, new_registration_code);
 
     // Devolvemos el usuario actualizado.
-    res.status(202).send({ message: "Correo enviado" });
+    res.status(200).send({ status: "ok", message: "Correo enviado" });
   } catch (error) {
     handleErrorController(
       error,

@@ -46,6 +46,9 @@
   - borrar usuario.
   - Listar de usuarios.
   - Buscar usuario.
+  - Cambiar password.
+  - Restablecer password.
+  - Recuperar password.
 
 - Product
 

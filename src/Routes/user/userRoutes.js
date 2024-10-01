@@ -52,7 +52,7 @@ userRouter.put(
 );
 
 // solicitud recuperación de contraseña
-userRouter.post("/user/forgetPassword", forgetPasswordController);
+userRouter.put("/user/forgot-password", forgetPasswordController);
 
 // Cambio de recuperación de contraseña
 userRouter.put(

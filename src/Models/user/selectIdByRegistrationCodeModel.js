@@ -6,7 +6,7 @@ export const selectIdByRegistrationCodeModel = async (registration_code) => {
     const pool = await getPool();
 
     const [result] = await pool.query(
-      "SELECT id_user, registration_code FROM Users WHERE registration_code = ?",
+      "SELECT ID_user, registrationCode FROM Users WHERE registrationCode = ?",
       [registration_code]
     );
 
