@@ -14,7 +14,10 @@ export const resetPasswordController = async (req, res, next) => {
     const response = await updatePasswordService(registration_code, req.body);
 
     // Responder al cliente
-    res.send(200).send(response);
+    res.send(200).send({
+      status: "ok",
+      message: response.message,
+    });
   } catch (error) {
     handleErrorController(
       error,

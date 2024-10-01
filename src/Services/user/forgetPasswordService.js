@@ -17,7 +17,7 @@ export const forgetPasswordService = async (email) => {
     const new_registration_code = crypto.randomUUID();
 
     // Obtener el id del usuario
-    const id_user = user.id_user;
+    const id_user = user.ID_user;
 
     // Actualizar el usuario con el código de recuperación
     await updateNewRegistrationCodeModel(id_user, new_registration_code);
