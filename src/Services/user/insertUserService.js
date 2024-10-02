@@ -1,7 +1,7 @@
 import { insertUserModel } from "../../Models/user/insertUserModel.js";
 import { selectUserByEmailModel } from "../../Models/user/selectUserByEmailModel.js";
 import { handleErrorService } from "../../Utils/handleError.js";
-/* import { sendWelcomeEmail } from "../email/sendWelcomeEmail.js"; */
+import { sendWelcomeEmail } from "../email/sendWelcomeEmail.js";
 import { emailAlreadyRegisteredError } from "../error/errorService.js";
 import bcrypt from "bcrypt";
 
@@ -15,7 +15,7 @@ export const insertUserService = async (body) => {
     const hashed_password = await bcrypt.hash(password, 12);
 
     // Enviamos el email de activación
-    /* await sendWelcomeEmail(user_name, email, registration_code); */
+    await sendWelcomeEmail(user_name, email, registration_code);
 
     // Buscamos en la BD si el usuario ya existe
     const userExists = await selectUserByEmailModel(email);

@@ -19,7 +19,12 @@ import { adminAuthMiddleware } from "../../Middlewares/adminAuthMiddleware.js";
 export const userRouter = express.Router();
 
 // Lista de usuarios
-userRouter.get("/user/list", getUserListController);
+userRouter.get(
+  "/user/list",
+  auththenticatedUser,
+  adminAuthMiddleware,
+  getUserListController
+);
 
 // Registro de usuario
 userRouter.post("/user/register", newUserController);
