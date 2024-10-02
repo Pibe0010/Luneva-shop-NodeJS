@@ -15,15 +15,15 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export async function sendWelcomeEmail(name, email, registration_code) {
+export async function sendWelcomeEmail(user_name, email, registration_code) {
   try {
-    const validateURL = `http://localhost:5173/validation/${registration_code}`;
+    const validateURL = `http://localhost:5173/activate-account/${registration_code}`;
     // Configurar el mensaje de correo electrónico
     const mailOptions = {
       from: MAIL_TRAP_AUTH_USER,
       to: email,
       subject: "¡Bienvenido a LUNEVA SHOP!",
-      html: `<p>Bienvenido/a a nuestra plataforma, ${name}.</p>
+      html: `<p>Bienvenido/a a nuestra plataforma, ${user_name}.</p>
                  <p>Tu datos de usuario son:</p>
                  <p><span>Usuario:</span> ${email}</p>
                  <p>Para validar tu cuenta, por favor haz clic en el siguiente enlace:</p>
