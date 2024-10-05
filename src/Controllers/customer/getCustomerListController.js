@@ -6,7 +6,7 @@ export const getCustomerListController = async (req, res, next) => {
     // Obtenemos la lista de clientes
     const customerList = await selectCustomerListService();
 
-    res.status(201).send({
+    res.status(200).send({
       status: "ok",
       data: customerList,
     });
