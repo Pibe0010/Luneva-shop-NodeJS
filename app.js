@@ -33,6 +33,8 @@ app.use(
     credentials: true,
   })
 );
+// Middleware Recursos Estaticos
+app.use("/uploads", express.static("./uploads"));
 
 // Rutas
 app.use(userRouter);

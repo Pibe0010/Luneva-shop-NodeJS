@@ -9,11 +9,12 @@ export const newProductController = async (req, res, next) => {
     await validateSchemaUtil(newProductSchema, req.body);
 
     // Insertamos el producto en la BD
-    await insertProductService(req.body);
+    const respoonse = await insertProductService(req.body);
 
     res.status(201).send({
       status: "ok",
       message: "Producto creado con exito",
+      data: { respoonse },
     });
   } catch (error) {
     handleErrorController(
