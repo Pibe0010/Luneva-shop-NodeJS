@@ -83,6 +83,7 @@
   - Listar de ofertas.
   - Borrar oferta.
   - Activar / Desactivar oferta.
+  - Buscar producto para la oferta.
 
 - Orders
 

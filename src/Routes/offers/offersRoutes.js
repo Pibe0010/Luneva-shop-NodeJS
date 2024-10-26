@@ -3,7 +3,9 @@ import { auththenticatedUser } from "../../Middlewares/auththenticatedUser.js";
 import { adminAuthMiddleware } from "../../Middlewares/adminAuthMiddleware.js";
 import {
   deleteOfferController,
+  getOfferSearchController,
   getOffersListController,
+  getUnsignedProductsController,
   newOfferController,
   toggleOfferActivationController,
   updateOfferController,
@@ -50,4 +52,20 @@ offersRouter.put(
   auththenticatedUser,
   adminAuthMiddleware,
   toggleOfferActivationController
+);
+
+// Buscar ofertas
+offersRouter.get(
+  "/offer/search",
+  auththenticatedUser,
+  adminAuthMiddleware,
+  getOfferSearchController
+);
+
+// Lista de productos para ofertas
+offersRouter.get(
+  "/offer/unsigned-products",
+  auththenticatedUser,
+  adminAuthMiddleware,
+  getUnsignedProductsController
 );
