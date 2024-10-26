@@ -12,6 +12,8 @@ import { updateOfferController } from "./offers/updateOfferController.js";
 import { deleteOfferController } from "./offers/deleteOfferController.js";
 import { getOffersListController } from "./offers/getOffersListController.js";
 import { toggleOfferActivationController } from "./offers/toggleOfferActivationController.js";
+import { getOfferSearchController } from "./offers/getOfferSearchController.js";
+import { getUnsignedProductsController } from "./offers/getUnsignedProductsController.js";
 
 // Ordenes
 import { getOrderListController } from "./order/getOrderListController.js";
@@ -63,11 +65,13 @@ export {
   deleteOfferController,
   getOffersListController,
   toggleOfferActivationController,
+  getUnsignedProductsController,
   getOrderListController,
   getOrderSearchController,
   newOrderController,
   updateOrderController,
   deleteOrderController,
+  getOfferSearchController,
   updateOrderStatusController,
   newShippingAddressController,
   updateShippingAddressController,
