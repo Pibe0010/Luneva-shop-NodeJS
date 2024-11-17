@@ -9,10 +9,10 @@ export const updateOfferController = async (req, res, next) => {
     await validateSchemaUtil(updateOfferSchema, req.body);
 
     // Obtenemos el id del producto
-    const ID_product = req.params.ID_product;
+    const ID_offer = req.params.ID_offer;
 
     // Actualizamos la oferta
-    const offer = await updateOfferService(ID_product, req.body);
+    const offer = await updateOfferService(ID_offer, req.body);
 
     res
       .status(200)

@@ -24,7 +24,7 @@ offersRouter.post(
 
 // Actualizar oferta
 offersRouter.put(
-  "/offers/update/:ID_product",
+  "/offers/update/:ID_offer",
   auththenticatedUser,
   adminAuthMiddleware,
   updateOfferController
