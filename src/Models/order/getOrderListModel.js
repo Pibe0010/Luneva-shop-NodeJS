@@ -6,7 +6,7 @@ export const getOrderListModel = async () => {
     const pool = await getPool();
 
     const result = await pool.query(`
-        SELECT ID_order, ref_OR, Users.user_name, Users.last_name, Users.email, Customers.phone, Products.name AS product_name, Products.ref_PR,Products.price, Products.category, product_amount, status, Orders.createdAt, Orders.updatedAt
+        SELECT ID_order, ref_OR, Users.user_name, Users.last_name, Users.email, Customers.phone, Products.name, Products.ref_PR, Orders.price, Products.category, Orders.product_amount, Orders.status, Orders.product_discount, Orders.createdAt, Orders.updatedAt
         FROM Orders
         LEFT JOIN Customers ON Orders.ID_customer = Customers.ID_customer
         LEFT JOIN Users ON Customers.ID_user = Users.ID_user
