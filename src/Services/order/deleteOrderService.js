@@ -13,6 +13,7 @@ export const deleteOrderService = async (order) => {
       notFoundError("order");
     }
 
+    // comprabamos que este cancelada
     if (selectOrder.status !== "cancelled") {
       invalidStatusError(" La order no ha sido cancelado");
     }
