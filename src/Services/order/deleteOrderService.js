@@ -19,7 +19,9 @@ export const deleteOrderService = async (order) => {
     }
 
     // Elimino la orden
-    await deleteOrderModel(order);
+    const response = await deleteOrderModel(order);
+
+    return response;
   } catch (error) {
     handleErrorService(
       error,
