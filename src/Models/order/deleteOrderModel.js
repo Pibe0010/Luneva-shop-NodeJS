@@ -12,6 +12,8 @@ export const deleteOrderModel = async (order) => {
     if (result.affectedRows === 0) {
       databaseDeleteError("No se ha podido eliminar la orden");
     }
+
+    return { message: "Orden eliminada correctamente" };
   } catch (error) {
     databaseDeleteError(
       error.message || "Error en el modelo al eliminar una orden",

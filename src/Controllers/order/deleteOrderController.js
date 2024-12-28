@@ -7,11 +7,11 @@ export const deleteOrderController = async (req, res, next) => {
     const order = req.params.ID_order;
 
     // Elimino la orden
-    await deleteOrderService(order);
+    const response = await deleteOrderService(order);
 
     res.status(200).send({
       status: "ok",
-      message: "Orden eliminada",
+      data: response,
     });
   } catch (error) {
     handleErrorController(
