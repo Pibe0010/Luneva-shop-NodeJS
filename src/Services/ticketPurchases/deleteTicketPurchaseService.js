@@ -13,7 +13,9 @@ export const deleteTicketPurchaseService = async (ID_ticket) => {
     }
 
     // Borro el ticket de la BD
-    await deleteTicketPurchaseModel(ID_ticket);
+    const response = await deleteTicketPurchaseModel(ID_ticket);
+
+    return response;
   } catch (error) {
     handleErrorService(
       error,

@@ -6,7 +6,7 @@ export const getTicketPurshaseListModel = async () => {
     const pool = await getPool();
 
     const [result] = await pool.query(
-      `SELECT Ticket_purchases.ID_ticket, Ticket_purchases.ID_order, Orders.product_amount, Orders.price, Products.name, Users.user_name, Ticket_purchases.createdAt, Ticket_purchases.updatedAt 
+      `SELECT Ticket_purchases.ID_ticket, Ticket_purchases.ID_order, Orders.ref_OR, Orders.product_amount, Orders.price, Products.name, Users.user_name, Users.last_name, Products.name, Ticket_purchases.createdAt, Ticket_purchases.updatedAt 
       FROM Ticket_purchases 
           INNER JOIN Orders  ON Ticket_purchases.ID_order = Orders.ID_order 
           INNER JOIN Customers  ON Orders.ID_customer = Customers.ID_customer
