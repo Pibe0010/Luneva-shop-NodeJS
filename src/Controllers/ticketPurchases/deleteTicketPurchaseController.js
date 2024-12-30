@@ -7,11 +7,11 @@ export const deleteTicketPurchaseController = async (req, res, next) => {
     const ID_ticket = req.params.ID_ticket;
 
     // Elimino el ticket
-    await deleteTicketPurchaseService(ID_ticket);
+    const response = await deleteTicketPurchaseService(ID_ticket);
 
     res.status(200).send({
       status: "ok",
-      message: "Ticket de compra eliminado",
+      data: response,
     });
   } catch (error) {
     handleErrorController(

@@ -13,6 +13,8 @@ export const deleteTicketPurchaseModel = async (ID_ticket) => {
     if (result.affectedRows === 0) {
       databaseDeleteError("No se ha podido eliminar el ticket");
     }
+
+    return { message: "Ticket eliminado correctamente" };
   } catch (error) {
     databaseDeleteError(
       error.message || "Error desde el modelo al eliminar el ticket de compra",
