@@ -9,7 +9,7 @@ export const deleteShipmentController = async (req, res, next) => {
     // Elimino el envio
     await deleteShipmentService(ID_shipment);
 
-    res.status(200).send({ status: "ok", message: "Envio eliminado" });
+    res.status(200).send({ status: "ok", data: "Envio eliminado" });
   } catch (error) {
     handleErrorController(
       error,

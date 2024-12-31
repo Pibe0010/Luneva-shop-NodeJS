@@ -16,7 +16,6 @@ export const getShipmentListModel = async () => {
     Orders.ref_OR,
     Orders.product_amount,
     Orders.price,
-    Orders.status,
     Products.ref_PR,
     Products.name,
     Shipping_addresses.address,
@@ -28,17 +27,21 @@ export const getShipmentListModel = async () => {
     Shipping_addresses.country,
     Users.user_name,
     Users.last_name,
-    Users.email
-  FROM 
+    Users.email,
+    Customers.phone
+FROM 
     Shipments
-  LEFT JOIN 
+LEFT JOIN 
     Orders ON Shipments.ID_order = Orders.ID_order
-  LEFT JOIN 
+LEFT JOIN 
+    Customers ON Orders.ID_customer = Customers.ID_customer
+LEFT JOIN 
+     Users ON Customers.ID_user = Users.ID_user
+LEFT JOIN 
     Products ON Orders.ID_product = Products.ID_product
-  LEFT JOIN 
-    Shipping_addresses ON Shipments.ID_shipping_address = Shipping_addresses.ID_address
-  LEFT JOIN 
-    Users ON Shipping_addresses.ID_customer = Users.ID_user`
+LEFT JOIN 
+    Shipping_addresses ON Shipments.ID_shipping_address = Shipping_addresses.ID_address;
+    `
     );
 
     if (result.length === 0) {
