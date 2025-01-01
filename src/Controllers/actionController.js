@@ -52,6 +52,7 @@ import { getPaymentSearchController } from "./payments/getPaymentSearchControlle
 import { updatePaymentController } from "./payments/updatePaymentController.js";
 import { deletePaymentController } from "./payments/deletePaymentController.js";
 import { cancelPaymentController } from "./payments/cancelPaymentController.js";
+import { updatePaymentStatusController } from "./payments/updatePaymentStatusController.js";
 
 export {
   newTrolleyController,
@@ -95,4 +96,5 @@ export {
   updatePaymentController,
   deletePaymentController,
   cancelPaymentController,
+  updatePaymentStatusController,
 };

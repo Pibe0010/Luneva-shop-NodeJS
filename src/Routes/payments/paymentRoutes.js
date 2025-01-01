@@ -8,6 +8,7 @@ import {
   getPaymentSearchController,
   newPaymentController,
   updatePaymentController,
+  updatePaymentStatusController,
 } from "../../Controllers/actionController.js";
 
 // Creamos el router
@@ -56,4 +57,12 @@ paymentRouter.put(
   "/payment/cancel/:ID_payment",
   auththenticatedUser,
   cancelPaymentController
+);
+
+// Actualizar estado de pago
+paymentRouter.put(
+  "/payment/update/status/:ID_payment",
+  auththenticatedUser,
+  adminAuthMiddleware,
+  updatePaymentStatusController
 );
