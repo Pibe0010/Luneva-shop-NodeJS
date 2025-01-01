@@ -11,7 +11,7 @@ export const deletePaymentController = async (req, res, next) => {
 
     res.status(200).send({
       status: "ok",
-      message: "Pago eliminado",
+      data: "Pago eliminado",
     });
   } catch (error) {
     handleErrorController(

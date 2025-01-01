@@ -10,7 +10,7 @@ export const selectPaymentSearchModel = async (searchTerm) => {
       SELECT p.ID_payment, p.ref_PM, p.payment_method, p.status, p.total_amount, p.iva_payments,
       o.ID_order, o.ref_OR, o.ID_customer, o.ID_product, o.product_amount, o.price, 
       o.status AS order_status, c.phone, u.user_name, u.last_name, u.email, 
-      pr.name AS product_name, pr.price AS product_price, p.createdAt, p.updatedAt
+      pr.name, pr.price AS product_price, p.createdAt, p.updatedAt
       FROM Payments p
       LEFT JOIN Orders o ON p.ID_order = o.ID_order
       LEFT JOIN Customers c ON o.ID_customer = c.ID_customer
