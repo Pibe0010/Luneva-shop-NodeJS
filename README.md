@@ -125,4 +125,5 @@
   - Borrar pago.
   - Lista de pagos.
   - Buscar pago.
-  - cancelar pago
+  - Cancelar pago
+  - Actulizar estado del pago
