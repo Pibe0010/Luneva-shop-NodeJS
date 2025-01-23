@@ -7,10 +7,11 @@ export const getTrolleyProductListModel = async (customer_id) => {
 
     // Obtengo la lista de el producto del carrito del cliente
     const result = await pool.query(
-      `SELECT Trolleys.ID_trolley, Products.Name, Products.Price, Products.image_one, Trolleys.products_amount 
+      `SELECT Trolleys.ID_trolley,Products.ID_product, Products.name, Products.image_one, Trolleys.products_amount,Orders.ID_order, Orders.price
        FROM Trolleys 
-       LEFT JOIN Products ON Trolleys.ID_product = Products.ID_product 
-       WHERE ID_customer LIKE ?`,
+       LEFT JOIN Products ON Trolleys.ID_product = Products.ID_product
+       LEFT JOIN Orders ON Trolleys.ID_customer = Orders.ID_order 
+       WHERE Trolleys.ID_customer LIKE ?`,
       [customer_id]
     );
 

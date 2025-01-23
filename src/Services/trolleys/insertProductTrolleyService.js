@@ -1,5 +1,6 @@
 import { selectCustomerByIdModel } from "../../Models/customer/selectCustomerByIdModel.js";
 import { insertProductTrolleyModel } from "../../Models/trolleys/insertProductTrolleyModel.js";
+import { selectTrolleyByIdModel } from "../../Models/trolleys/selectTrolleyByIdModel.js";
 import { handleErrorService } from "../../Utils/handleError.js";
 
 export const insertProductTrolleyService = async (ID_user, body) => {
@@ -14,12 +15,15 @@ export const insertProductTrolleyService = async (ID_user, body) => {
     const customer = await selectCustomerByIdModel(ID_user);
 
     // insertamos el producto en el carrito de la BD
-    const response = await insertProductTrolleyModel(
+    const responseData = await insertProductTrolleyModel(
       ID_trolley,
       customer.ID_customer,
       ID_product,
       products_amount
     );
+
+    // Devuelvo el carrito actualizado
+    const response = await selectTrolleyByIdModel(responseData);
 
     return response;
   } catch (error) {

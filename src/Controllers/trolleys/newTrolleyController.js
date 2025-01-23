@@ -12,10 +12,11 @@ export const newTrolleyController = async (req, res, next) => {
     await validateSchemaUtil(newTrolleySchema, req.body);
 
     // Insertamos el producto al carrito
-    await insertProductTrolleyService(ID_user, req.body);
+    const response = await insertProductTrolleyService(ID_user, req.body);
 
     res.status(201).send({
       status: "ok",
+      data: response,
       message: "Producto añadido al carrito",
     });
   } catch (error) {
