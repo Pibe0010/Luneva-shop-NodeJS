@@ -1,20 +1,34 @@
 import { getPool } from "../../database/getPool.js";
 import { databaseInsertError } from "../../Services/error/errorDataBase.js";
 
-export const insertProductTrolleyModel = async (
+export const insertProductExistedTrolleyModel = async (
   ID_trolley,
-  customer,
   ID_product,
-  products_amount,
-  orderId
+  products_amount
 ) => {
   try {
     const pool = await getPool();
 
-    await pool.query(
-      `INSERT INTO Trolleys (ID_trolley, ID_customer, ID_product, products_amount, ID_order) VALUES (?, ?, ?, ?, ?)`,
-      [ID_trolley, customer, ID_product, products_amount, orderId]
+    console.log(products_amount);
+
+    // Verificar si el producto ya existe en el carrito
+    const [existingProduct] = await pool.query(
+      `SELECT ID_trolley, products_amount FROM Trolleys WHERE ID_trolley = ? AND ID_product = ?`,
+      [ID_trolley, ID_product]
     );
+
+    if (existingProduct.length > 0) {
+      // Producto existe, actualizar cantidad
+      const currentAmount = Number(existingProduct[0].products_amount);
+      const newAmount = currentAmount + Number(products_amount);
+
+      await pool.query(
+        `UPDATE Trolleys SET products_amount = ? WHERE ID_trolley = ? AND ID_product = ?`,
+        [newAmount, ID_trolley, ID_product]
+      );
+    } else {
+      throw new Error("El producto no existe en el carrito.");
+    }
 
     // Actualizamos el stock del producto
     const [productStock] = await pool.query(

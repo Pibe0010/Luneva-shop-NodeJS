@@ -7,12 +7,11 @@ export const newOrderController = async (req, res, next) => {
     const ID_user = req.user.ID_user;
 
     // Insertamos la orden
-    const response = await insertOrderService(ID_user);
+    await insertOrderService(ID_user);
 
     res.status(201).send({
       status: "ok",
       message: "Orden creada con exito",
-      data: response,
     });
   } catch (error) {
     handleErrorController(

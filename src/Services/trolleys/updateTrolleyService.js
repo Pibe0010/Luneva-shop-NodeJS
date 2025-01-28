@@ -6,6 +6,7 @@ import { updateProductStockModel } from "../../Models/trolleys/updateProductStoc
 import { updateTrolleyModel } from "../../Models/trolleys/updateTrolleyModel.js";
 import { handleErrorService } from "../../Utils/handleError.js";
 import { notFoundError } from "../error/errorService.js";
+import { updateOrderService } from "../order/updateOrderService.js";
 
 export const updateTrolleyService = async (ID_user, body) => {
   try {
@@ -26,7 +27,9 @@ export const updateTrolleyService = async (ID_user, body) => {
       customer_id.ID_customer,
       ID_product
     );
-    console.log(trolley);
+
+    // Actualizo la orden
+    await updateOrderService(trolley.ID_order, ID_product, products_amount);
 
     // Actualizamos el stock del producto
     await updateProductStockModel(trolley.ID_trolley, ID_product);

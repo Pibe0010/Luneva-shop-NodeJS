@@ -66,36 +66,6 @@ export const createSchema = async (db) => {
     );
     `);
 
-  // Carrito
-  await db.query(`
-    CREATE TABLE IF NOT EXISTS Trolleys (
-        ID_trolley CHAR(36) PRIMARY KEY NOT NULL,
-        ID_customer CHAR(36) NOT NULL,
-        ID_product CHAR(36) NOT NULL,
-        products_amount INT NOT NULL,
-        process ENUM("active", "abandoned", "empty") DEFAULT "active",
-        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-        updatedAt DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-        FOREIGN KEY (ID_customer) REFERENCES Customers(ID_customer),
-        FOREIGN KEY (ID_product) REFERENCES Products(ID_product)
-    );
-    `);
-
-  // Ofertas
-  await db.query(`
-    CREATE TABLE IF NOT EXISTS Offers (
-        ID_offer CHAR(36) PRIMARY KEY NOT NULL,
-        ID_product CHAR(36) NOT NULL,
-        discount_rate DECIMAL(5, 2),
-        start_date DATE,
-        ending_date DATE,
-        active ENUM("true", "false") DEFAULT "true",
-        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-        updatedAt DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-        FOREIGN KEY (ID_product) REFERENCES Products(ID_product)
-    );
-    `);
-
   // Orden de compra
   await db.query(`
     CREATE TABLE IF NOT EXISTS Orders (
@@ -110,6 +80,38 @@ export const createSchema = async (db) => {
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
         updatedAt DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
         FOREIGN KEY (ID_customer) REFERENCES Customers(ID_customer),
+        FOREIGN KEY (ID_product) REFERENCES Products(ID_product)
+    );
+    `);
+
+  // Carrito
+  await db.query(`
+    CREATE TABLE IF NOT EXISTS Trolleys (
+        ID_trolley CHAR(36) PRIMARY KEY NOT NULL,
+        ID_customer CHAR(36) NOT NULL,
+        ID_product CHAR(36) NOT NULL,
+        ID_order CHAR(36) NOT NULL,
+        products_amount INT NOT NULL,
+        process ENUM("active", "abandoned", "empty") DEFAULT "active",
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updatedAt DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+        FOREIGN KEY (ID_customer) REFERENCES Customers(ID_customer),
+        FOREIGN KEY (ID_product) REFERENCES Products(ID_product),
+        FOREIGN KEY (ID_order) REFERENCES Orders(ID_order)
+    );
+    `);
+
+  // Ofertas
+  await db.query(`
+    CREATE TABLE IF NOT EXISTS Offers (
+        ID_offer CHAR(36) PRIMARY KEY NOT NULL,
+        ID_product CHAR(36) NOT NULL,
+        discount_rate DECIMAL(5, 2),
+        start_date DATE,
+        ending_date DATE,
+        active ENUM("true", "false") DEFAULT "true",
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updatedAt DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
         FOREIGN KEY (ID_product) REFERENCES Products(ID_product)
     );
     `);

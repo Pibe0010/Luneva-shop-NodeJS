@@ -1,7 +1,12 @@
 import { getPool } from "../../database/getPool.js";
 import { databaseInsertError } from "../../Services/error/errorDataBase.js";
 
-export const updateOrderModel = async (products_amount, ID_order, price) => {
+export const updateOrderModel = async (
+  newProductsAmount,
+  ID_order,
+  discountedPrice,
+  price
+) => {
   try {
     const pool = await getPool();
 
@@ -15,8 +20,9 @@ export const updateOrderModel = async (products_amount, ID_order, price) => {
       }
     };
 
-    addToUpdate("product_amount", products_amount);
+    addToUpdate("product_amount", newProductsAmount);
     addToUpdate("price", price);
+    addToUpdate("product_discount", discountedPrice);
 
     if (fieldsToUpdate.length === 0) return {};
 

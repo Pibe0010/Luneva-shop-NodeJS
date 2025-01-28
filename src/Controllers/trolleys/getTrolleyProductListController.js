@@ -7,9 +7,11 @@ export const getTrolleyProductListController = async (req, res, next) => {
 
     const trolleyList = await getTrolleyProductListService(ID_user);
 
-    res
-      .status(200)
-      .send({ status: "ok", message: "Lista del carrito", data: trolleyList });
+    res.status(200).send({
+      status: "ok",
+      message: "Lista del carrito",
+      data: trolleyList,
+    });
   } catch (error) {
     handleErrorController(
       error,

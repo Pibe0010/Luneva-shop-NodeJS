@@ -1,13 +1,13 @@
 import { getPool } from "../../database/getPool.js";
 import { databaseQueryError } from "../../Services/error/errorDataBase.js";
 
-export const selectOrderByProductModel = async (ID_product, ID_customer) => {
+export const selectOrderByProductModel = async (ID_product, ID_order) => {
   try {
     const pool = await getPool();
 
     const [result] = await pool.query(
-      `SELECT * FROM Orders WHERE ID_customer = ? AND ID_product = ?`,
-      [ID_customer, ID_product]
+      `SELECT * FROM Orders WHERE ID_order = ? AND ID_product = ?`,
+      [ID_order, ID_product]
     );
 
     if (result.length === 0) {

@@ -1,24 +1,23 @@
 import { getPool } from "../../database/getPool.js";
 import { databaseQueryError } from "../../Services/error/errorDataBase.js";
 
-export const selectTrolleyByOrderModel = async (ID_order) => {
+export const selectProductExistedModel = async (ID_customer, ID_product) => {
   try {
     const pool = await getPool();
 
     const [result] = await pool.query(
-      `SELECT * FROM Orders WHERE ID_order = ?`,
-      [ID_order]
+      `SELECT * FROM Trolleys WHERE ID_customer = ? AND ID_product = ? `,
+      [ID_customer, ID_product]
     );
 
     if (result.length === 0) {
       return null;
     }
 
-    return result;
+    return result[0];
   } catch (error) {
     databaseQueryError(
-      error.message ||
-        "Error en el modelo al obtener el carrito en la orden de envio"
+      error.message || "Error en el modelo al seleccionar la orden"
     );
   }
 };

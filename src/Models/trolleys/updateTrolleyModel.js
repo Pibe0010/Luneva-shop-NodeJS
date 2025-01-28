@@ -53,10 +53,13 @@ export const updateTrolleyModel = async (
       ID_product,
     ]);
 
+    const totalamount =
+      Number(productAmountResult[0].products_amount) + Number(products_amount);
+
     // Actualizar el carrito
     const [result] = await pool.query(
       `UPDATE Trolleys SET products_amount = ? WHERE ID_trolley = ? `,
-      [products_amount, ID_trolley, ID_product]
+      [totalamount, ID_trolley, ID_product]
     );
 
     if (result.affectedRows === 0) {
