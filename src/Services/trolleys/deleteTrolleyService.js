@@ -1,9 +1,11 @@
 import { selectCustomerByIdModel } from "../../Models/customer/selectCustomerByIdModel.js";
 import { deleteTrolleyModel } from "../../Models/trolleys/deleteTrolleyModel.js";
 import { selectTrolleyByIdCustomerModel } from "../../Models/trolleys/selectTrolleyByIdCustomerModel.js";
+import { updateOrderStatusFromTrolleyModel } from "../../Models/trolleys/updateOrderStatusFromTrolleyModel.js";
 import { updateProductStockDeleteModel } from "../../Models/trolleys/updateProductStockDeleteModel.js";
 import { handleErrorService } from "../../Utils/handleError.js";
 import { notFoundError } from "../error/errorService.js";
+import { deleteOrderService } from "../order/deleteOrderService.js";
 
 export const deleteTrolleyService = async (ID_user, ID_product) => {
   try {
@@ -20,11 +22,19 @@ export const deleteTrolleyService = async (ID_user, ID_product) => {
       notFoundError("trolley");
     }
 
+    const status = "cancelled";
+
+    // Cambio el estado de la orden del producto a cancelado
+    await updateOrderStatusFromTrolleyModel(trolley.ID_order, status);
+
     // Actualizamos el stock del producto
     await updateProductStockDeleteModel(trolley.ID_trolley);
 
     // eliminamos el producto del carrito
     const response = await deleteTrolleyModel(trolley.ID_trolley);
+
+    // Borramos la orden del producto
+    await deleteOrderService(trolley.ID_order);
 
     return response;
   } catch (error) {
