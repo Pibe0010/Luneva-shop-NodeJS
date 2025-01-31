@@ -14,6 +14,7 @@ import { forgetPasswordController } from "../Controllers/user/forgetPasswordCont
 import { resetPasswordController } from "./user/resetPasswordController.js";
 import { getProfileUserController } from "./user/getProfileUserController.js";
 import { getUserSearchController } from "./user/getUserSearchController.js";
+import { userSupportController } from "./user/userSupportController.js";
 
 // Product
 import { newProductController } from "../Controllers/product/newProductController.js";
@@ -44,6 +45,7 @@ export {
   forgetPasswordController,
   resetPasswordController,
   getProfileUserController,
+  userSupportController,
   newProductController,
   productListController,
   updateProductController,

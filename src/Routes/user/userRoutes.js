@@ -11,6 +11,7 @@ import {
   newUserController,
   resetPasswordController,
   updateUserController,
+  userSupportController,
   validateUserController,
 } from "../../Controllers/mainController.js";
 import { auththenticatedUser } from "../../Middlewares/auththenticatedUser.js";
@@ -75,3 +76,6 @@ userRouter.get(
   adminAuthMiddleware,
   getUserSearchController
 );
+
+// Eviar email de contacto de soporte
+userRouter.post("/user/support", auththenticatedUser, userSupportController);
