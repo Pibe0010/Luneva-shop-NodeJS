@@ -37,11 +37,6 @@ export const updateCustomerService = async (ID_user, body) => {
 
       return response;
     }
-
-    // Obtenemos el cliente actualizado
-    const customer = await selectCustomerByIdModel(ID_user);
-
-    return customer;
   } catch (error) {
     handleErrorService(
       error,
