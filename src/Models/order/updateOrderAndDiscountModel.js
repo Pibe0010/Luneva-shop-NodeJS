@@ -1,7 +1,12 @@
 import { getPool } from "../../database/getPool.js";
 import { databaseInsertError } from "../../Services/error/errorDataBase.js";
 
-export const updateOrderModel = async (newProductsAmount, ID_order, price) => {
+export const updateOrderAndDiscountModel = async (
+  newProductsAmount,
+  ID_order,
+  discountedPrice,
+  price
+) => {
   try {
     const pool = await getPool();
 
@@ -17,6 +22,7 @@ export const updateOrderModel = async (newProductsAmount, ID_order, price) => {
 
     addToUpdate("product_amount", newProductsAmount);
     addToUpdate("price", price);
+    addToUpdate("product_discount", discountedPrice);
 
     if (fieldsToUpdate.length === 0) return {};
 
@@ -26,11 +32,11 @@ export const updateOrderModel = async (newProductsAmount, ID_order, price) => {
     const [result] = await pool.query(query, values);
 
     if (result.affectedRows === 0) {
-      databaseInsertError("No se ha podido actualizar la orden");
+      databaseInsertError("No se ha podido actualizar la orden con descuento");
     }
   } catch (error) {
     databaseInsertError(
-      error.message || "Error en el modelo al actualizar la orden"
+      error.message || "Error en el modelo al actualizar la orden con descuento"
     );
   }
 };
