@@ -1,6 +1,7 @@
 import { selectOrderByIdModel } from "../../Models/order/selectOrderByIdModel.js";
 import { selectProductOfferByIdModel } from "../../Models/order/selectProductOfferByIdModel.js";
 import { selectTrolleyByOrderModel } from "../../Models/order/selectTrolleyByOrderModel.js";
+import { updateOrderAndDiscountModel } from "../../Models/order/updateOrderAndDiscountModel.js";
 import { updateOrderModel } from "../../Models/order/updateOrderModel.js";
 import { selectProductByIdModel } from "../../Models/product/selectProductByIdModel.js";
 import { handleErrorService } from "../../Utils/handleError.js";
@@ -20,8 +21,6 @@ export const updateOrderService = async (
     // Verificamos si el producto tiene descuento
     const offer = await selectProductOfferByIdModel(ID_product);
     if (offer && offer.active) {
-      console.log("Entró en los descuentos", offer);
-
       const discountUnit = Number(offer.discount_rate); // Descuento por unidad
       const currentProductsAmount = Number(order[0].product_amount); // Cantidad actual de productos
       const productPrice = Number(product.price); // Precio unitario del producto
@@ -33,11 +32,8 @@ export const updateOrderService = async (
       // Calcula el nuevo precio total con el descuento aplicado
       const newTotalPrice = newProductsAmount * productPrice - totalDiscount;
 
-      console.log("Descuento total:", totalDiscount);
-      console.log("Nuevo precio total:", newTotalPrice);
-
       // Actualizamos la orden
-      await updateOrderModel(
+      await updateOrderAndDiscountModel(
         newProductsAmount,
         ID_order,
         totalDiscount,
@@ -49,15 +45,11 @@ export const updateOrderService = async (
       const newProductsAmount = currentProductsAmount + Number(products_amount); // Nueva cantidad total
       const newTotalPrice = newProductsAmount * productPrice; // Calcula el nuevo precio total
 
-      console.log(`Actualizando la orden ${ID_order}`);
-
       // Actualizamos la orden si no hay descuento
       await updateOrderModel(newProductsAmount, ID_order, newTotalPrice);
 
       // Devuelvo la orden actualizada
-      const updatedOrder = await selectOrderByIdModel(ID_order);
-
-      console.log("Orden actualizada:", updatedOrder);
+      await selectOrderByIdModel(ID_order);
     }
   } catch (error) {
     handleErrorService(

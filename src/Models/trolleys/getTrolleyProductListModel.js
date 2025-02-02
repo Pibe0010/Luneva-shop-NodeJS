@@ -15,7 +15,8 @@ export const getTrolleyProductListModel = async (customer_id) => {
         Products.image_one,
         Trolleys.products_amount,
         Orders.ID_order,
-        Orders.price
+        Orders.price,
+        Orders.product_discount
       FROM Trolleys 
       LEFT JOIN Products ON Trolleys.ID_product = Products.ID_product
       LEFT JOIN Customers ON Trolleys.ID_customer = Customers.ID_customer
