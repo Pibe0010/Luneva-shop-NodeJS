@@ -28,4 +28,6 @@ export const {
   ROLE,
   EMAIL,
   ACTIVE,
+
+  STRIPE_KEY,
 } = process.env;

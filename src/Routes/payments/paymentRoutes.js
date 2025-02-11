@@ -5,7 +5,9 @@ import {
   cancelPaymentController,
   deletePaymentController,
   getPaymentListController,
+  getPaymentListUserController,
   getPaymentSearchController,
+  newPaymentCheckoutController,
   newPaymentController,
   updatePaymentController,
   updatePaymentStatusController,
@@ -27,6 +29,13 @@ paymentRouter.get(
   auththenticatedUser,
   adminAuthMiddleware,
   getPaymentListController
+);
+
+// Lista de pagos
+paymentRouter.get(
+  "/payment/list/user",
+  auththenticatedUser,
+  getPaymentListUserController
 );
 
 // Buscar pago
@@ -65,4 +74,11 @@ paymentRouter.put(
   auththenticatedUser,
   adminAuthMiddleware,
   updatePaymentStatusController
+);
+
+// Checkout pago
+paymentRouter.post(
+  "/api/checkout",
+  auththenticatedUser,
+  newPaymentCheckoutController
 );

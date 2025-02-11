@@ -53,6 +53,8 @@ import { updatePaymentController } from "./payments/updatePaymentController.js";
 import { deletePaymentController } from "./payments/deletePaymentController.js";
 import { cancelPaymentController } from "./payments/cancelPaymentController.js";
 import { updatePaymentStatusController } from "./payments/updatePaymentStatusController.js";
+import { newPaymentCheckoutController } from "./shipments/newPaymentCheckoutController.js";
+import { getPaymentListUserController } from "./shipments/getPaymentListUserController.js";
 
 export {
   newTrolleyController,
@@ -97,4 +99,6 @@ export {
   deletePaymentController,
   cancelPaymentController,
   updatePaymentStatusController,
+  newPaymentCheckoutController,
+  getPaymentListUserController,
 };

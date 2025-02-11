@@ -1,6 +1,7 @@
 import { selectCustomerByIdModel } from "../../Models/customer/selectCustomerByIdModel.js";
 import { insertShippingAddressModel } from "../../Models/shippingAddresses/insertShippingAddressModel.js";
 import { handleErrorService } from "../../Utils/handleError.js";
+import { insertShipmenService } from "../shipments/insertShipmentService.js";
 
 export const insertShippingAddressService = async (ID_user, body) => {
   try {
@@ -32,6 +33,9 @@ export const insertShippingAddressService = async (ID_user, body) => {
       postal_code,
       country
     );
+
+    // Creamos el envio en la BD
+    await insertShipmenService(ID_user);
 
     return shippingAddress;
   } catch (error) {

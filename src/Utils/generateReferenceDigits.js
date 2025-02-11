@@ -1,4 +1,4 @@
-export function generateReference5Digits(prefix, fixedLetter, number) {
+export const generateReference5Digits = (prefix, fixedLetter, number) => {
   const maxNumber = 99999;
   const numStr = number.toString().padStart(5, "0");
 
@@ -7,9 +7,9 @@ export function generateReference5Digits(prefix, fixedLetter, number) {
   const changingLetter = letters[letterIndex % letters.length];
 
   return `${prefix}-${fixedLetter}${changingLetter}${numStr}`;
-}
+};
 
-export function generateReference5DigitsFromRef(prefix, maxRef) {
+export const generateReference5DigitsFromRef = (prefix, maxRef) => {
   const maxNumber = 99999;
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
@@ -40,4 +40,4 @@ export function generateReference5DigitsFromRef(prefix, maxRef) {
 
   const numStrPadded = number.toString().padStart(5, "0");
   return `${prefix}-${nextChangingLetters}${numStrPadded}`;
-}
+};
