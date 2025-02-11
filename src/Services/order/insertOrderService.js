@@ -31,7 +31,8 @@ export const insertOrderService = async (
 
     // Verifica si el producto tiene descuento
     const offer = await selectProductOfferByIdModel(ID_product);
-    if (offer && offer.active) {
+
+    if (offer && offer.active && offer.end_date > new Date()) {
       const discount = offer.discount_rate;
       const totalPrice = price * products_amount;
       const discountedPrice = (price - discount) * products_amount;

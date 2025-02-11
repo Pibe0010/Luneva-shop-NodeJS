@@ -8,7 +8,7 @@
 
 2. Instalamos las dependencias que usaremos en el proyecto.
 
-   - bcrypt, cors, dotenv, express, express-fileupload, joi, jsonwebtoken, mysql2, nodemailer, sharp, morgan
+   - bcrypt, cors, dotenv, express, express-fileupload, joi, jsonwebtoken, mysql2, nodemailer, sharp, morgan, stripe
 
 3. Creamos los archivos
 

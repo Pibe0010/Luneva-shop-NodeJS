@@ -1,7 +1,7 @@
 import { getPool } from "../../database/getPool.js";
 import { databaseQueryError } from "../../Services/error/errorDataBase.js";
 
-export const getPaymentsListModel = async () => {
+export const getPaymentsListUserModel = async () => {
   try {
     const pool = await getPool();
 
@@ -15,17 +15,19 @@ export const getPaymentsListModel = async () => {
       LEFT JOIN Customers c ON o.ID_customer = c.ID_customer
       LEFT JOIN Users u ON c.ID_user = u.ID_user
       LEFT JOIN Products pr ON o.ID_product = pr.ID_product
-      
+      WHERE p.status = "pending"
       `;
 
     const [result] = await pool.query(query);
 
     if (!result || result.length === 0) {
-      databaseQueryError("No se encontraron la listas de pagos");
+      databaseQueryError("No se encontraron la listas de pagos del usuario");
     }
 
     return result;
   } catch (error) {
-    databaseQueryError("Error en el modelo al obtener la lista de pagos");
+    databaseQueryError(
+      "Error en el modelo al obtener la lista de pagos del usuario"
+    );
   }
 };
