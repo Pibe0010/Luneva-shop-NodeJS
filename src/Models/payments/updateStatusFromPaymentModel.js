@@ -29,6 +29,7 @@ export const updateStatusFromPaymentModel = async (ID_payment, status) => {
     }
   } catch (error) {
     databaseUpdateError(
+      error,
       "Error al actualizar el estado de el pago en el modelo"
     );
   }

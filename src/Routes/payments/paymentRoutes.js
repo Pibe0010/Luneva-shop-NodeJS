@@ -31,7 +31,7 @@ paymentRouter.get(
   getPaymentListController
 );
 
-// Lista de pagos
+// Lista de pagos de usuario
 paymentRouter.get(
   "/payment/list/user",
   auththenticatedUser,

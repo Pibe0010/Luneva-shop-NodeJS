@@ -72,7 +72,7 @@ export const newPaymentCheckoutService = async (stripe, body) => {
     // Cambio el estado del pago
     await Promise.all(
       products.map((product) =>
-        updateStatusFromPaymentModel(product.ID_payment, "sent")
+        updateStatusFromPaymentModel(product.ID_payment, "paid")
       )
     );
 
