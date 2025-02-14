@@ -7,13 +7,16 @@ import { newPaymentCheckoutService } from "../../Services/payments/newPaymentChe
 
 export const newPaymentCheckoutController = async (req, res, next) => {
   try {
+    // Obtengo el id del cliente
+    const ID_user = req.user.ID_user;
+
     const stripe = new Stripe(`${STRIPE_KEY}`);
 
     // Validamos el body
     await validateSchemaUtil(newPaymentCheckoutSchema, req.body);
 
     // Verifico el pago
-    const response = await newPaymentCheckoutService(stripe, req.body);
+    const response = await newPaymentCheckoutService(stripe, req.body, ID_user);
 
     res.status(200).send({
       status: "ok",

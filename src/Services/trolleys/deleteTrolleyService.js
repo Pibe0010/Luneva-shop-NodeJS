@@ -1,4 +1,5 @@
 import { selectCustomerByIdModel } from "../../Models/customer/selectCustomerByIdModel.js";
+import { selectOrdersFromCustomerModel } from "../../Models/order/selectOrdersFromCustomerModel.js";
 import { deleteTrolleyModel } from "../../Models/trolleys/deleteTrolleyModel.js";
 import { selectTrolleyByIdCustomerModel } from "../../Models/trolleys/selectTrolleyByIdCustomerModel.js";
 import { updateOrderStatusFromTrolleyModel } from "../../Models/trolleys/updateOrderStatusFromTrolleyModel.js";
@@ -22,10 +23,15 @@ export const deleteTrolleyService = async (ID_user, ID_product) => {
       notFoundError("trolley");
     }
 
-    const status = "cancelled";
+    // Obtengo la orden del producto
+    const order = await selectOrdersFromCustomerModel(customer_id.ID_customer);
 
-    // Cambio el estado de la orden del producto a cancelado
-    await updateOrderStatusFromTrolleyModel(trolley.ID_order, status);
+    if (order[0].status !== "cancelled") {
+      const status = "cancelled";
+
+      // Cambio el estado de la orden del producto a cancelado
+      await updateOrderStatusFromTrolleyModel(order[0].ID_order, status);
+    }
 
     // Actualizamos el stock del producto
     await updateProductStockDeleteModel(trolley.ID_trolley);
@@ -34,7 +40,7 @@ export const deleteTrolleyService = async (ID_user, ID_product) => {
     const response = await deleteTrolleyModel(trolley.ID_trolley);
 
     // Borramos la orden del producto
-    await deleteOrderService(trolley.ID_order);
+    await deleteOrderService(order[0].ID_order);
 
     return response;
   } catch (error) {

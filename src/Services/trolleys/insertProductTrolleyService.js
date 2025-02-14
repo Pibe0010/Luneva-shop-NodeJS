@@ -25,8 +25,7 @@ export const insertProductTrolleyService = async (ID_user, body) => {
       ID_trolley,
       customer.ID_customer,
       ID_product,
-      products_amount,
-      orderId
+      products_amount
     );
 
     // Devuelvo el carrito actualizado

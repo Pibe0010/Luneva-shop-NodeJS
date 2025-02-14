@@ -3,6 +3,7 @@ import { auththenticatedUser } from "../../Middlewares/auththenticatedUser.js";
 import { adminAuthMiddleware } from "../../Middlewares/adminAuthMiddleware.js";
 import {
   cancelPaymentController,
+  deletePaymentCancelController,
   deletePaymentController,
   getPaymentListController,
   getPaymentListUserController,
@@ -81,4 +82,11 @@ paymentRouter.post(
   "/api/checkout",
   auththenticatedUser,
   newPaymentCheckoutController
+);
+
+// Eliminar pago, envio, orden al cancelar el pago
+paymentRouter.delete(
+  "/payment/cancel",
+  auththenticatedUser,
+  deletePaymentCancelController
 );

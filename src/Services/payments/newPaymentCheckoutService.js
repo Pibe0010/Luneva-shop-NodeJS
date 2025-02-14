@@ -1,8 +1,11 @@
 import { FRONTEND_HOST } from "../../../env.js";
+import { selectCustomerByIdModel } from "../../Models/customer/selectCustomerByIdModel.js";
+import { selectPaymentOrdersFromCustomerModel } from "../../Models/payments/selectPaymentOrdersFromCustomerModel.js";
 import { updateStatusFromPaymentModel } from "../../Models/payments/updateStatusFromPaymentModel.js";
 import { handleErrorService } from "../../Utils/handleError.js";
+import { updateOrderStatusFromPaymentModel } from "../../Models/payments/updateOrderStatusFromPaymentModel.js";
 
-export const newPaymentCheckoutService = async (stripe, body) => {
+export const newPaymentCheckoutService = async (stripe, body, ID_user) => {
   try {
     const {
       shippingCost,
@@ -12,6 +15,16 @@ export const newPaymentCheckoutService = async (stripe, body) => {
       amount,
       products,
     } = body;
+
+    console.log(products);
+
+    // Obtengo el cliente
+    const customer = await selectCustomerByIdModel(ID_user);
+
+    // Obtengo la ordenes del cliente
+    const order = await selectPaymentOrdersFromCustomerModel(
+      customer.ID_customer
+    );
 
     // Convertir la lista de productos en line_items
     const line_items = products.map((product) => ({
@@ -73,6 +86,11 @@ export const newPaymentCheckoutService = async (stripe, body) => {
     await Promise.all(
       products.map((product) =>
         updateStatusFromPaymentModel(product.ID_payment, "paid")
+      )
+    );
+    await Promise.all(
+      order.map((orders) =>
+        updateOrderStatusFromPaymentModel(orders.ID_order, "sent")
       )
     );
 
