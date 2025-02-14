@@ -1,4 +1,5 @@
 import { selectCustomerByIdModel } from "../../Models/customer/selectCustomerByIdModel.js";
+import { selectOrdersFromCustomerModel } from "../../Models/order/selectOrdersFromCustomerModel.js";
 import { selectProductByIdModel } from "../../Models/product/selectProductByIdModel.js";
 import { selectTrolleyByIdCustomerModel } from "../../Models/trolleys/selectTrolleyByIdCustomerModel.js";
 import { selectTrolleyByIdModel } from "../../Models/trolleys/selectTrolleyByIdModel.js";
@@ -28,14 +29,17 @@ export const updateTrolleyService = async (ID_user, body) => {
       ID_product
     );
 
+    // Obtengo la orden del producto
+    const order = await selectOrdersFromCustomerModel(customer_id.ID_customer);
+
     // Actualizo la orden
-    await updateOrderService(trolley.ID_order, ID_product, products_amount);
+    await updateOrderService(order[0].ID_order, ID_product, products_amount);
 
     // Actualizamos el stock del producto
-    await updateProductStockModel(trolley.ID_trolley, ID_product);
+    await updateProductStockModel(ID_product, products_amount);
 
     // Actualizamos el producto en el carrito
-    await updateTrolleyModel(trolley.ID_trolley, ID_product, products_amount);
+    await updateTrolleyModel(trolley.ID_trolley, products_amount);
 
     // Devuelvo el carrot actualizado
     const trolleyUpdated = await selectTrolleyByIdModel(trolley.ID_trolley);

@@ -1,6 +1,6 @@
 import { selectCustomerByIdModel } from "../../Models/customer/selectCustomerByIdModel.js";
 import { insertTicketPurchaseModel } from "../../Models/ticketPurchases/insertTicketPurchaseModel.js";
-import { selectOrdersFromCustomerModel } from "../../Models/ticketPurchases/selectOrdersFromCustomerModel.js";
+import { selectOrdersFromCustomerModel } from "../../Models/order/selectOrdersFromCustomerModel.js";
 import { selectTicketByIdModel } from "../../Models/ticketPurchases/selectTicketByIdModel.js";
 import { handleErrorService } from "../../Utils/handleError.js";
 

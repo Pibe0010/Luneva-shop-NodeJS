@@ -5,15 +5,14 @@ export const insertProductTrolleyModel = async (
   ID_trolley,
   customer,
   ID_product,
-  products_amount,
-  orderId
+  products_amount
 ) => {
   try {
     const pool = await getPool();
 
     await pool.query(
-      `INSERT INTO Trolleys (ID_trolley, ID_customer, ID_product, products_amount, ID_order) VALUES (?, ?, ?, ?, ?)`,
-      [ID_trolley, customer, ID_product, products_amount, orderId]
+      `INSERT INTO Trolleys (ID_trolley, ID_customer, ID_product, products_amount) VALUES (?, ?, ?, ?)`,
+      [ID_trolley, customer, ID_product, products_amount]
     );
 
     // Actualizamos el stock del producto

@@ -1,7 +1,7 @@
 import { getPool } from "../../database/getPool.js";
 import { databaseQueryError } from "../../Services/error/errorDataBase.js";
 
-export const updateProductStockModel = async (ID_trolley, ID_product) => {
+export const updateProductStockModel = async (ID_product, products_amount) => {
   try {
     const pool = await getPool();
 
@@ -11,22 +11,11 @@ export const updateProductStockModel = async (ID_trolley, ID_product) => {
       [ID_product]
     );
 
-    // Obtener la cantidad actual en el carrito
-    const [productAmountResult] = await pool.query(
-      `SELECT products_amount FROM Trolleys WHERE ID_trolley = ?`,
-      [ID_trolley]
-    );
-
     // Obtenemos el cantidad del carrito como un número
     const productStock = Number(productStockResult[0].Stock);
-    const trolleyQuantity = Number(productAmountResult[0].products_amount);
 
-    const namberModify = (storage, number) => {
-      return storage + number;
-    };
-
-    // Sumamos la cantidad de producto
-    const stockProduct = namberModify(productStock, trolleyQuantity);
+    // Restamos  al stock
+    const stockProduct = productStock - products_amount;
 
     const result = await pool.query(
       `UPDATE Products SET Stock = ? WHERE ID_product = ?`,

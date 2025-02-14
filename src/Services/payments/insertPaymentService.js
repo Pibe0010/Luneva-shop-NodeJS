@@ -3,7 +3,6 @@ import { getMaxReference5Digits } from "../../Models/getMaxRef.js";
 import { insertPaymentModel } from "../../Models/payments/insertPaymentModel.js";
 import { selectPaymentByIdModel } from "../../Models/payments/selectPaymentByIdModel.js";
 import { selectPaymentOrdersFromCustomerModel } from "../../Models/payments/selectPaymentOrdersFromCustomerModel.js";
-import { updateOrderStatusFromPaymentModel } from "../../Models/payments/updateOrderStatusFromPaymentModel.js";
 import { generateReference5DigitsFromRef } from "../../Utils/generateReferenceDigits.js";
 import { handleErrorService } from "../../Utils/handleError.js";
 
@@ -97,9 +96,6 @@ export const insertPaymentService = async (ID_user, body) => {
           shipment_cost
         );
       }
-
-      // Actualiza el estado de la orden
-      await updateOrderStatusFromPaymentModel(orders.ID_order, "sent");
 
       // Devolvemos el pago creado
       const response = await selectPaymentByIdModel(ID_payment);

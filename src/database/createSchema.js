@@ -90,14 +90,12 @@ export const createSchema = async (db) => {
         ID_trolley CHAR(36) PRIMARY KEY NOT NULL,
         ID_customer CHAR(36) NOT NULL,
         ID_product CHAR(36) NOT NULL,
-        ID_order CHAR(36) NOT NULL,
         products_amount INT NOT NULL,
         process ENUM("active", "abandoned", "empty") DEFAULT "active",
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
         updatedAt DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
         FOREIGN KEY (ID_customer) REFERENCES Customers(ID_customer),
-        FOREIGN KEY (ID_product) REFERENCES Products(ID_product),
-        FOREIGN KEY (ID_order) REFERENCES Orders(ID_order)
+        FOREIGN KEY (ID_product) REFERENCES Products(ID_product)
     );
     `);
 
