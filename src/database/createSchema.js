@@ -170,11 +170,12 @@ export const createSchema = async (db) => {
   await db.query(`
     CREATE TABLE IF NOT EXISTS Ticket_Purchases (
         ID_ticket CHAR(36) PRIMARY KEY NOT NULL,
-        ID_order CHAR(36) NOT NULL,
-        ticket_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+        ID_payment CHAR(36) NOT NULL,
+        status ENUM("pending", "sent", "cancelled") DEFAULT "pending",
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
         updatedAt DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-        FOREIGN KEY (ID_order) REFERENCES Orders(ID_order)
+        FOREIGN KEY (ID_payment) REFERENCES Payments(ID_payment)
+        
     );
     `);
 

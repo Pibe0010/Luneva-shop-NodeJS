@@ -1,7 +1,7 @@
 import { getPool } from "../../database/getPool.js";
 import { databaseInsertError } from "../../Services/error/errorDataBase.js";
 
-export const insertTicketPurchaseModel = async (ID_ticket, ID_order) => {
+export const insertTicketPurchaseModel = async (ID_ticket, ID_payment) => {
   try {
     const pool = await getPool();
 
@@ -16,7 +16,7 @@ export const insertTicketPurchaseModel = async (ID_ticket, ID_order) => {
     };
 
     addToUpdate("ID_ticket", ID_ticket);
-    addToUpdate("ID_order", ID_order);
+    addToUpdate("ID_payment", ID_payment);
 
     if (fieldsToUpdate.length === 0) return {}; // No hay campos para actualizar, salir
 

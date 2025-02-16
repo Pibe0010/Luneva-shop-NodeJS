@@ -6,7 +6,7 @@ export const selectPaymentByOrdersModel = async (ID_order) => {
     const pool = await getPool();
 
     const [result] = await pool.query(
-      `SELECT ID_payment, status FROM Payments WHERE ID_order = ? `,
+      `SELECT ID_payment, status FROM Payments WHERE ID_order = ? AND status = "pending"`,
       [ID_order]
     );
 

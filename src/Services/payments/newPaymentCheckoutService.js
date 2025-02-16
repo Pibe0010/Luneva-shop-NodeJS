@@ -16,8 +16,6 @@ export const newPaymentCheckoutService = async (stripe, body, ID_user) => {
       products,
     } = body;
 
-    console.log(products);
-
     // Obtengo el cliente
     const customer = await selectCustomerByIdModel(ID_user);
 

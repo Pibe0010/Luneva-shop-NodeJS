@@ -44,6 +44,7 @@ import { newTicketPurchaseController } from "./ticketPurchases/newTicketPurchase
 import { deleteTicketPurchaseController } from "./ticketPurchases/deleteTicketPurchaseController.js";
 import { getTicketPurshaseListController } from "./ticketPurchases/getTicketPurshaseListController.js";
 import { getticketPurchaseSearchController } from "./ticketPurchases/getticketPurchaseSearchController.js";
+import { getTicketPurshaseListUserController } from "./ticketPurchases/getTicketPurshaseListUserController.js";
 
 // Pagos
 import { newPaymentController } from "./payments/newPaymentController.js";
@@ -93,6 +94,7 @@ export {
   deleteTicketPurchaseController,
   getTicketPurshaseListController,
   getticketPurchaseSearchController,
+  getTicketPurshaseListUserController,
   newPaymentController,
   getPaymentListController,
   getPaymentSearchController,
