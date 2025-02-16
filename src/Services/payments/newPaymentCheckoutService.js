@@ -4,6 +4,7 @@ import { selectPaymentOrdersFromCustomerModel } from "../../Models/payments/sele
 import { updateStatusFromPaymentModel } from "../../Models/payments/updateStatusFromPaymentModel.js";
 import { handleErrorService } from "../../Utils/handleError.js";
 import { updateOrderStatusFromPaymentModel } from "../../Models/payments/updateOrderStatusFromPaymentModel.js";
+import { sendEmailTicketPurchaseService } from "../ticketPurchases/sendEmailTicketPurchaseService.js";
 
 export const newPaymentCheckoutService = async (stripe, body, ID_user) => {
   try {
@@ -91,6 +92,9 @@ export const newPaymentCheckoutService = async (stripe, body, ID_user) => {
         updateOrderStatusFromPaymentModel(orders.ID_order, "sent")
       )
     );
+
+    // Envio el ticket al usuario
+    await sendEmailTicketPurchaseService(ID_user);
 
     return session;
   } catch (error) {
