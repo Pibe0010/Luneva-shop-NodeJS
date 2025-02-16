@@ -1,9 +1,18 @@
 import { getPool } from "../../database/getPool.js";
 import { databaseDeleteError } from "../../Services/error/errorDataBase.js";
 
-export const deletePaymentCancelModel = async (ID_order, status) => {
+export const deletePaymentCancelModel = async (
+  ID_order,
+  status,
+  ID_payment
+) => {
   try {
+    console.log(ID_payment);
     const pool = await getPool();
+
+    await pool.query(`DELETE FROM Ticket_purchases WHERE ID_payment = ?`, [
+      ID_payment,
+    ]);
 
     await pool.query(`DELETE FROM Payments WHERE ID_order = ?`, [ID_order]);
 

@@ -5,6 +5,7 @@ import {
   deleteTicketPurchaseController,
   getticketPurchaseSearchController,
   getTicketPurshaseListController,
+  getTicketPurshaseListUserController,
   newTicketPurchaseController,
 } from "../../Controllers/actionController.js";
 
@@ -32,6 +33,12 @@ ticketPurchaseRouter.get(
   auththenticatedUser,
   adminAuthMiddleware,
   getTicketPurshaseListController
+);
+
+ticketPurchaseRouter.get(
+  "/ticket/list/user",
+  auththenticatedUser,
+  getTicketPurshaseListUserController
 );
 
 // Buscar ticket

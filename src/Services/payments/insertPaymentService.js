@@ -5,6 +5,7 @@ import { selectPaymentByIdModel } from "../../Models/payments/selectPaymentByIdM
 import { selectPaymentOrdersFromCustomerModel } from "../../Models/payments/selectPaymentOrdersFromCustomerModel.js";
 import { generateReference5DigitsFromRef } from "../../Utils/generateReferenceDigits.js";
 import { handleErrorService } from "../../Utils/handleError.js";
+import { insertTicketPurchaseService } from "../ticketPurchases/insertTicketPurchaseService.js";
 
 export const insertPaymentService = async (ID_user, body) => {
   try {
@@ -54,7 +55,6 @@ export const insertPaymentService = async (ID_user, body) => {
 
         // Precio total
         const total_price = total_amount + shipment_cost;
-        console.log(total_price);
 
         // Inserta el pago en la BD
         await insertPaymentModel(
@@ -66,6 +66,8 @@ export const insertPaymentService = async (ID_user, body) => {
           iva,
           shipment_cost
         );
+        // Creao el ticket de compra
+        await insertTicketPurchaseService(orders.ID_order);
       } else if (orders.product_discount === null) {
         // iva
         const iva = 0.21;
@@ -96,6 +98,9 @@ export const insertPaymentService = async (ID_user, body) => {
           shipment_cost
         );
       }
+
+      // Creo el ticket de compra
+      await insertTicketPurchaseService(orders.ID_order);
 
       // Devolvemos el pago creado
       const response = await selectPaymentByIdModel(ID_payment);

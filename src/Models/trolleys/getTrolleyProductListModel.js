@@ -21,7 +21,7 @@ export const getTrolleyProductListModel = async (customer_id) => {
       LEFT JOIN Products ON Trolleys.ID_product = Products.ID_product
       LEFT JOIN Customers ON Trolleys.ID_customer = Customers.ID_customer
       LEFT JOIN Orders ON Orders.ID_product = Products.ID_product
-      WHERE Trolleys.ID_customer = ?
+      WHERE Trolleys.ID_customer = ? AND Orders.status = "earring"
       `,
       [customer_id]
     );

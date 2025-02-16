@@ -1,6 +1,6 @@
 import { selectCustomerByIdModel } from "../../Models/customer/selectCustomerByIdModel.js";
 import { selectPaymentByOrdersModel } from "../../Models/payments/selectPaymentbyOrder.js";
-import { deletePaymentCancelModel } from "../../Models/shipments/deletePaymentCancelModel.js";
+import { deletePaymentCancelModel } from "../../Models/payments/deletePaymentCancelModel.js";
 import { handleErrorService } from "../../Utils/handleError.js";
 import { notFoundError } from "../error/errorService.js";
 import { selectShipmentByOrdersModel } from "../../Models/payments/selectShipmentByOrderModel.js";
@@ -60,6 +60,7 @@ export const deletePaymentCancelService = async (user) => {
 
       // Obtengo los pagos de esta orden
       const payments = await selectPaymentByOrdersModel(order.ID_order);
+      console.log(payments);
 
       await Promise.all(
         payments.map((payment) =>
@@ -77,7 +78,11 @@ export const deletePaymentCancelService = async (user) => {
 
       // Elimino los pagos
       const status = "earring";
-      await deletePaymentCancelModel(order.ID_order, status);
+      await deletePaymentCancelModel(
+        order.ID_order,
+        status,
+        payments[0].ID_payment
+      );
     }
   } catch (error) {
     handleErrorService(

@@ -1,27 +1,27 @@
-import { selectCustomerByIdModel } from "../../Models/customer/selectCustomerByIdModel.js";
 import { insertTicketPurchaseModel } from "../../Models/ticketPurchases/insertTicketPurchaseModel.js";
-import { selectOrdersFromCustomerModel } from "../../Models/order/selectOrdersFromCustomerModel.js";
 import { selectTicketByIdModel } from "../../Models/ticketPurchases/selectTicketByIdModel.js";
 import { handleErrorService } from "../../Utils/handleError.js";
+import { selectPaymentByOrdersModel } from "../../Models/payments/selectPaymentbyOrder.js";
+import { updateStatusFromPaymentModel } from "../../Models/payments/updateStatusFromPaymentModel.js";
 
-export const insertTicketPurchaseService = async (ID_user) => {
+export const insertTicketPurchaseService = async (ID_order) => {
   try {
-    // Obtengo el cliente
-    const customer = await selectCustomerByIdModel(ID_user);
-
-    // Obtengo la orden
-    const order = await selectOrdersFromCustomerModel(customer.ID_customer);
+    // Obtengo el pago
+    const payment = await selectPaymentByOrdersModel(ID_order);
 
     // ALmaceno los tickets
     const tickets = [];
 
-    // Creo los tickets por cada orden
-    for (const orders of order) {
+    // Creo los tickets por cada pago
+    for (const payments of payment) {
       // Creao el id del ticket
       const ID_ticket = crypto.randomUUID();
 
       // Inserto el ticket
-      await insertTicketPurchaseModel(ID_ticket, orders.ID_order);
+      await insertTicketPurchaseModel(ID_ticket, payments.ID_payment);
+
+      //Cambio el estado del pago a pagado
+      await updateStatusFromPaymentModel(payments.ID_payment, "pending");
 
       // Retorno el ticket Creado
       const tickect = await selectTicketByIdModel(ID_ticket);
