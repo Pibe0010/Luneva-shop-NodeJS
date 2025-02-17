@@ -16,7 +16,7 @@ export const resetPasswordController = async (req, res, next) => {
     // Responder al cliente
     res.send(200).send({
       status: "ok",
-      message: response.message,
+      message: response,
     });
   } catch (error) {
     handleErrorController(

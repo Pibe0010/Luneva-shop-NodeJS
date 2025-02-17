@@ -1,10 +1,7 @@
 import { selectUserByIdModel } from "../../Models/user/selectUserByIdModel.js";
 import { updatePasswordModel } from "../../Models/user/updatePasswordModel.js";
 import { handleErrorService } from "../../Utils/handleError.js";
-import {
-  invalidCredentials,
-  invalidPasswordError,
-} from "../error/errorService.js";
+import { invalidCredentials, notFoundError } from "../error/errorService.js";
 import bcrypt from "bcrypt";
 
 export const changePasswordService = async (ID_user, body) => {
@@ -25,7 +22,7 @@ export const changePasswordService = async (ID_user, body) => {
     );
 
     if (!isValidPassword) {
-      invalidPasswordError();
+      notFoundError("La contraseña no coincide");
     }
     // Encryptamos la nueva password
     const hashedPassword = await bcrypt.hash(newPassword, 12);
