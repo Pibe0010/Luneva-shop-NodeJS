@@ -11,7 +11,7 @@ export const changePasswordController = async (req, res, next) => {
     // Cambiamos la password
     const response = await changePasswordService(req.user.ID_user, req.body);
 
-    res.status(201).send({ status: "ok", message: response });
+    res.status(201).send({ status: "ok", message: response.message });
   } catch (error) {
     handleErrorController(
       error,

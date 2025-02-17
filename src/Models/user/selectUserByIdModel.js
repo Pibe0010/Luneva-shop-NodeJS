@@ -6,7 +6,7 @@ export const selectUserByIdModel = async (ID_user) => {
     const pool = await getPool();
 
     const [user] = await pool.query(
-      `SELECT Users.ID_user, Customers.ID_customer, Users.user_name, Users.last_name, Users.email, Users.active, Users.avatar, Customers.phone 
+      `SELECT Users.ID_user, Customers.ID_customer,Users.password, Users.user_name, Users.last_name, Users.email, Users.active, Users.avatar, Customers.phone 
         FROM Users
         LEFT JOIN Customers ON Users.ID_user = Customers.ID_user
         WHERE Users.ID_user = ?`,
