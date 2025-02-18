@@ -3,6 +3,7 @@ import { auththenticatedUser } from "../../Middlewares/auththenticatedUser.js";
 import { adminAuthMiddleware } from "../../Middlewares/adminAuthMiddleware.js";
 import {
   cancelPaymentController,
+  changeStatusSuccessController,
   deletePaymentCancelController,
   deletePaymentController,
   getPaymentListController,
@@ -89,4 +90,11 @@ paymentRouter.delete(
   "/payment/cancel",
   auththenticatedUser,
   deletePaymentCancelController
+);
+
+// Cambio los estados de pagon, ordenes y tickets al pagar
+paymentRouter.post(
+  "/payment/success/status",
+  auththenticatedUser,
+  changeStatusSuccessController
 );

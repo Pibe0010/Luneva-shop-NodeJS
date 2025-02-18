@@ -1,12 +1,7 @@
 import { FRONTEND_HOST } from "../../../env.js";
-import { selectCustomerByIdModel } from "../../Models/customer/selectCustomerByIdModel.js";
-import { selectPaymentOrdersFromCustomerModel } from "../../Models/payments/selectPaymentOrdersFromCustomerModel.js";
-import { updateStatusFromPaymentModel } from "../../Models/payments/updateStatusFromPaymentModel.js";
 import { handleErrorService } from "../../Utils/handleError.js";
-import { updateOrderStatusFromPaymentModel } from "../../Models/payments/updateOrderStatusFromPaymentModel.js";
-import { sendEmailTicketPurchaseService } from "../ticketPurchases/sendEmailTicketPurchaseService.js";
 
-export const newPaymentCheckoutService = async (stripe, body, ID_user) => {
+export const newPaymentCheckoutService = async (stripe, body) => {
   try {
     const {
       shippingCost,
@@ -16,14 +11,6 @@ export const newPaymentCheckoutService = async (stripe, body, ID_user) => {
       amount,
       products,
     } = body;
-
-    // Obtengo el cliente
-    const customer = await selectCustomerByIdModel(ID_user);
-
-    // Obtengo la ordenes del cliente
-    const order = await selectPaymentOrdersFromCustomerModel(
-      customer.ID_customer
-    );
 
     // Convertir la lista de productos en line_items
     const line_items = products.map((product) => ({
@@ -80,21 +67,6 @@ export const newPaymentCheckoutService = async (stripe, body, ID_user) => {
       cancel_url: `${FRONTEND_HOST}/cancel`,
       metadata: metadata,
     });
-
-    // Cambio el estado del pago
-    await Promise.all(
-      products.map((product) =>
-        updateStatusFromPaymentModel(product.ID_payment, "paid")
-      )
-    );
-    await Promise.all(
-      order.map((orders) =>
-        updateOrderStatusFromPaymentModel(orders.ID_order, "sent")
-      )
-    );
-
-    // Envio el ticket al usuario
-    await sendEmailTicketPurchaseService(ID_user);
 
     return session;
   } catch (error) {
