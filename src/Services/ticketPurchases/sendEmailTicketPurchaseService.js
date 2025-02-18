@@ -5,7 +5,7 @@ import {
   MAIL_TRAP_PORT,
 } from "../../../env.js";
 import { changeTicketStatusModel } from "../../Models/ticketPurchases/changeTicketStatusModel.js";
-import { getTicketPurshaseListUserModel } from "../../Models/ticketPurchases/getTicketPurshaseListUserModel.js";
+import { getTicketBySendUserModel } from "../../Models/ticketPurchases/getTicketBySendUserModel.js";
 import { selectUserByIdModel } from "../../Models/user/selectUserByIdModel.js";
 import { handleErrorService } from "../../Utils/handleError.js";
 import { notFoundError } from "../error/errorService.js";
@@ -15,15 +15,13 @@ export const sendEmailTicketPurchaseService = async (ID_user) => {
   try {
     // comprobamos que el usuario existe
     const userExist = await selectUserByIdModel(ID_user);
-    console.log(userExist);
 
     if (!userExist) {
       notFoundError("usuario");
     }
 
     // Obtengo los tickets del usuario
-    const ticket = await getTicketPurshaseListUserModel(userExist.ID_customer);
-    console.log(ticket);
+    const ticket = await getTicketBySendUserModel(userExist.ID_customer);
 
     // Creao el ticket del usuario
     const sendTicket = ticket.sort(
