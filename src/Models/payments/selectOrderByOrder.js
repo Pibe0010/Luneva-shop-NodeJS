@@ -6,7 +6,7 @@ export const selectOrderByOrderModel = async (ID_customer) => {
     const pool = await getPool();
 
     const [result] = await pool.query(
-      `SELECT ID_order, status FROM Orders WHERE ID_customer = ? `,
+      `SELECT ID_order, status FROM Orders WHERE ID_customer = ? AND status = "earring"`,
       [ID_customer]
     );
 

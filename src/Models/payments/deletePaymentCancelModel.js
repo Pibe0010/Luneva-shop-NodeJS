@@ -7,7 +7,6 @@ export const deletePaymentCancelModel = async (
   ID_payment
 ) => {
   try {
-    console.log(ID_payment);
     const pool = await getPool();
 
     await pool.query(`DELETE FROM Ticket_purchases WHERE ID_payment = ?`, [
