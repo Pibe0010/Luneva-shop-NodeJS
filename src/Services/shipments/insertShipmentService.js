@@ -10,6 +10,7 @@ import { selectAddressFromShipmentModel } from "../../Models/shipments/selectAdd
 export const insertShipmenService = async (customer, body) => {
   try {
     const { ID_address } = body;
+    console.log(customer, body);
 
     // Lista para almacenar los envíos por cada orden del cliente
     const shipments = [];
