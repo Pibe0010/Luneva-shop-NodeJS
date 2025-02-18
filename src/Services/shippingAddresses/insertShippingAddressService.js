@@ -35,7 +35,7 @@ export const insertShippingAddressService = async (ID_user, body) => {
     );
 
     // Creamos el envio en la BD
-    await insertShipmenService(ID_user);
+    await insertShipmenService(ID_user, ID_address);
 
     return shippingAddress;
   } catch (error) {
