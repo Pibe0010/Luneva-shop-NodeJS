@@ -14,11 +14,7 @@ import { productExist } from "../../Middlewares/productExist.js";
 export const productRouter = express.Router();
 
 // Buscar productos por nombre
-productRouter.get(
-  "/product/search",
-  auththenticatedUser,
-  getProductSearchController
-);
+productRouter.get("/product/search", getProductSearchController);
 
 // Crear productos
 productRouter.post(
@@ -29,7 +25,7 @@ productRouter.post(
 );
 
 // Lista de productos
-productRouter.get("/product/list", auththenticatedUser, productListController);
+productRouter.get("/product/list", productListController);
 
 // Acttualiar producto
 productRouter.put(
