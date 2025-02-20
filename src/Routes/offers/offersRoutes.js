@@ -39,12 +39,7 @@ offersRouter.delete(
 );
 
 // Lista de Ofertas
-offersRouter.get(
-  "/offers/list",
-  auththenticatedUser,
-  auththenticatedUser,
-  getOffersListController
-);
+offersRouter.get("/offers/list", getOffersListController);
 
 // Activar o desactivar oferta
 offersRouter.put(
