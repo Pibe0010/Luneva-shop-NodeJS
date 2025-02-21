@@ -2,12 +2,14 @@ import express from "express";
 import { auththenticatedUser } from "../../Middlewares/auththenticatedUser.js";
 import {
   deleteShippingAddressController,
+  getListAddressController,
   getListShippingAddressController,
   getSearchShippingAddressController,
   newShippingAddressController,
   selectShippingAdrressController,
   updateShippingAddressController,
 } from "../../Controllers/actionController.js";
+import { adminAuthMiddleware } from "../../Middlewares/adminAuthMiddleware.js";
 
 // Creamos el router
 export const shippingAddressRouter = express.Router();
@@ -38,6 +40,14 @@ shippingAddressRouter.get(
   "/address/list",
   auththenticatedUser,
   getListShippingAddressController
+);
+
+// Lista de direcciones de envios
+shippingAddressRouter.get(
+  "/address/list/admin",
+  auththenticatedUser,
+  adminAuthMiddleware,
+  getListAddressController
 );
 
 // Seleccionar dirección de envio
