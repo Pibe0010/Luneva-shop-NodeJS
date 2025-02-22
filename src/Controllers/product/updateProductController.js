@@ -2,14 +2,13 @@ import { updateImgProductService } from "../../Services/product/updateImgProduct
 import { validateSchemaUtil } from "../../Utils/validateSchemaUtil.js";
 import { updateProductService } from "../../Services/product/updateProductService.js";
 import { handleErrorController } from "../../Utils/handleError.js";
-import { updateProductImgSchema } from "../../schemas/product/updateProductImgSchema.js";
 import { productUpdatedSchema } from "../../schemas/product/productUpdatedSchema.js";
 
 export const updateProductController = async (req, res, next) => {
   try {
     // Validamos el body
     await validateSchemaUtil(productUpdatedSchema, req.body);
-    await validateSchemaUtil(updateProductImgSchema, req.files || {});
+    await validateSchemaUtil(productUpdatedSchema, req.files || {});
 
     // Obtenemos el producto
     const ID_product = req.params.ID_product;
