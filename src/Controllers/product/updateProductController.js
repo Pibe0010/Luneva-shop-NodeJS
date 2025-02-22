@@ -1,7 +1,7 @@
 import { updateImgProductService } from "../../Services/product/updateImgProductService.js";
-import { updateProductSchema } from "../../Schemas/product/updateproductSchema.js";
+import { updateProductSchema } from "../../Schemas/product/updateProductSchema.js";
 import { validateSchemaUtil } from "../../Utils/validateSchemaUtil.js";
-import { updateProductService } from "../../Services/product/updateproductService.js";
+import { updateProductService } from "../../Services/product/updateProductService.js";
 import { handleErrorController } from "../../Utils/handleError.js";
 
 export const updateProductController = async (req, res, next) => {
