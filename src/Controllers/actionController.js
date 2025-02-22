@@ -57,7 +57,7 @@ import { cancelPaymentController } from "./payments/cancelPaymentController.js";
 import { updatePaymentStatusController } from "./payments/updatePaymentStatusController.js";
 import { newPaymentCheckoutController } from "./shipments/newPaymentCheckoutController.js";
 import { getPaymentListUserController } from "./shipments/getPaymentListUserController.js";
-import { deletePaymentCancelController } from "./payments/deletePaymentcancelController.js";
+import { deletePaymentCancelController } from "./payments/deletePaymentCancelController.js";
 import { changeStatusSuccessController } from "./payments/changeStatusSuccesController.js";
 
 export {
