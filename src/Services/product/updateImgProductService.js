@@ -2,7 +2,7 @@ import { UPLOADS_DIR } from "../../../env.js";
 import path from "path";
 import sharp from "sharp";
 import { createPathIfNotExistsUtil } from "../../Utils/createPathIfNotExistsUtil.js";
-import { updateImgProductModel } from "../../Models/product/updateImgProductModel.js";
+import { updateImgProductModel } from "../../Models/product/updateImageProductModel.js";
 import { handleErrorService } from "../../Utils/handleError.js";
 import { selectProductByIdModel } from "../../Models/product/selectProductByIdModel.js";
 

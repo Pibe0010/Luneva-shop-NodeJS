@@ -1,7 +1,7 @@
 import { getPool } from "../../database/getPool.js";
 import { databaseQueryError } from "../../Services/error/errorDataBase.js";
 
-export const updateImgProductModel = async (
+export const updateImageProductModel = async (
   ID_product,
   imgNameOne,
   imgNameTwo,
