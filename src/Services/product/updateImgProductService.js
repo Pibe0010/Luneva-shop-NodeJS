@@ -2,7 +2,7 @@ import { UPLOADS_DIR } from "../../../env.js";
 import path from "path";
 import sharp from "sharp";
 import { createPathIfNotExistsUtil } from "../../Utils/createPathIfNotExistsUtil.js";
-import { updateImgProductModel } from "../../Models/product/updateImageProductModel.js";
+import { updateImageProductModel } from "../../Models/product/updateImageProductModel.js";
 import { handleErrorService } from "../../Utils/handleError.js";
 import { selectProductByIdModel } from "../../Models/product/selectProductByIdModel.js";
 
@@ -41,7 +41,7 @@ export const updateImgProductService = async (
       updatedImgName = await selectProductByIdModel(ID_product);
 
       // Actualizamos el modelo con la nueva imagen.
-      await updateImgProductModel(ID_product, imgNameOne, null, null);
+      await updateImageProductModel(ID_product, imgNameOne, null, null);
     }
 
     // Actualizamos imagen dos si existe.
@@ -56,7 +56,7 @@ export const updateImgProductService = async (
       updatedImgName = await selectProductByIdModel(ID_product);
 
       // Actualizamos el modelo con la nueva imagen.
-      await updateImgProductModel(ID_product, null, imgNameTwo, null);
+      await updateImageProductModel(ID_product, null, imgNameTwo, null);
     }
 
     // Actualizamos imagen tres si existe.
@@ -71,7 +71,7 @@ export const updateImgProductService = async (
       updatedImgName = await selectProductByIdModel(ID_product);
 
       // Actualizamos el modelo con la nueva imagen.
-      await updateImgProductModel(ID_product, null, null, imgNameThree);
+      await updateImageProductModel(ID_product, null, null, imgNameThree);
     }
 
     // Devolver el nombre de la imagen que se haya actualizado.
