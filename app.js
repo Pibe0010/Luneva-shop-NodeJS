@@ -47,7 +47,9 @@ app.use(shippingAddressRouter);
 app.use(shipmentRouter);
 app.use(ticketPurchaseRouter);
 app.use(paymentRouter);
-
+app.get("/", (req, res) => {
+  res.send("Bienvenido a la API");
+});
 // Midleware 404 not found
 app.use(notFoundError);
 
