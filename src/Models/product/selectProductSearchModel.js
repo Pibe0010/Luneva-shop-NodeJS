@@ -6,7 +6,7 @@ export const selectProductSearchModel = async (searchTerm) => {
     const pool = await getPool();
 
     const [result] = await pool.query(
-      `SELECT * FROM Products WHERE name LIKE? OR ref_PR LIKE?`,
+      `SELECT * FROM Products WHERE name LIKE? OR ref_PR LIKE? LIMIT 2`,
       [`%${searchTerm}%`, `%${searchTerm}%`]
     );
 
